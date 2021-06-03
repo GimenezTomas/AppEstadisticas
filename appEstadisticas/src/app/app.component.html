@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-menu side="start" class="menu" menuId="equiposMenu" contentId="main">
+  <ion-menu (ionWillOpen)="triggerAnimation()" side="end" max-edge-start=50 class="menu" menuId="equiposMenu" contentId="main">
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title>Start Menu</ion-title>

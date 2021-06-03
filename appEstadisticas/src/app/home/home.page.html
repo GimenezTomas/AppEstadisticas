@@ -10,7 +10,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-card id="comenzarPartido" class="cards">
+    <ion-img src="./assets/deportes.png"></ion-img>
+    <ion-card-header style="display: flex;">
+      <ion-item>
+        <ion-label>Comenzar partido</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      Entra aqui si quieres comenzar un partido existe o crear uno nuevo.
+    </ion-card-content>
+  </ion-card>
+  <ion-card id="verJugadores" class="cards">
+    <ion-img src="./assets/equipo.png"></ion-img>
+    <ion-card-header style="display: flex;">
+      <ion-item>
+        <ion-label>Ver equipo</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      Consulta las estadísticas de tus jugadores. También puedes agregar nuevos, borrarlos y editarlos.
+    </ion-card-content>
+  </ion-card>
+</ion-content>
 
 <ion-tabs>
   <ion-tab-bar slot="bottom">
