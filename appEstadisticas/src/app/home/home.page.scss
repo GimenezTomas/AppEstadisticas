@@ -4,15 +4,6 @@
     display: block;
 }
 
-.cards{
-    transition: 1s;
-}
-
-.cards:active{
-    box-shadow: 0 -5px 40px rgba(0, 255, 0, 0.623);
-    height: 500px;
-}
-
 .cards ion-img{
     position: absolute;
     object-fit: cover;
@@ -30,7 +21,5 @@
     --inner-border-width: 0px;
     --background: transparent;
 }
-.cards ion-label{
 
-}
 

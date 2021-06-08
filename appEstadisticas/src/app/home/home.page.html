@@ -35,9 +35,18 @@
       Consulta las estadísticas de tus jugadores. También puedes agregar nuevos, borrarlos y editarlos.
     </ion-card-content>
   </ion-card>
+  
+  <ion-item *ngFor="let noticia of noticias; let i = index;">
+    <h3>Noticias {{ i }} </h3>
+  </ion-item>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
-
-<ion-tabs>
+<!--<ion-tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="calendar">
       <ion-icon name="calendar-outline"></ion-icon>
@@ -51,4 +60,4 @@
       <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>
-</ion-tabs>
+</ion-tabs>-->
