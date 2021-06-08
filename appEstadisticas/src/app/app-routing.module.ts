@@ -13,7 +13,12 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'jugadores',
+    loadChildren: () => import('./jugadores/jugadores.module').then( m => m.JugadoresPageModule)
   }
+
 ];
 @NgModule({
   imports: [
