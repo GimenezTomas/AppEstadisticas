@@ -1,20 +1,4 @@
 <ion-app>
-  <!--<ion-menu (ionWillOpen)="triggerAnimation()" side="end" max-edge-start=50 class="menu" menuId="equiposMenu" contentId="main">
-    <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>Start Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <ion-list>
-        <ion-item routerLink="/loading" routerDirection="foward">Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-menu>-->
   <ion-router-outlet id="main"></ion-router-outlet>
 
   <ion-tabs>
@@ -32,4 +16,33 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
+
+  <ion-menu (ionWillOpen)="triggerAnimation()" side="end" max-edge-start=50 class="menu" menuId="equiposMenu" contentId="main">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Start Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/loading" routerDirection="foward">Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-button (click)="openMenu()" class="equipo" fill="clear">
+        <ion-label>Equipo1</ion-label>
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </ion-button>
+    </ion-toolbar>
+  </ion-header>
 </ion-app>
