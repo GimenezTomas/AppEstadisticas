@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Roster</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card id="viewRoster" routerLink="/jugadores" class="cards">
+    <ion-img src="./assets/3p.png"></ion-img>
+    <ion-card-header style="display: flex;">
+      <ion-item>
+        <ion-label>Ver Jugadores</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      Aqui puede ver, editar y borrar todos los jugadores de su equipo
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card id="addPlayers" routerLink="/jugadores-agregar" class="cards">
+    <ion-img src="./assets/equipo.png"></ion-img>
+    <ion-card-header style="display: flex;">
+      <ion-item>
+        <ion-label>Agregar Jugadores</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      Aqui puede agregar jugadores a la plantilla
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -15,9 +15,20 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'jugadores-inicio',
+    loadChildren: () => import('./jugadores-inicio/jugadores-inicio.module').then( m => m.JugadoresInicioPageModule)
+  },
+  {
     path: 'jugadores',
     loadChildren: () => import('./jugadores/jugadores.module').then( m => m.JugadoresPageModule)
-  }
+  },
+  {
+    path: 'jugadores-agregar',
+    loadChildren: () => import('./jugadores-agregar/jugadores-agregar.module').then( m => m.JugadoresAgregarPageModule)
+  },
+
+
+
 
 ];
 @NgModule({
