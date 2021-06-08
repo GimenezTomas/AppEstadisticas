@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular'
+import { IonInfiniteScroll } from '@ionic/angular'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,9 @@ import { MenuController } from '@ionic/angular'
 })
 export class HomePage implements OnInit {
 
-  constructor(private menu: MenuController) { }
+  noticias: any[] = Array(20)
+
+  constructor(private menu: MenuController, private router: Router) { }
 
   openFirst() {
     this.menu.enable(true, 'first');
@@ -30,6 +34,19 @@ export class HomePage implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  loadData(event) {
+    /*setTimeout(() => {
+      console.log('Done');
+      event.target.complete();
+
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+      if (data.length == 1000) {
+        event.target.disabled = true;
+      }
+    }, 500);*/
   }
 
 }
