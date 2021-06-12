@@ -17,10 +17,30 @@ ion-header ion-icon{
 
 ion-content ion-list{
     padding: 5%;
+    width: 92%;
+    display: block;
+    margin: auto;
 }
 
-ion-content ion-list ion-item div{
-    padding: 1%;
-    --border-radius: 100%;
-    --box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+ion-content ion-list ion-button{
+    width: 100%;
+    margin-top: 8%;
+    --background: white;
+    --border-radius: 20px;
 }
+
+ion-content ion-list ion-button ion-item{
+    width: 100%;
+    color: #757575;
+}
+
+ion-content ion-list ion-button ion-item ion-icon{
+    width: 20px;
+}
+
+ion-content ion-list ion-button ion-item ion-label{
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+
