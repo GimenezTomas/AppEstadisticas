@@ -1,46 +1,89 @@
-ion-header ion-title{
+.main-header ion-title{
     text-align: center;
 }
 
-ion-header ion-button{
+.main-header ion-button{
     position: absolute;
     right: 2%;
     --background: transparent;
     --box-shadow: 0;
 }
 
-ion-header ion-icon{
+.main-header ion-icon{
     width: 15px;
     height: 15px;
     color: black;
 }
 
-ion-content ion-list{
+.main-content ion-list{
     padding: 5%;
     width: 92%;
     display: block;
     margin: auto;
+    margin-top: 5%;
 }
 
-ion-content ion-list ion-button{
+.main-content ion-list ion-button{
     width: 100%;
     margin-top: 8%;
     --background: white;
     --border-radius: 20px;
 }
 
-ion-content ion-list ion-button ion-item{
+.main-content ion-list ion-button ion-item{
     width: 100%;
     color: #757575;
 }
 
-ion-content ion-list ion-button ion-item ion-icon{
+.main-content ion-list ion-button ion-item ion-icon{
     width: 20px;
 }
 
-ion-content ion-list ion-button ion-item ion-label{
+.main-content ion-list ion-button ion-item ion-label{
     font-weight: 600;
     letter-spacing: 1px;
+}
+
+.cambiar{
+    text-align: center;
+    font-size: 15px;
+    margin-top: 8%;
+}
+
+ion-menu {
+    --min-width: 100%;
+}
+
+ion-menu ion-header ion-item{
+    position: relative;
+    padding: 3%;
+    --border-color: white;
+}
+
+ion-menu ion-header ion-icon{
+    position: absolute;
+    z-index: 2;
+}
+
+ion-menu ion-header ion-title{
+    text-align: center;
+}
+
+ion-menu ion-content ion-list{
+    width: 90%;
+    display: block;
+    margin: auto;
+    margin-top: 5%;
+    padding: 5%;
+    //border: solid 3px rgba(160, 160, 160, 0.822);
+    border-radius: 12px;
+}
+
+ion-menu ion-button{
+    display: block;
+    margin: auto;
+    margin-top: 5%;
+    width: 80%;
 }
 
 
