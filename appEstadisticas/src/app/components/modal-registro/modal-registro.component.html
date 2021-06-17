@@ -1,6 +1,6 @@
 <ion-header class="main-header">
   <ion-toolbar>
-    <ion-title>Iniciar Sesion</ion-title>
+    <ion-title>Registrate</ion-title>
     <ion-button slot="end" (click)="dismiss()">
       <ion-icon slot="icon-only" name="close"></ion-icon>
     </ion-button>
@@ -21,28 +21,40 @@
       </ion-item>
     </ion-button>
     <ion-button>
-      <ion-item (click)="openMenu('emailSignIn')">
+      <ion-item (click)="openMenu('emailSign')">
         <ion-label>Mail</ion-label>
         <ion-icon slot="start" name="mail-unread-outline"></ion-icon>      
       </ion-item>
     </ion-button>
   </ion-list>
   <div class="cambiar">
-    <ion-text>¿Todavía no tienes una cuenta?</ion-text>
-    <ion-text color="primary" (click)="signUp()">Registrate</ion-text>
+    <ion-text>¿Ya tienes una cuenta?</ion-text>
+    <ion-text color="primary">Inicia Sesión</ion-text>
   </div>
 </ion-content>
 
-<ion-menu side="start" max-edge-start=50 class="menu" menuId="emailSignIn" contentId="main">
+<ion-menu side="start" max-edge-start=50 class="menu" menuId="emailSign" contentId="main">
   <ion-header>
     <ion-item>
-      <ion-icon (click)="openMenu('emailSignIn')" slot="start" name="arrow-back-outline"></ion-icon>
-      <ion-title>Iniciar Sesion</ion-title>
+      <ion-icon (click)="openMenu('emailSign')" slot="start" name="arrow-back-outline"></ion-icon>
+      <ion-title>Registrate</ion-title>
     </ion-item>
   </ion-header>
   <ion-content>
     <div>
       <ion-list>
+        <ion-item>
+          <ion-label position="default">Nombre:</ion-label>
+          <ion-input type="text" [(ngModel)]="inputEmail"  placeholder="Juan"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="default">Apellido:</ion-label>
+          <ion-input type="text" [(ngModel)]="inputEmail"  placeholder="Russo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Nacimiento:</ion-label>
+          <ion-datetime displayFormat="MMMM" value="2012-12-15T13:47:20.789"></ion-datetime>
+        </ion-item>
         <ion-item>
           <ion-label position="default">Email:</ion-label>
           <ion-input type="email" [(ngModel)]="inputEmail"  placeholder="appest@gmail.com"></ion-input>
