@@ -1,9 +1,45 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>JugadoresAgregar</ion-title>
+    <ion-item>
+      <ion-icon routerLink="/jugadores-inicio" slot="start" name="arrow-back-outline"></ion-icon>
+      <ion-title>Agregar Jugadores</ion-title>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-div class="list">
+    <ion-item class="form">
+      <ion-label class="tit">Nombre</ion-label>
+      <ion-input type="text" placeholder="Juan"></ion-input>
+    </ion-item>
+    <ion-item class="form"> 
+      <ion-label class="tit">Apellido</ion-label>
+      <ion-input type="text" placeholder="Martinez"></ion-input>
+    </ion-item>
+    <ion-item class="form">
+      <ion-label class="tit">N° Camiseta</ion-label>
+      <ion-input type="number" placeholder="32"></ion-input>
+    </ion-item>
+    <ion-item class="form">
+      <ion-label class="tit">Nacimiento</ion-label>
+      <ion-datetime min="1900-02" max="2006"
+        [dayShortNames]="customDayShortNames"
+        displayFormat="DDD. MMM DD, YY"
+        monthShortNames="Jan, Feb, Mar, Apr, Mai, Jun, Jul, Aug, Sep, Oct, Nov, Dec"></ion-datetime>
+    </ion-item>
+    <ion-item class="form">
+      <ion-label class="tit">Peso (Kg)</ion-label>
+      <ion-input type="number" placeholder="64 (64 Kg)"></ion-input>
+    </ion-item>
+    <ion-item class="form">
+      <ion-label class="tit">Altura (Cm)</ion-label>
+      <ion-input type="number" placeholder="175 (1.75m)"></ion-input>
+    </ion-item>
+    <ion-item class="form">
+      <ion-label class="tit">Posicion</ion-label>
+      <ion-input type="text" placeholder="Base, Alero, Arquero, Defensa"></ion-input>
+    </ion-item>
+    <ion-button class="button button-block button-possitive">Agregar</ion-button>
+  </ion-div>
 </ion-content>
