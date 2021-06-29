@@ -25,7 +25,15 @@ const routes: Routes = [
   {
     path: 'jugadores-agregar',
     loadChildren: () => import('./jugadores-agregar/jugadores-agregar.module').then( m => m.JugadoresAgregarPageModule)
+  },  {
+    path: 'modal-sign-in',
+    loadChildren: () => import('./modals/modal-sign-in/modal-sign-in.module').then( m => m.ModalSignInPageModule)
   },
+  {
+    path: 'modal-sign-up',
+    loadChildren: () => import('./modals/modal-sign-up/modal-sign-up.module').then( m => m.ModalSignUpPageModule)
+  },
+
 
 
 

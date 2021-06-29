@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ModalComponent } from '../components/modal/modal.component';
-import { ModalRegistroComponent } from '../components/modal-registro/modal-registro.component';
+//import { ModalComponent } from '../components/modal/modal.component';
+//import { ModalRegistroComponent } from '../components/modal-registro/modal-registro.component';
+import { ModalSignInPage } from '../modals/modal-sign-in/modal-sign-in.page';
+import { ModalSignUpPage } from '../modals/modal-sign-up/modal-sign-up.page';
 
 @Component({
   selector: 'app-tab1',
@@ -14,7 +16,7 @@ export class Tab1Page {
 
   async openModalSignIn(){
     const modal = await this.modalController.create({
-      component: ModalComponent
+      component: ModalSignInPage
     })
 
     return await modal.present()
@@ -22,7 +24,7 @@ export class Tab1Page {
   
   async openModalSignUp(){
     const modal = await this.modalController.create({
-      component: ModalRegistroComponent
+      component: ModalSignUpPage
     })
 
     return await modal.present()

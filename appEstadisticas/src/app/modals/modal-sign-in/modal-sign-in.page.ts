@@ -1,24 +1,22 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, MenuController } from '@ionic/angular';
+import { ModalSignUpPage } from '../modal-sign-up/modal-sign-up.page';
 
 @Component({
-  selector: 'app-modal-registro',
-  templateUrl: './modal-registro.component.html',
-  styleUrls: ['./modal-registro.component.scss'],
+  selector: 'app-modal-sign-in',
+  templateUrl: './modal-sign-in.page.html',
+  styleUrls: ['./modal-sign-in.page.scss'],
 })
 
-export class ModalRegistroComponent implements OnInit {
+export class ModalSignInPage implements OnInit {
 
   inputEmail: string = ""
   inputPassword: string = ""
   invalid: boolean = true
-  userType = true
 
   constructor(private modalController: ModalController, private menu: MenuController) { }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
   dismiss(){
     this.modalController.dismiss()
@@ -39,7 +37,6 @@ export class ModalRegistroComponent implements OnInit {
   }
 
   openMenu(id){
-    console.log('abierto')
     this.menu.toggle(id)
   }
 
@@ -68,8 +65,16 @@ export class ModalRegistroComponent implements OnInit {
     return false
   }
 
-  segmentChanged(ev: any) {
-    this.userType = ev.detail.value
+  async openModalSignUp(){
+    const modal = await this.modalController.create({
+      component: ModalSignUpPage
+    })
+
+    return await modal.present()
+  }
+
+  signUp(){
+    this.openModalSignUp()
+    this.dismiss()
   }
 }
-

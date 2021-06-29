@@ -146,58 +146,93 @@ ion-menu ion-content ion-list ion-text{
     margin-top: 10px;
 }
 
+.main-content div div ion-button{
+  display: block;
+  margin: auto;
+  --background: grey;
+  width: 70%;
+  margin-top: 5%;
+}
 
-/*
-<!--BORRAR-->
-  <ion-list class="list tipoUserList">
-    <ion-text>¡Bienvenido a la App de estadísticas!</ion-text>
-    <ion-text>Elige el tipo de usuario</ion-text>
-    <ion-segment (ionChange)="segmentChanged($event)" value="javascript">
-      <ion-segment-button value="python">
-        <div>            
-          <ion-icon name="globe"></ion-icon>
-          <!--<fa-icon [icon]="['fas', 'shield-at']"></fa-icon>--> <!--No anda por el import, el tema es que no tengo un module para importar-->
-          <ion-label>Club</ion-label>
-        </div>
-      </ion-segment-button>
-      <ion-segment-button value="javascript">
-        <div>
-          <ion-icon name="globe"></ion-icon>
-          <fa-icon [icon]="['fas', 'user-tie']"></fa-icon>
-          <ion-label>Entrenador</ion-label>
-        </div>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-list>
-  <!--BORRAR-->
-  <ion-list>
-    <ion-item>
-      <ion-label position="default">Nombre:</ion-label>
-      <ion-input type="text" [(ngModel)]="inputEmail"  placeholder="Juan"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="default">Apellido:</ion-label>
-      <ion-input type="text" [(ngModel)]="inputEmail"  placeholder="Russo"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Nacimiento</ion-label>
-      <ion-datetime min="1900-02" max="2006"
-        [dayShortNames]="customDayShortNames"
-        displayFormat="DDD. MMM DD, YY"
-        monthShortNames="Jan, Feb, Mar, Apr, Mai, Jun, Jul, Aug, Sep, Oct, Nov, Dec"></ion-datetime>
-    </ion-item>
-  </ion-list>
-  <!--BORRAR-->
-  <ion-list>
-    <ion-item>
-      <ion-label position="default">Email:</ion-label>
-      <ion-input type="email" [(ngModel)]="inputEmail"  placeholder="appest@gmail.com"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="default">Password:</ion-label>
-      <ion-input type="Password" [(ngModel)]="inputPassword"></ion-input>
-    </ion-item>
-    <ion-text [hidden]="invalid">El email o la contraseña son invalidos. Reingresa los datos</ion-text>
-  </ion-list>
-  <!--BORRAR-->
-*/
+.main-content2{
+    padding: 5%;
+    width: 100%;
+    display: block;
+    margin: auto;
+}
+
+.main-content2 ion-button{
+    width: 100% !important;
+    margin-top: 8%;
+    --background: white !important;
+    --border-radius: 20px;
+}
+
+.main-content2 ion-button ion-item{
+    width: 100%;
+    color: #757575;
+}
+
+.main-content2 ion-button ion-item ion-icon{
+    width: 20px;
+}
+
+.main-content2 ion-button ion-item ion-label{
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+
+ion-menu {
+    --min-width: 100%;
+}
+
+ion-menu ion-header ion-item{
+    position: relative;
+    padding: 3%;
+    --border-color: white;
+}
+
+ion-menu ion-header ion-icon{
+    position: absolute;
+    z-index: 2;
+}
+
+ion-menu ion-header ion-title{
+    text-align: center;
+}
+
+ion-menu ion-content div{
+    width: 90%;
+    padding: 5% !important;
+    display: block;
+    height: 100%;
+    position: relative;
+    margin: auto !important;
+}
+
+ion-menu ion-content ion-list{
+    width: 100%;
+    margin-top: 5%;
+    //border: solid 3px rgba(160, 160, 160, 0.822);
+    border-radius: 12px;
+}
+
+ion-menu ion-button{
+    margin-top: 5%;
+    width: 100%;
+}
+
+ion-menu ion-content .text{
+    right: 5%;
+    color: grey;
+    position: absolute;
+    font-size: 12px;
+}
+
+ion-menu ion-content ion-list ion-text{
+    color: red;
+    margin-top: 2%;
+    font-size: 10px;
+    text-align: left;
+}

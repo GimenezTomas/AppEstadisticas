@@ -1,23 +1,26 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ModalController, MenuController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-modal-registro',
-  templateUrl: './modal-registro.component.html',
-  styleUrls: ['./modal-registro.component.scss'],
+  selector: 'app-modal-sign-up',
+  templateUrl: './modal-sign-up.page.html',
+  styleUrls: ['./modal-sign-up.page.scss'],
 })
-
-export class ModalRegistroComponent implements OnInit {
+export class ModalSignUpPage implements OnInit {
 
   inputEmail: string = ""
   inputPassword: string = ""
   invalid: boolean = true
   userType = true
+  managerStep1 = true
+  name: string = ""
+  lastname: string = ""
+  birth: string = ""
+  sport: string = ""
 
-  constructor(private modalController: ModalController, private menu: MenuController) { }
+  constructor(private modalController: ModalController, private menu: MenuController, private render: Renderer2) { }
 
   ngOnInit() {
-    
   }
 
   dismiss(){
@@ -51,6 +54,14 @@ export class ModalRegistroComponent implements OnInit {
     }
   }
 
+  checkName(): Boolean{
+    let onlyLetters=/[a-zA-Z]/
+    if(this.name.length>1 && this.lastname.length>1 && onlyLetters.test(this.lastname) && onlyLetters.test(this.name)){
+      return true
+    }
+    return false
+  }
+
   checkEmail(): Boolean{
     if(this.inputEmail.length>5 && this.inputEmail.includes('@')){
       if(this.inputEmail.indexOf('@') > 1 && this.inputEmail.substr(this.inputEmail.indexOf('@')).includes('.')){
@@ -68,8 +79,23 @@ export class ModalRegistroComponent implements OnInit {
     return false
   }
 
-  segmentChanged(ev: any) {
-    this.userType = ev.detail.value
+  segmentChanged(ev: CustomEvent) {
+    this.userType = Boolean(JSON.parse(ev.detail.value))
+  }
+
+  hide(){
+    return this.userType
+  }
+
+  managerNextStep(){
+    console.log(this.checkName() + " -> "+this.birth)
+    if(this.checkName() && this.birth != ""){
+      this.managerStep1 = false
+      console.log('si nene')
+    }else{
+      this.managerStep1 = true
+    }
   }
 }
+
 

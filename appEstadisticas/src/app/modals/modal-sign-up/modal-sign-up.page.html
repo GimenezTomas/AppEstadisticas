@@ -1,0 +1,123 @@
+<ion-header class="main-header">
+  <ion-toolbar>
+    <ion-title>Registrate</ion-title>
+    <ion-button slot="end" (click)="dismiss()">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+  <ion-segment (ionChange)="segmentChanged($event)" value=true>
+    <ion-segment-button value=false>
+      <div>            
+        <fa-icon [icon]="['fas', 'shield-alt']"></fa-icon>
+        <ion-label>Club</ion-label>
+      </div>
+    </ion-segment-button>
+    <ion-segment-button value=true>
+      <div>
+        <fa-icon [icon]="['fas', 'user-tie']"></fa-icon>
+        <ion-label>Entrenador</ion-label>
+      </div>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+<ion-content class="main-content">
+  <div>
+    <div>
+      <ion-text>¡Bienvenido a la App de estadísticas!</ion-text>
+      <div>        
+        <div id="entrenador" *ngIf="hide()">
+          <ion-list id="entrenadorStep1" *ngIf="managerStep1">
+            <ion-item>
+              <ion-label position="default">Nombre:</ion-label>
+              <ion-input type="text" [(ngModel)]="name"  placeholder="Juan"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="default">Apellido:</ion-label>
+              <ion-input type="text" [(ngModel)]="lastname"  placeholder="Russo"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Nacimiento</ion-label>
+              <ion-datetime [(ngModel)]="birth" min="1900-02" max="2006"
+                [dayShortNames]="customDayShortNames"
+                displayFormat="DDD. MMM DD, YY"
+                monthShortNames="Jan, Feb, Mar, Apr, Mai, Jun, Jul, Aug, Sep, Oct, Nov, Dec"></ion-datetime>
+            </ion-item>
+            <ion-button (click)="managerNextStep()">SIGUIENTE</ion-button>
+          </ion-list>
+          <ion-list id="entrenadorStep2" *ngIf="!managerStep1" class="main-content2">
+            <ion-button>
+              <ion-item>
+                <ion-label>Facebook</ion-label>
+                <ion-icon slot="start" name="logo-facebook"></ion-icon>      
+              </ion-item>
+            </ion-button>
+            <ion-button>
+              <ion-item>
+                <ion-label>Google</ion-label>
+                <ion-icon slot="start" name="logo-google"></ion-icon>      
+              </ion-item>
+            </ion-button>
+            <ion-button>
+              <ion-item (click)="openMenu('emailSignIn')">
+                <ion-label>Mail</ion-label>
+                <ion-icon slot="start" name="mail-unread-outline"></ion-icon>      
+              </ion-item>
+            </ion-button>
+          </ion-list>
+        </div>
+        <ion-list id="club" *ngIf="!hide()">
+          <ion-item>
+            <ion-label position="default">Nombre:</ion-label>
+            <ion-input type="text" [(ngModel)]="name" placeholder="Juan"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="default">Deporte:</ion-label>
+            <ion-select [(ngModel)]="sport" cancelText="Dismiss">
+              <ion-select-option value="Crear deporte">Crear deporte</ion-select-option>
+              <ion-select-option value="Fútbol">Fútbol</ion-select-option>
+              <ion-select-option value="Basquet">Basquet</ion-select-option>
+              <ion-select-option value="Hockey">Hockey</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+    <!--
+    <ion-list>
+      <ion-item>
+        <ion-label position="default">Email:</ion-label>
+        <ion-input type="email" [(ngModel)]="inputEmail"  placeholder="appest@gmail.com"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="default">Password:</ion-label>
+        <ion-input type="Password" [(ngModel)]="inputPassword"></ion-input>
+      </ion-item>
+      <ion-text [hidden]="invalid">El email o la contraseña son invalidos. Reingresa los datos</ion-text>
+    </ion-list>-->
+  </div>
+</ion-content>
+<ion-menu side="start" max-edge-start=50 class="menu" menuId="emailSignIn" contentId="main">
+  <ion-header>
+    <ion-item>
+      <ion-icon (click)="openMenu('emailSignIn')" slot="start" name="arrow-back-outline"></ion-icon>
+      <ion-title>Registrate</ion-title>
+    </ion-item>
+  </ion-header>
+  <ion-content>
+    <div>
+      <ion-list>
+        <ion-item>
+          <ion-label position="default">Email:</ion-label>
+          <ion-input type="email" [(ngModel)]="inputEmail"  placeholder="appest@gmail.com"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="default">Password:</ion-label>
+          <ion-input type="Password" [(ngModel)]="inputPassword"></ion-input>
+        </ion-item>
+        <ion-text [hidden]="invalid" >El email o la contraseña son invalidos. Reingresa los datos</ion-text>
+      </ion-list>
+      <ion-button color="primary" (click)="checkFormSignIn()">Sign in</ion-button>
+      <ion-text class="text">¿Olvidaste tu contraseña?</ion-text>
+    </div>
+  </ion-content>
+</ion-menu>

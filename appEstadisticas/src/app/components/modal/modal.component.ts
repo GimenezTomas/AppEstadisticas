@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, MenuController } from '@ionic/angular';
 import { ModalRegistroComponent } from '../modal-registro/modal-registro.component';
 
+
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
