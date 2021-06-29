@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ModalController, MenuController } from '@ionic/angular';
+import { ModalSignInPage } from '../modal-sign-in/modal-sign-in.page';
 
 @Component({
   selector: 'app-modal-sign-up',
@@ -95,6 +96,19 @@ export class ModalSignUpPage implements OnInit {
     }else{
       this.managerStep1 = true
     }
+  }
+
+  async openModalSignIn(){
+    const modal = await this.modalController.create({
+      component: ModalSignInPage
+    })
+
+    return await modal.present()
+  }
+  
+  signIn(){
+    this.openModalSignIn()
+    this.dismiss()
   }
 }
 
