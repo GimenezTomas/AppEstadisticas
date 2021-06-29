@@ -16,13 +16,14 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { AngularFireAuth, AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireModule } from "@angular/fire";
 import { environment } from 'src/environments/environment';
+import { TabService } from './services/tab.service';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FontAwesomeModule, AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TabService],
   bootstrap: [AppComponent],
 })
 
