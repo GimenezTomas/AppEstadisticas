@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, MenuController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 import { ModalSignUpPage } from '../modal-sign-up/modal-sign-up.page';
 
 @Component({
@@ -14,7 +15,7 @@ export class ModalSignInPage implements OnInit {
   inputPassword: string = ""
   invalid: boolean = true
 
-  constructor(private modalController: ModalController, private menu: MenuController) { }
+  constructor(private authSvc:AuthService, private modalController: ModalController, private menu: MenuController) { }
 
   ngOnInit() {}
 
@@ -76,5 +77,31 @@ export class ModalSignInPage implements OnInit {
   signUp(){
     this.openModalSignUp()
     this.dismiss()
+  }
+
+  async onLogin(email,password){
+    try {
+      const user = await this.authSvc.login(email.value, password.value);
+      if (user) {
+        const isVerified = this.authSvc.emailVerificado(user);
+        //this.redirectUser(isVerified);
+      }
+      
+    } catch (error) {
+      console.log("error-->",error);
+      
+    }
+  }
+
+  async onLoginGoogle() {
+    try {
+      const user = await this.authSvc.loginGoogle();
+      if (user) {
+        const isVerified = this.authSvc.emailVerificado(user);
+        //this.redirectUser(isVerified);
+      }
+    } catch (error) {
+      console.log('Error->', error);
+    }
   }
 }
