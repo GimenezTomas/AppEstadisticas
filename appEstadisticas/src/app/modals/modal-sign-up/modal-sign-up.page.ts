@@ -1,5 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController, MenuController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 import { ModalSignInPage } from '../modal-sign-in/modal-sign-in.page';
 
 @Component({
@@ -19,7 +21,7 @@ export class ModalSignUpPage implements OnInit {
   birth: string = ""
   sport: string = ""
 
-  constructor(private modalController: ModalController, private menu: MenuController, private render: Renderer2) { }
+  constructor(private authSvc: AuthService, private router: Router,private modalController: ModalController, private menu: MenuController, private render: Renderer2) { }
 
   ngOnInit() {
   }
@@ -110,6 +112,40 @@ export class ModalSignUpPage implements OnInit {
     this.openModalSignIn()
     this.dismiss()
   }
+
+
+  async onRegister(email, password) {
+    try {
+      const user = await this.authSvc.register(email.value, password.value);
+      if (user) {
+        const isVerified = this.authSvc.emailVerificado(user);
+        this.redirectUser(isVerified);
+      }
+    } catch (error) {
+      console.log("Error===>", error);
+    }
+  }
+
+  async onLoginGoogle() {
+    try {
+      const user = await this.authSvc.loginGoogle();
+      if (user) {
+        const isVerified = this.authSvc.emailVerificado(user);
+        this.redirectUser(isVerified);
+      }
+    } catch (error) {
+      console.log('Error->', error);
+    }
+  }
+
+  private redirectUser(isVerified: boolean): void {
+    if (isVerified) {
+      this.router.navigate(['home']);
+    } else {
+     console.log("Verifique su cuenta con el email que le mandamos.")
+    }
+  }
+
 }
 
 

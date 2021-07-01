@@ -3,6 +3,11 @@ import { ModalController, MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalSignUpPage } from '../modal-sign-up/modal-sign-up.page';
 
+// Add the Firebase services that you want to use
+import "firebase/auth";
+import "firebase/firestore";
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-modal-sign-in',
   templateUrl: './modal-sign-in.page.html',
@@ -15,7 +20,7 @@ export class ModalSignInPage implements OnInit {
   inputPassword: string = ""
   invalid: boolean = true
 
-  constructor(private authSvc:AuthService, private modalController: ModalController, private menu: MenuController) { }
+  constructor(private authSvc:AuthService, private modalController: ModalController, private menu: MenuController, private router: Router) { }
 
   ngOnInit() {}
 
@@ -84,7 +89,7 @@ export class ModalSignInPage implements OnInit {
       const user = await this.authSvc.login(email.value, password.value);
       if (user) {
         const isVerified = this.authSvc.emailVerificado(user);
-        //this.redirectUser(isVerified);
+        this.redirectUser(isVerified);
       }
       
     } catch (error) {
@@ -98,10 +103,18 @@ export class ModalSignInPage implements OnInit {
       const user = await this.authSvc.loginGoogle();
       if (user) {
         const isVerified = this.authSvc.emailVerificado(user);
-        //this.redirectUser(isVerified);
+        this.redirectUser(isVerified);
       }
     } catch (error) {
       console.log('Error->', error);
+    }
+  }
+
+  private redirectUser(isVerified: boolean): void {
+    if (isVerified) {
+      this.router.navigate(['home']);
+    } else {
+      console.log("Verifique su cuenta con el email que le mandamos.");
     }
   }
 }

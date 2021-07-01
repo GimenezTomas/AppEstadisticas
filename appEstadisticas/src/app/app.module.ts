@@ -21,8 +21,7 @@ import { TabService } from './services/tab.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FontAwesomeModule, AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FontAwesomeModule,AngularFireModule.initializeApp(environment.firebaseConfig),AngularFireAuthModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TabService],
   bootstrap: [AppComponent],
 })

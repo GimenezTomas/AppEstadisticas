@@ -20,16 +20,16 @@ export class User{
 export class AuthService {
   public user$: Observable<User>;
   
-  constructor(private afAuth:AngularFireAuth, private afs: AngularFirestore) {
+  constructor(private afAuth:AngularFireAuth, private afs: AngularFirestore){ 
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
-          //return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         }
         return of(null);
       })
     );
-   }
+    }
   
  
 
@@ -40,7 +40,7 @@ export class AuthService {
 
     async loginGoogle(): Promise<User> {
     try {
-      const { user } = await this.afAuth.auth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
+      const { user } = await this.afAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
       this.updateUserData(user);
       return user;
     } catch (error) {
@@ -52,7 +52,7 @@ export class AuthService {
 
   async register(email:string, password:string): Promise<User>{
     try {
-      const {user} = await this.afAuth.auth.createUserWithEmailAndPassword(email,password);
+      const {user} = await this.afAuth.createUserWithEmailAndPassword(email,password);
       await this.enviarVerificacion();
       return user;
     } catch (error) {
@@ -65,7 +65,7 @@ export class AuthService {
 
   async enviarVerificacion() {
      try {
-      return (await this.afAuth.auth.currentUser).sendEmailVerification();
+      return (await this.afAuth.currentUser).sendEmailVerification();
     } catch (error) {
       console.log('Error->', error);
     }
@@ -74,7 +74,7 @@ export class AuthService {
 
   async login(email:string,password:string): Promise<User> {
     try {
-      const{user} = await this.afAuth.auth.signInWithEmailAndPassword(email,password);
+      const{user} = await this.afAuth.signInWithEmailAndPassword(email,password);
       this.updateUserData(user);
       return user;
     } catch (error) {
@@ -86,7 +86,7 @@ export class AuthService {
 
   async logout(): Promise<void>{
     try {
-      await this.afAuth.auth.signOut();
+      await this.afAuth.signOut();
     } catch (error) {
       console.log("error--->",error);
     }
