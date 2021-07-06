@@ -33,6 +33,10 @@ const routes: Routes = [
     path: 'modal-sign-up',
     loadChildren: () => import('./modals/modal-sign-up/modal-sign-up.module').then( m => m.ModalSignUpPageModule)
   },
+  {
+    path: 'crear-deporte',
+    loadChildren: () => import('./crear-deporte/crear-deporte.module').then( m => m.CrearDeportePageModule)
+  },
 
 
 
