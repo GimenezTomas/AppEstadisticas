@@ -16,22 +16,27 @@ const routes: Routes = [
   },
   {
     path: 'jugadores-inicio',
-    loadChildren: () => import('./jugadores-inicio/jugadores-inicio.module').then( m => m.JugadoresInicioPageModule)
+    loadChildren: () => import('./ver-equipo/jugadores-inicio/jugadores-inicio.module').then( m => m.JugadoresInicioPageModule)
   },
   {
     path: 'jugadores',
-    loadChildren: () => import('./jugadores/jugadores.module').then( m => m.JugadoresPageModule)
+    loadChildren: () => import('./ver-equipo/jugadores/jugadores.module').then( m => m.JugadoresPageModule)
   },
   {
     path: 'jugadores-agregar',
-    loadChildren: () => import('./jugadores-agregar/jugadores-agregar.module').then( m => m.JugadoresAgregarPageModule)
-  },  {
+    loadChildren: () => import('./ver-equipo/jugadores-agregar/jugadores-agregar.module').then( m => m.JugadoresAgregarPageModule)
+  },
+  {
     path: 'modal-sign-in',
     loadChildren: () => import('./modals/modal-sign-in/modal-sign-in.module').then( m => m.ModalSignInPageModule)
   },
   {
     path: 'modal-sign-up',
     loadChildren: () => import('./modals/modal-sign-up/modal-sign-up.module').then( m => m.ModalSignUpPageModule)
+  },
+  {
+    path: 'detalles-del-equipo',
+    loadChildren: () => import('./ver-equipo/detalles-del-equipo/detalles-del-equipo.module').then( m => m.DetallesDelEquipoPageModule)
   },
 
 
