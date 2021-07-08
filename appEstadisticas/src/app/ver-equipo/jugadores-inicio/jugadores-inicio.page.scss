@@ -1,0 +1,58 @@
+.cards ion-img{
+    position: absolute;
+    object-fit: cover;
+    filter: blur(3px);
+}
+
+.cards ion-card-header{
+    padding: 0;
+}
+
+.cards ion-item{
+    width: 100%;
+    height: auto;
+    border: none;
+    --inner-border-width: 0px;
+    --background: transparent;
+}
+
+.cards ion-card-content{
+    color: white;
+}
+
+
+.card2{
+    --background: black;
+}
+
+.card2 ion-item ion-img{
+    --background: white;
+}
+
+.card2 ion-card-header{
+    padding: 1%;
+    --background: black;
+}
+
+.card2 ion-button{
+    --border-radius: 100%;
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: -17.5px;
+    right: 10px;
+    --background: white;
+    color: black;
+    z-index: 2;
+}
+
+.card2 ion-card-title{
+    font-size: 13px;
+    --background: black;
+    padding-left: 5%;
+}
+
+.card2 ion-card-content{
+    font-size: 11px;
+    --background: black;
+}
