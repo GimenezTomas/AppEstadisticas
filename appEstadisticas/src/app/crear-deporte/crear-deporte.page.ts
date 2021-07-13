@@ -1,6 +1,8 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestoreDocument, QuerySnapshot } from '@angular/fire/firestore';
+import * as firebase from 'firebase';
 import { AbmService } from '../services/abm.service';
-
 
 @Component({
   selector: 'app-crear-deporte',
@@ -9,10 +11,12 @@ import { AbmService } from '../services/abm.service';
 })
 
 
+
 export class CrearDeportePage implements OnInit {
   public DeportesList:any[]=[];
   public modificar:boolean=false;
-  public idDocumentoModificar:number;
+  public idDocumentoModificar:string;
+  public nombreDeporteModificar:string;
   constructor(private ABMsvc:AbmService) { }
 
   ngOnInit() {
@@ -38,7 +42,7 @@ export class CrearDeportePage implements OnInit {
    mostrarTabla(){
     this.DeportesList=[];
     
-    this.ABMsvc.afs.collection("deportes").onSnapshot((data)=>{
+    this.ABMsvc.afs.collection("deportes").onSnapshot({includeMetadataChanges: true},(data)=>{
     data.forEach(e => {
       console.log(e.data());
       
@@ -49,11 +53,17 @@ export class CrearDeportePage implements OnInit {
         
 
     onEliminarDeporte(id){
-      this.ABMsvc.afs.collection("deportes").doc(id).delete().then(()=>{
-        console.log("Documento borrado exitosamete");
-      }).catch((error)=>{
-        console.log("error ==>",error);
-      });
+      var query = this.ABMsvc.afs.collection("deportes").where('nombreDeporte',"==",id);
+      query.get().then(function(QuerySnapshot){
+        QuerySnapshot.forEach(function(doc){
+          doc.ref.delete().then(()=>{
+            console.log("Documento borrado exitosamente");
+          }).catch((error)=>{
+            console.log("error ==>",error);
+          });
+        })
+      })
+  
    } 
    
   
@@ -61,13 +71,18 @@ export class CrearDeportePage implements OnInit {
 
 
 
-  onEditar(idDoc){
+  onEditar(idDoc,nombreModificar){
    this.modificar = true;
    this.idDocumentoModificar=idDoc;
+   this.nombreDeporteModificar=nombreModificar;
+   
  }
 
  modificarDeporte(idDoc,nombreDeporte,cantEquipos,cantParticipantes){
-  this.ABMsvc.afs.collection("deportes").doc(idDoc).update({
+  var query = this.ABMsvc.afs.collection("deportes").where('nombreDeporte',"==",idDoc);
+  query.get().then(function(QuerySnapshot){
+    QuerySnapshot.forEach(function(doc){
+  doc.ref.update({
         nombreDeporte:nombreDeporte.value,
         cantEquipos:cantEquipos.value,
         cantParticipantes:cantParticipantes.value
@@ -78,7 +93,12 @@ export class CrearDeportePage implements OnInit {
 .catch((error) => {
     console.error("error--->", error);
 });
+  
+  })
+
+  })
   this.modificar=false;
  }
+
 
 }
