@@ -839,7 +839,7 @@
         <img src="./assets/logoApp.png" alt="">
       </div>
       <div class="buttonContainer">
-        <ion-button routerLink="/home" class="buttonHome" href="#">Iniciar Sesión</ion-button>
+        <ion-button (click)="openModalSignIn()" class="buttonHome" href="#">Iniciar Sesión</ion-button>
         <ion-button (click)="openModalSignUp()" class="buttonHome" href="#">Registarse</ion-button>
       </div>
     </ion-grid>
