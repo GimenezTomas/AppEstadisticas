@@ -3,7 +3,7 @@
     <ion-title>CrearDeporte</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content id="contenido">
+<ion-content id="contenido" class="main-content">
   <form>
     <ion-item>
   <ion-input id="nombreDeporte" #nombreDeporte required="true" type="text" placeholder="Nombra tu deporte"></ion-input>
@@ -19,7 +19,7 @@
 </ion-item>
   <ion-button type=submit (click)="crearDeporte(nombreDeporte, cantEquipos, cantParticipantes)" size="small" >Crear</ion-button>
   </form>
-  <ion-button *ngIf="modificar" (click)="modificarDeporte( this.idDocumentoModificar ,nombreDeporte, cantEquipos, cantParticipantes)" type=submit id="botonGuardar" size="small">Guardar</ion-button>
+  <ion-button *ngIf="modificar" (click)="modificarDeporte( idDocumentoModificar ,nombreDeporte, cantEquipos, cantParticipantes)" type=submit id="botonGuardar" size="small">Guardar</ion-button>
 <ion-button (click)="mostrarTabla()" size="small">Ver deportes creados</ion-button>
 <ion-grid id="tabla">
   <ion-row>
@@ -64,7 +64,7 @@
   </ion-button>
   </ion-col>
   <ion-col>
-  <ion-button (click)="onEditar(deporte.nombreDeporte)" size="small">
+  <ion-button (click)="onEditar(deporte.nombreDeporte,deporte.nombreDeporte)" size="small">
     Editar
   </ion-button>
   </ion-col>
