@@ -51,7 +51,8 @@ export class ModalSignUpPage implements OnInit {
 
   checkFormSignIn(){
     if(this.checkEmail() && this.checkPassword()){
-      this.invalid = true
+      this.invalid = true;
+      this.onRegister(this.inputEmail,this.inputPassword);
     }else{
       this.invalid = false
     }
