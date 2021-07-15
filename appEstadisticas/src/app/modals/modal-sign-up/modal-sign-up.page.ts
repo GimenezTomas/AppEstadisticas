@@ -57,6 +57,13 @@ export class ModalSignUpPage implements OnInit {
     }
   }
 
+  checkClubName(): Boolean{
+    if(this.name.length>3){
+      return true
+    }
+    return false
+  }
+
   checkName(): Boolean{
     let onlyLetters=/[a-zA-Z]/
     if(this.name.length>1 && this.lastname.length>1 && onlyLetters.test(this.lastname) && onlyLetters.test(this.name)){
@@ -94,11 +101,20 @@ export class ModalSignUpPage implements OnInit {
     console.log(this.checkName() + " -> "+this.birth)
     if(this.checkName() && this.birth != ""){
       this.managerStep1 = false
-      console.log('si nene')
     }else{
       this.managerStep1 = true
     }
   }
+
+  clubNextStep(){
+    if(this.checkClubName()){
+      this.managerStep1 = false
+    }else{
+      this.managerStep1 = true
+    }
+  }
+
+
 
   async openModalSignIn(){
     const modal = await this.modalController.create({
@@ -145,6 +161,7 @@ export class ModalSignUpPage implements OnInit {
      console.log("Verifique su cuenta con el email que le mandamos.")
     }
   }
+
 
 }
 
