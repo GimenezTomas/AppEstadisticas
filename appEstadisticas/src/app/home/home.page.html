@@ -37,6 +37,19 @@
       Consulta las estadísticas de tus jugadores. También puedes agregar nuevos, borrarlos y editarlos.
     </ion-card-content>
   </ion-card>
+
+  <ion-card id="crearDeporte" routerLink="/crear-deporte" class="cards">
+    <ion-img src="./assets/depor.png"></ion-img>
+    <ion-card-header style="display: flex;">
+      <ion-item>
+        <ion-label>Crear Deporte</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      Cree o ingrese un deporte que no predeterminado.
+    </ion-card-content>
+  </ion-card>
   
   <ion-item *ngFor="let noticia of noticias; let i = index;">
     <h3>Noticias {{ i }} </h3>
