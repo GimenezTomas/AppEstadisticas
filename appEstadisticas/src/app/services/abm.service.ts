@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { FirebaseApp } from '@angular/fire';
 import { AngularFirestore,AngularFirestoreDocument, AngularFirestoreModule } from "@angular/fire/firestore";
 import * as firebase from 'firebase';
-
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import * as firebase from 'firebase';
 export class AbmService {
   public afs;
   constructor() { 
+    firebase.default.initializeApp(environment.firebaseConfig);
     this.afs=firebase.default.firestore()
   }  
   
