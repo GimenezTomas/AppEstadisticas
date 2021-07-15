@@ -6,18 +6,18 @@
 <ion-content id="contenido" class="main-content">
   <form>
     <ion-item>
-  <ion-input id="nombreDeporte" #nombreDeporte required="true" type="text" placeholder="Nombra tu deporte"></ion-input>
+  <ion-input id="nombreDeporte" #nombreDeporte required="true" required type="text" placeholder="Nombra tu deporte"></ion-input>
 </ion-item>
 <ion-item>
-  <ion-input id="cantEquipos" #cantEquipos type="text" required="true" placeholder="Cantidad de Equipos"></ion-input>
+  <ion-input id="cantEquipos" #cantEquipos type="number" required placeholder="Cantidad de Equipos"></ion-input>
 </ion-item>
 <ion-item>
-  <ion-input id="cantParticipantes" #cantParticipantes type="text" placeholder="Cantidad de Participantes"></ion-input>
+  <ion-input id="cantParticipantes" #cantParticipantes type="number" required placeholder="Cantidad de Participantes"></ion-input>
 </ion-item>
 <ion-item>
   <ion-input type="text" placeholder="Estadisticas a Registrar"></ion-input>
 </ion-item>
-  <ion-button type=submit (click)="crearDeporte(nombreDeporte, cantEquipos, cantParticipantes)" size="small" >Crear</ion-button>
+  <ion-button *ngIf="modificar==false" type=submit (click)="crearDeporte(nombreDeporte, cantEquipos, cantParticipantes)" size="small" >Crear</ion-button>
   </form>
   <ion-button *ngIf="modificar" (click)="modificarDeporte( idDocumentoModificar ,nombreDeporte, cantEquipos, cantParticipantes)" type=submit id="botonGuardar" size="small">Guardar</ion-button>
 <ion-button (click)="mostrarTabla()" size="small">Ver deportes creados</ion-button>
