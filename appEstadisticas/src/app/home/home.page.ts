@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular'
 import { IonInfiniteScroll } from '@ionic/angular'; 
 import { Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
+import { PopoverComponent } from '../components/popover/popover.component';
+
+
 
 @Component({
   selector: 'app-home',
@@ -12,7 +16,21 @@ export class HomePage implements OnInit {
 
   noticias: any[] = Array(20)
 
-  constructor(private menu: MenuController, private router: Router) { }
+  constructor(private menu: MenuController, private router: Router, public popoverController: PopoverController) { }
+
+  async presentPopover(ev: any) {
+    console.log("entro")
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    await popover.present();
+
+    const { role } = await popover.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
 
   openFirst() {
     this.menu.enable(true, 'first');

@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CrearDeportePageRoutingModule } from './crear-deporte-routing.module';
+import { CrearEquipoPageRoutingModule } from './crear-equipo-routing.module';
 
-import { CrearDeportePage } from './crear-deporte.page';
+import { CrearEquipoPage } from './crear-equipo.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CrearDeportePageRoutingModule
+    CrearEquipoPageRoutingModule
   ],
-  declarations: [CrearDeportePage]
+  declarations: [CrearEquipoPage]
 })
-export class CrearDeportePageModule {}
+export class CrearEquipoPageModule {}

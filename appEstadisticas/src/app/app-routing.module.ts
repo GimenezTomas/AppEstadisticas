@@ -35,13 +35,13 @@ const routes: Routes = [
     loadChildren: () => import('./modals/modal-sign-up/modal-sign-up.module').then( m => m.ModalSignUpPageModule)
   },
   {
-    path: 'crear-deporte',
-    loadChildren: () => import('./crear-deporte/crear-deporte.module').then( m => m.CrearDeportePageModule)
-  },
-  {
     path: 'detalles-del-equipo',
     loadChildren: () => import('./ver-equipo/detalles-del-equipo/detalles-del-equipo.module').then( m => m.DetallesDelEquipoPageModule)
+  },  {
+    path: 'crear-equipo',
+    loadChildren: () => import('./crear-equipo/crear-equipo.module').then( m => m.CrearEquipoPageModule)
   }
+
 
 
 
