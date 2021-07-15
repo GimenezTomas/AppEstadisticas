@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-detalles-del-equipo',
@@ -7,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetallesDelEquipoPage implements OnInit {
 
-  constructor() { }
+  constructor(private authSvc: AuthService) { }
 
   ngOnInit() {
   }
-
 }
