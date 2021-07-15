@@ -60,11 +60,28 @@
           </ion-list>
         </div>
         <ion-list id="club" *ngIf="!hide()">
-          <ion-item>
-            <ion-label position="default">Nombre:</ion-label>
-            <ion-input type="text" [(ngModel)]="name" placeholder="Juan"></ion-input>
-          </ion-item>
-          <ion-item>
+          <ion-list id="clubStep1" *ngIf="managerStep1">
+            <ion-item>
+              <ion-label position="default">Nombre:</ion-label>
+              <ion-input type="text" [(ngModel)]="name" placeholder="Poli IV"></ion-input>
+            </ion-item>
+            <ion-button (click)="clubNextStep()">SIGUIENTE</ion-button>
+          </ion-list>
+          <ion-list id="clubStep2" *ngIf="!managerStep1" class="main-content2">
+            <ion-button (click)="onLoginGoogle()">
+              <ion-item>
+                <ion-label>Google</ion-label>
+                <ion-icon slot="start" name="logo-google"></ion-icon>      
+              </ion-item>
+            </ion-button>
+            <ion-button>
+              <ion-item (click)="openMenu('emailSignIn')">
+                <ion-label>Mail</ion-label>
+                <ion-icon slot="start" name="mail-unread-outline"></ion-icon>      
+              </ion-item>
+            </ion-button>
+          </ion-list>
+          <!--<ion-item>
             <ion-label position="default">Deporte:</ion-label>
             <ion-select [(ngModel)]="sport" cancelText="Dismiss">
               <ion-select-option value="Crear deporte">Crear deporte</ion-select-option>
@@ -72,7 +89,7 @@
               <ion-select-option value="Basquet">Basquet</ion-select-option>
               <ion-select-option value="Hockey">Hockey</ion-select-option>
             </ion-select>
-          </ion-item>
+          </ion-item>-->
         </ion-list>
       </div>
     </div>
