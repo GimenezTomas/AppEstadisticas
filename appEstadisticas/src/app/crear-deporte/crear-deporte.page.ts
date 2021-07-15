@@ -42,7 +42,7 @@ export class CrearDeportePage implements OnInit {
    mostrarTabla(){
     this.DeportesList=[];
     
-    this.ABMsvc.afs.collection("deportes").onSnapshot({includeMetadataChanges: true},(data)=>{
+    this.ABMsvc.afs.collection("deportes").where("nombreDeporte","!=",null).onSnapshot({includeMetadataChanges: true},(data)=>{
     data.forEach(e => {
       console.log(e.data());
       
