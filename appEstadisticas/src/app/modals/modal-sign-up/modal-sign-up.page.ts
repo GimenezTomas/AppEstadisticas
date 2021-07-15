@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { ModalController, MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalSignInPage } from '../modal-sign-in/modal-sign-in.page';
-
+import { AbmService } from 'src/app/services/abm.service';
+import { FirebaseClubService } from '../../services/firebase/club.service';
 @Component({
   selector: 'app-modal-sign-up',
   templateUrl: './modal-sign-up.page.html',
@@ -21,7 +22,7 @@ export class ModalSignUpPage implements OnInit {
   birth: string = ""
   sport: string = ""
 
-  constructor(private authSvc: AuthService, private router: Router,private modalController: ModalController, private menu: MenuController, private render: Renderer2) { }
+  constructor(private clubService: FirebaseClubService, private authSvc: AuthService, private router: Router,private modalController: ModalController, private menu: MenuController, private render: Renderer2) { }
 
   ngOnInit() {
   }
@@ -115,8 +116,6 @@ export class ModalSignUpPage implements OnInit {
     }
   }
 
-
-
   async openModalSignIn(){
     const modal = await this.modalController.create({
       component: ModalSignInPage
@@ -148,6 +147,7 @@ export class ModalSignUpPage implements OnInit {
       const user = await this.authSvc.loginGoogle();
       if (user) {
         const isVerified = this.authSvc.emailVerificado(user);
+        this.clubService.crearClub(user.email, this.name)
         this.redirectUser(isVerified);
       }
     } catch (error) {
@@ -162,8 +162,6 @@ export class ModalSignUpPage implements OnInit {
      console.log("Verifique su cuenta con el email que le mandamos.")
     }
   }
-
-
 }
 
 

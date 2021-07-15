@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AbmService } from '../abm.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class FirebaseClubService {
 
-  constructor( private firestore: AngularFirestore) { }
-
-  create(club: any){
-    return this.firestore.collection('clubes').add(club)
+  constructor( private ABMsvc:AbmService) { 
+    
   }
 
-  updateNombre(nombre:string, idDoc:string){
-    return this.firestore.collection('clubes').doc(idDoc).update({
-      nombre: nombre 
-    })
-  }
-
-  delete(idDoc:string){
-    this.firestore.collection('users').doc(idDoc).delete()
-    this.firestore.collection('clubes').doc(idDoc).delete()
+  crearClub(email: string, name: string){
+    this.ABMsvc.afs.collection("clubes").add({
+      nombre: name,
+      mail: email 
+    }).then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+      }).catch((error) => {
+        console.error("Error adding document: ", error);
+    });
   }
 }
