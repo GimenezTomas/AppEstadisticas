@@ -115,9 +115,9 @@ export class ModalSignUpPage implements OnInit {
   }
 
 
-  async onRegister(email, password) {
+  async onRegister(email:string, password:string) {
     try {
-      const user = await this.authSvc.register(email.value, password.value);
+      const user = await this.authSvc.register(email, password);
       if (user) {
         const isVerified = this.authSvc.emailVerificado(user);
         this.redirectUser(isVerified);
