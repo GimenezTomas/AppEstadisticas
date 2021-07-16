@@ -157,6 +157,7 @@ export class ModalSignUpPage implements OnInit {
 
   private redirectUser(isVerified: boolean): void {
     if (isVerified) {
+      this.dismiss()
       this.router.navigate(['home']);
     } else {
      console.log("Verifique su cuenta con el email que le mandamos.")

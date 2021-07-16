@@ -21,4 +21,23 @@ export class FirebaseClubService {
         console.error("Error adding document: ", error);
     });
   }
+
+  borrarClub(id: string){
+    var query = this.ABMsvc.afs.collection("clubes").doc(id).delete().then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+    }).catch((error) => {
+      console.error("Error adding document: ", error);
+    });
+  }
+
+  editarNombreClub(id: string, nombre: string){
+    var query = this.ABMsvc.afs.collection("clubes").doc(id).update({
+      nombre: nombre
+    }).then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+    }).catch((error) => {
+      console.error("Error adding document: ", error);
+    });
+  }
+
 }
