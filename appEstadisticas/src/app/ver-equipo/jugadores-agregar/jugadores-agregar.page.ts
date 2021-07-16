@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseApp } from '@angular/fire';
-import { faAlgolia } from '@fortawesome/free-brands-svg-icons';
-import * as firebase from 'firebase/app';
 import { AbmService } from '../../services/abm.service';
 
 @Component({
@@ -10,14 +7,19 @@ import { AbmService } from '../../services/abm.service';
   styleUrls: ['./jugadores-agregar.page.scss'],
 })
 export class JugadoresAgregarPage implements OnInit {
-  constructor(private ABMsvc:AbmService) {}
 
-  ngOnInit() {
+  constructor(private ABMsvc:AbmService) { }
+  ngOnInit(): void {throw new Error('Method not implemented.');}
 
-  }
   crearDeporte(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion):void{
     this.ABMsvc.afs.collection("jugadores").add({
-      
+      nombre: nombre.value,
+      apellido: apellido.value,
+      nCamiseta: nCamiseta.value,
+      nacimiento: nacimiento.value,
+      peso: peso.value,
+      altura: altura.value,
+      posicion: posicion.value
     })
     .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
@@ -29,3 +31,6 @@ export class JugadoresAgregarPage implements OnInit {
   }
 
 }
+
+
+  
