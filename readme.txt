@@ -10,7 +10,7 @@ ng add @angular/fire
 npm install firebase @angular/fire --save
 
 --------
-Sacar tab del login
 Error doblke click botones inicio
 Log con mail css
 boton close registrarse
+redireccionar a home cuando la sesion esta abierta
