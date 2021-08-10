@@ -10,7 +10,7 @@ ng add @angular/fire
 npm install firebase @angular/fire --save
 
 --------
-Error doblke click botones inicio
+// Error doblke click botones inicio // Despues hay que verlo con prusci (probablamente es algo de navegabilidad) //
 Log con mail css
 boton close registrarse
 redireccionar a home cuando la sesion esta abierta
