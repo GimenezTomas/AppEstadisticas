@@ -40,6 +40,10 @@ const routes: Routes = [
   },  {
     path: 'crear-equipo',
     loadChildren: () => import('./crear-equipo/crear-equipo.module').then( m => m.CrearEquipoPageModule)
+  },
+  {
+    path: 'crear-deporte',
+    loadChildren: () => import('./crear-deporte/crear-deporte.module').then( m => m.CrearDeportePageModule)
   }
 
 
