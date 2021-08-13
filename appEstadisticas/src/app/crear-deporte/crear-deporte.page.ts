@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestoreDocument, QuerySnapshot } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { AbmService } from '../services/abm.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-crear-deporte',
@@ -17,7 +18,7 @@ export class CrearDeportePage implements OnInit {
   public modificar:boolean=false;
   public idDocumentoModificar:string;
   public nombreDeporteModificar:string;
-  constructor(private ABMsvc:AbmService) { }
+  constructor(private ABMsvc:AbmService, private AUTHsvc:AuthService) { }
 
   ngOnInit() {
   }
@@ -28,7 +29,8 @@ export class CrearDeportePage implements OnInit {
     this.ABMsvc.afs.collection("deportes").add({
       nombreDeporte: nombreDeporte.value,
       cantEquipos: cantEquipos.value,
-      cantParticipantes: cantParticipantes.value
+      cantParticipantes: cantParticipantes.value,
+      uid: this.AUTHsvc.user$
     })
     .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
