@@ -2,6 +2,7 @@ import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestoreDocument, QuerySnapshot } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
+import { observeOn } from 'rxjs/operators';
 import { AbmService } from '../services/abm.service';
 import { AuthService } from '../services/auth.service';
 
@@ -26,31 +27,33 @@ export class CrearDeportePage implements OnInit {
   
 
   crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{
-    this.ABMsvc.afs.collection("deportes").add({
-      nombreDeporte: nombreDeporte.value,
-      cantEquipos: cantEquipos.value,
-      cantParticipantes: cantParticipantes.value,
-      uid: this.AUTHsvc.user$
+    
+    this.AUTHsvc.user$.forEach(i=> 
+      this.ABMsvc.afs.collection("deportes").add({     
+        nombreDeporte: nombreDeporte.value,
+        cantEquipos: cantEquipos.value,         
+        cantParticipantes: cantParticipantes.value,
+        uid: i.uid
     })
     .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
-  })
+    })
     .catch((error) => {
       console.error("Error adding document: ", error);
-  });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+      })
+    );                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
   }
 
-   mostrarTabla(){
+mostrarTabla(){
     this.DeportesList=[];
     
-    this.ABMsvc.afs.collection("deportes").where("nombreDeporte","!=",null).onSnapshot({includeMetadataChanges: true},(data)=>{
-    data.forEach(e => {
-      console.log(e.data());
-      
-        this.DeportesList.push(e.data());
-    })})
-    }
+    this.AUTHsvc.user$.forEach(i=>
+      this.ABMsvc.afs.collection("deportes").where("uid","==",i.uid).onSnapshot({includeMetadataChanges: true},(data)=>{
+        data.forEach(e => {
+          this.DeportesList.push(e.data());
+        })
+    }))
+}
     
         
 
@@ -70,9 +73,6 @@ export class CrearDeportePage implements OnInit {
    
   
  
-
-
-
   onEditar(idDoc,nombreModificar){
    this.modificar = true;
    this.idDocumentoModificar=idDoc;
