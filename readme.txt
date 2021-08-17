@@ -12,6 +12,5 @@ npm install firebase @angular/fire --save
 --------
 // Error doblke click botones inicio // Despues hay que verlo con prusci (probablamente es algo de navegabilidad) //
 circular dependecy por lo que agregue ashe
-Log con mail css
 boton close registrarse
 redireccionar a home cuando la sesion esta abierta
