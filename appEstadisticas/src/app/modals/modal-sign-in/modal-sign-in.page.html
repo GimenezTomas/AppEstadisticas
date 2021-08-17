@@ -1,9 +1,11 @@
 <ion-header class="main-header">
   <ion-toolbar>
     <ion-title>Iniciar Sesion</ion-title>
-    <ion-button slot="end" (click)="dismiss()">
-      <ion-icon slot="icon-only" name="close"></ion-icon>
-    </ion-button>
+    <ion-buttons slot="end">
+      <ion-button slot="end" (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="main-content">
@@ -47,7 +49,7 @@
         </ion-item>
         <ion-text [hidden]="invalid" >El email o la contraseña son invalidos. Reingresa los datos</ion-text>
       </ion-list>
-      <ion-button color="primary" (click)="onLogin(email,password)">Sign in</ion-button>
+      <ion-button id="signin" color="primary" (click)="onLogin(email,password)">Sign in</ion-button>
       <ion-text class="text">¿Olvidaste tu contraseña?</ion-text>
     </div>
   </ion-content>
