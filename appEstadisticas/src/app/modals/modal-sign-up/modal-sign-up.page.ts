@@ -22,7 +22,7 @@ export class ModalSignUpPage implements OnInit {
   birth: string = ""
   sport: string = ""
 
-  constructor(private clubService: FirebaseClubService, private authSvc: AuthService, private router: Router,private modalController: ModalController, private menu: MenuController, private render: Renderer2) { }
+  constructor(private authSvc: AuthService, private router: Router,private modalController: ModalController, private menu: MenuController, private render: Renderer2) { }
 
   ngOnInit() {
   }
@@ -147,7 +147,7 @@ export class ModalSignUpPage implements OnInit {
       const user = await this.authSvc.loginGoogle();
       if (user) {
         const isVerified = this.authSvc.emailVerificado(user);
-        this.clubService.crearClub(user.email, this.name)
+        //this.clubService.crearClub(user.email, this.name)
         this.redirectUser(isVerified);
       }
     } catch (error) {
