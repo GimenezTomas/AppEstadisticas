@@ -114,7 +114,7 @@ export class ModalSignInPage implements OnInit {
   private redirectUser(isVerified: boolean): void {
     if (isVerified) {
       this.dismiss()
-    
+      this.equipo.getNombresEquipos('RIGtETEOcR9WyBN9MLL1')
       this.router.navigate(['home']);
     } else {
       console.log("Verifique su cuenta con el email que le mandamos.");
