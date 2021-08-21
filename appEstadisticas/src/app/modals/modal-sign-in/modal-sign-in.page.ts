@@ -7,6 +7,7 @@ import { ModalSignUpPage } from '../modal-sign-up/modal-sign-up.page';
 import "firebase/auth";
 import "firebase/firestore";
 import { Router } from '@angular/router';
+import { EquipoService } from 'src/app/services/firebase/equipo.service';
 
 @Component({
   selector: 'app-modal-sign-in',
@@ -20,7 +21,7 @@ export class ModalSignInPage implements OnInit {
   inputPassword: string = ""
   invalid: boolean = true
 
-  constructor(private authSvc:AuthService, private modalController: ModalController, private menu: MenuController, private router: Router) { }
+  constructor(private equipo: EquipoService, private authSvc:AuthService, private modalController: ModalController, private menu: MenuController, private router: Router) { }
 
   ngOnInit() {}
 
@@ -113,6 +114,7 @@ export class ModalSignInPage implements OnInit {
   private redirectUser(isVerified: boolean): void {
     if (isVerified) {
       this.dismiss()
+      this.equipo.getNombresEquipos('RIGtETEOcR9WyBN9MLL1')
       this.router.navigate(['home']);
     } else {
       console.log("Verifique su cuenta con el email que le mandamos.");

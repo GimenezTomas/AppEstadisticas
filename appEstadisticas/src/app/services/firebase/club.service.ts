@@ -39,5 +39,4 @@ export class FirebaseClubService {
       console.error("Error adding document: ", error);
     });
   }
-
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 import { TabService } from './services/tab.service';
 
 @Component({
@@ -7,5 +8,5 @@ import { TabService } from './services/tab.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(public tabs: TabService) {}
+  constructor(public tabs: TabService, public authService: AuthService) {}
 }

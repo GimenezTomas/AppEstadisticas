@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 //import { ModalComponent } from '../components/modal/modal.component';
@@ -14,12 +15,20 @@ export class Tab1Page {
 
   constructor(private modalController: ModalController) {}
 
+  mimodal:any;
+
   async openModalSignIn(){
     const modal = await this.modalController.create({
       component: ModalSignInPage
     })
 
-    return await modal.present()
+    await modal.present()
+
+    this.mimodal = modal;
+  }
+
+  dismiss(){
+    this.mimodal.dismiss()
   }
   
   async openModalSignUp(){
