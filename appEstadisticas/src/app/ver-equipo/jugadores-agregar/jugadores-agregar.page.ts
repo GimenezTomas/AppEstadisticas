@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbmService } from '../../services/abm.service';
 import firebase from 'firebase/app'
 import { AuthService } from 'src/app/services/auth.service';
+import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 
 
 @Component({
@@ -11,11 +12,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class JugadoresAgregarPage implements OnInit {
 
-  constructor(private ABMsvc:AbmService, private AUTHsvc:AuthService) { }
+  constructor(private ABMsvc:AbmService, private jugadoresService: JugadoresService,private AUTHsvc:AuthService) { }
   ngOnInit(): void {throw new Error('Method not implemented.');}
 
   agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion):void{
-    this.ABMsvc.afs.collection("jugadores").add({
+    /*this.ABMsvc.afs.collection("jugadores").add({
       Jugador : 
         {nombre : nombre.value,
         apellido : apellido.value,
@@ -30,10 +31,18 @@ export class JugadoresAgregarPage implements OnInit {
   })
     .catch((error) => {
       console.error("Error adding document: ", error);
-  });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+  });*/
+   
+    this.jugadoresService.agregar('RIGtETEOcR9WyBN9MLL1', {
+      nombre : nombre.value,
+      apellido : apellido.value,
+      nCamiseta : nCamiseta.value,
+      nacimiento : nacimiento.value,
+      peso : peso.value,
+      altura : altura.value,
+      posicion : posicion.value
+    })
   }
-
 }
 
 
