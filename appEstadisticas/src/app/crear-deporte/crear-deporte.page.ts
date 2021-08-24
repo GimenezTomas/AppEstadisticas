@@ -73,29 +73,18 @@ export class CrearDeportePage implements OnInit {
     return await modal.present();
   }
 
-  
-  async presentModalBorrar() {
+  async presentModalBorrar(nombreDeporte:string) {
     const modal = await this.modalController.create({
       component: ModalBorrarDeporteComponent,
-      cssClass: 'my-custom-class'
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'id': nombreDeporte,
+      }
     });
     return await modal.present();
   }
 
-    eliminarDeporte(id){
-      var query = this.ABMsvc.afs.collection("deportes").where('nombreDeporte',"==",id);
-      query.get().then(function(QuerySnapshot){
-        QuerySnapshot.forEach(function(doc){
-          doc.ref.delete().then(()=>{
-            console.log("Documento borrado exitosamente");
-            this.reloadPage();
-          }).catch((error)=>{
-            console.log("error ==>",error);
-          });
-        })
-      })
   
-   } 
    
   
  
