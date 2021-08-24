@@ -1,8 +1,11 @@
 import { stringify } from '@angular/compiler/src/util';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AngularFirestoreDocument, QuerySnapshot } from '@angular/fire/firestore';
+import { ModalController } from '@ionic/angular';
 import * as firebase from 'firebase';
 import { observeOn } from 'rxjs/operators';
+import { ModalBorrarDeporteComponent } from '../modal-borrar-deporte/modal-borrar-deporte.component';
+import { ModalDeporteCreadoComponent } from '../modal-deporte-creado/modal-deporte-creado.component';
 import { AbmService } from '../services/abm.service';
 import { AuthService } from '../services/auth.service';
 
@@ -19,11 +22,26 @@ export class CrearDeportePage implements OnInit {
   public modificar:boolean=false;
   public idDocumentoModificar:string;
   public nombreDeporteModificar:string;
-  constructor(private ABMsvc:AbmService, private AUTHsvc:AuthService) { }
+  constructor(private ABMsvc:AbmService, private AUTHsvc:AuthService, private zone: NgZone, public modalController: ModalController) { }
 
   ngOnInit() {
+
+    this.DeportesList=[];
+
+  
+    this.AUTHsvc.user$.forEach(i=>
+      this.ABMsvc.afs.collection("deportes").where("uid","==",i.uid).get().then((data)=>{
+        data.forEach(e => {
+          this.DeportesList.push(e.data());
+        })
+    }))
   }
 
+  reloadPage() { 
+    this.zone.runOutsideAngular(() => {
+        location.reload();
+    });
+}
   
 
   crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{
@@ -37,32 +55,40 @@ export class CrearDeportePage implements OnInit {
     })
     .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
+      this.presentModalCreado();
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
       })
-    );                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+    ); 
+    
+    
   }
 
-mostrarTabla(){
-    this.DeportesList=[];
-    
-    this.AUTHsvc.user$.forEach(i=>
-      this.ABMsvc.afs.collection("deportes").where("uid","==",i.uid).onSnapshot({includeMetadataChanges: true},(data)=>{
-        data.forEach(e => {
-          this.DeportesList.push(e.data());
-        })
-    }))
-}
-    
-        
+  async presentModalCreado() {
+    const modal = await this.modalController.create({
+      component: ModalDeporteCreadoComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
 
-    onEliminarDeporte(id){
+  
+  async presentModalBorrar() {
+    const modal = await this.modalController.create({
+      component: ModalBorrarDeporteComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
+    eliminarDeporte(id){
       var query = this.ABMsvc.afs.collection("deportes").where('nombreDeporte',"==",id);
       query.get().then(function(QuerySnapshot){
         QuerySnapshot.forEach(function(doc){
           doc.ref.delete().then(()=>{
             console.log("Documento borrado exitosamente");
+            this.reloadPage();
           }).catch((error)=>{
             console.log("error ==>",error);
           });
