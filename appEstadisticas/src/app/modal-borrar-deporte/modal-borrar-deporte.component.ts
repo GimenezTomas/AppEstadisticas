@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { CrearDeportePage } from '../crear-deporte/crear-deporte.page';
 import { ModalController } from '@ionic/angular';
 import { AbmService } from '../services/abm.service';
@@ -9,8 +9,8 @@ import { AbmService } from '../services/abm.service';
   styleUrls: ['./modal-borrar-deporte.component.scss'],
 })
 export class ModalBorrarDeporteComponent implements OnInit {
-  @Input() nombreDeporte: string;
-  constructor(private modalController:ModalController,private ABMsvc:AbmService) { }
+  @Input() id: string;
+  constructor(private modalController:ModalController,private ABMsvc:AbmService, private zone: NgZone) { }
 
   ngOnInit() {}
 
@@ -22,16 +22,19 @@ export class ModalBorrarDeporteComponent implements OnInit {
   }
 
   eliminarDeporte(){
-    var query = this.ABMsvc.afs.collection("deportes").where('nombreDeporte',"==",this.nombreDeporte);
+    var query = this.ABMsvc.afs.collection("deportes").where('nombreDeporte',"==",this.id);
+    var zona = this.zone;
     query.get().then(function(QuerySnapshot){
       QuerySnapshot.forEach(function(doc){
         doc.ref.delete().then(()=>{
           console.log("Documento borrado exitosamente");
-          this.reloadPage();
+          zona.runOutsideAngular(() => {
+            location.reload();
+        });
         }).catch((error)=>{
           console.log("error ==>",error);
         });
-      })
+      });
     })
 
  } 
