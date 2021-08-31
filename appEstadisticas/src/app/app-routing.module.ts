@@ -44,6 +44,10 @@ const routes: Routes = [
   {
     path: 'crear-deporte',
     loadChildren: () => import('./crear-deporte/crear-deporte.module').then( m => m.CrearDeportePageModule)
+  },
+  {
+    path: 'cancha',
+    loadChildren: () => import('./cancha/cancha.module').then( m => m.CanchaPageModule)
   }
 
 
