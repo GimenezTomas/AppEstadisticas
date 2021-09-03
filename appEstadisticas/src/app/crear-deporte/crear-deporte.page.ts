@@ -45,7 +45,7 @@ export class CrearDeportePage implements OnInit {
   
 
   crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{
-    
+    if(this.deporteExistente(nombreDeporte)){
     this.AUTHsvc.user$.forEach(i=> 
       this.ABMsvc.afs.collection("deportes").add({     
         nombreDeporte: nombreDeporte.value,
@@ -61,7 +61,9 @@ export class CrearDeportePage implements OnInit {
       console.error("Error adding document: ", error);
       })
     ); 
-    
+    }else{
+      
+    }
     
   }
 
@@ -86,7 +88,20 @@ export class CrearDeportePage implements OnInit {
 
   
    
-  
+  deporteExistente(nombreDeporte:string):boolean{
+    this.ABMsvc.afs.collection("deportes").where("nombreDeporte","==",nombreDeporte).get()
+    .then((data => {
+      if(data!=null){
+        return true;
+      }else{
+          return false;
+      }}))
+    .catch((error => {
+      console.error("Error => ",error);
+      return false;
+    }))
+    return false;
+  }
  
   onEditar(idDoc,nombreModificar){
    this.modificar = true;
