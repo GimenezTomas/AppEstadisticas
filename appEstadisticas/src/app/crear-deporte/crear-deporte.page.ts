@@ -6,6 +6,7 @@ import * as firebase from 'firebase';
 import { observeOn } from 'rxjs/operators';
 import { ModalBorrarDeporteComponent } from '../modal-borrar-deporte/modal-borrar-deporte.component';
 import { ModalDeporteCreadoComponent } from '../modal-deporte-creado/modal-deporte-creado.component';
+import { ModalDeporteexistenteComponent } from '../modal-deporteexistente/modal-deporteexistente.component';
 import { AbmService } from '../services/abm.service';
 import { AuthService } from '../services/auth.service';
 
@@ -45,7 +46,7 @@ export class CrearDeportePage implements OnInit {
   
 
   crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{
-    if(this.deporteExistente(nombreDeporte)){
+    if(this.deporteExistente(nombreDeporte.value)==false){
     this.AUTHsvc.user$.forEach(i=> 
       this.ABMsvc.afs.collection("deportes").add({     
         nombreDeporte: nombreDeporte.value,
@@ -62,7 +63,7 @@ export class CrearDeportePage implements OnInit {
       })
     ); 
     }else{
-      
+      this.presentModalExistente();
     }
     
   }
@@ -86,9 +87,15 @@ export class CrearDeportePage implements OnInit {
     return await modal.present();
   }
 
-  
+  async presentModalExistente(){
+    const modal = await this.modalController.create({
+      component: ModalDeporteexistenteComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
    
-  deporteExistente(nombreDeporte:string):boolean{
+  deporteExistente(nombreDeporte):boolean{
     this.ABMsvc.afs.collection("deportes").where("nombreDeporte","==",nombreDeporte).get()
     .then((data => {
       if(data!=null){
@@ -97,8 +104,9 @@ export class CrearDeportePage implements OnInit {
           return false;
       }}))
     .catch((error => {
-      console.error("Error => ",error);
       return false;
+      console.error("Error => ",error);
+      
     }))
     return false;
   }
