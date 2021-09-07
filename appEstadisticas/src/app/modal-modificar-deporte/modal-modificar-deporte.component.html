@@ -1,0 +1,26 @@
+<ion-header class="main-header">
+  <ion-toolbar>
+    <ion-title>Modificar Deporte
+    </ion-title>
+    <ion-button slot="end" (click)="dismiss()">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form>
+    <ion-item>
+  <ion-input [value] = "nombreDeporte" id="nombreDeporte" #nombreDeporte required="true" required type="text" placeholder="Nombra tu deporte"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-input id="cantEquipos" #cantEquipos type="number" required placeholder="Cantidad de Equipos"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-input id="cantParticipantes" #cantParticipantes type="number" required placeholder="Cantidad de Participantes"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-input type="text" placeholder="Estadisticas a Registrar"></ion-input>
+</ion-item>
+  <ion-button type=submit (click)="modificarDeporte(nombreDeporte, nombreDeporte, cantEquipos, cantParticipantes)" size="small" >Guardar</ion-button>
+  </form>
+</ion-content>

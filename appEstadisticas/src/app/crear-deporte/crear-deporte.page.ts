@@ -7,6 +7,7 @@ import { observeOn } from 'rxjs/operators';
 import { ModalBorrarDeporteComponent } from '../modal-borrar-deporte/modal-borrar-deporte.component';
 import { ModalDeporteCreadoComponent } from '../modal-deporte-creado/modal-deporte-creado.component';
 import { ModalDeporteexistenteComponent } from '../modal-deporteexistente/modal-deporteexistente.component';
+import { ModalModificarDeporteComponent } from '../modal-modificar-deporte/modal-modificar-deporte.component';
 import { AbmService } from '../services/abm.service';
 import { AuthService } from '../services/auth.service';
 
@@ -46,24 +47,24 @@ export class CrearDeportePage implements OnInit {
   
 
   crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{
-    if(this.deporteExistente(nombreDeporte.value)==false){
-    this.AUTHsvc.user$.forEach(i=> 
-      this.ABMsvc.afs.collection("deportes").add({     
-        nombreDeporte: nombreDeporte.value,
-        cantEquipos: cantEquipos.value,         
-        cantParticipantes: cantParticipantes.value,
-        uid: i.uid
-    })
-    .then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
-      this.presentModalCreado();
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-      })
-    ); 
-    }else{
+    if(this.deporteExistente(nombreDeporte)){
       this.presentModalExistente();
+    }else{
+      this.AUTHsvc.user$.forEach(i=> 
+        this.ABMsvc.afs.collection("deportes").add({     
+          nombreDeporte: nombreDeporte.value,
+          cantEquipos: cantEquipos.value,         
+          cantParticipantes: cantParticipantes.value,
+          uid: i.uid
+      })
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+        this.presentModalCreado();
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+        })
+      ); 
     }
     
   }
@@ -95,27 +96,39 @@ export class CrearDeportePage implements OnInit {
     return await modal.present();
   }
    
-  deporteExistente(nombreDeporte):boolean{
-    this.ABMsvc.afs.collection("deportes").where("nombreDeporte","==",nombreDeporte).get()
-    .then((data => {
-      if(data!=null){
-        return true;
-      }else{
-          return false;
-      }}))
-    .catch((error => {
-      return false;
-      console.error("Error => ",error);
-      
-    }))
+  async presentModalModificar(idDoc,nombreDeporteModificar:string,cantEquipos,cantParticipantes){
+    const modal = await this.modalController.create({
+      component: ModalModificarDeporteComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'id': idDoc,
+        'nombreDeporte': nombreDeporteModificar,
+        'cantEquipos' : cantEquipos,
+        'cantParticipantes' : cantParticipantes
+      }
+    });
+    return await modal.present();
+  }
+
+
+  public deporteExistente(nombreDeporte:string):boolean{
+    this.AUTHsvc.user$.forEach(i=>
+      this.ABMsvc.afs.collection("deportes").where("uid","==",i.uid).get().then((data)=>{
+          data.forEach(e => {
+            console.log("jeje=>", e.data().nombreDeporte);
+            if (e.data().nombreDeporte == nombreDeporte){
+              console.log("Son igualess");
+              return true;
+            }
+          });
+    }));
     return false;
   }
  
-  onEditar(idDoc,nombreModificar){
-   this.modificar = true;
+  onEditar(idDoc,nombreModificar,cantEquipos,cantParticipantes){
    this.idDocumentoModificar=idDoc;
    this.nombreDeporteModificar=nombreModificar;
-   
+   this.presentModalModificar(idDoc,nombreModificar.value,cantEquipos,cantParticipantes);
  }
 
  modificarDeporte(idDoc,nombreDeporte,cantEquipos,cantParticipantes){
