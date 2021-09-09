@@ -11,7 +11,6 @@ import { environment } from '../../environments/environment';
 export class AbmService {
   public afs;
   constructor() { 
-    firebase.default.initializeApp(environment.firebaseConfig);
     this.afs=firebase.default.firestore()
   }  
   

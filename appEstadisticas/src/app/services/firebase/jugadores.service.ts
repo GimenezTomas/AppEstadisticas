@@ -14,18 +14,19 @@ export class JugadoresService {
   agregar(idClub: string, body: any) {
    this.ABMsvc.afs.collection("clubes").doc(idClub).update({
       jugadores: firebase.firestore.FieldValue.arrayUnion(body)
-      }).then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
+      }).then(() => {
+        console.log("Document written");
     })
       .catch((error) => {
         console.error("Error adding document: ", error);
-    });  
+    });
   }
-  borrar(idClub: string){
+  borrar(idClub: string, doc: number){
     this.ABMsvc.afs.collection("clubes").doc(idClub).update({
-      jugadores: firebase.firestore.FieldValue.arrayRemove('1')
-    }).then((docRef) => {
-      console.log("Documento Borrado con exito :)");
+
+      jugadores: firebase.firestore.FieldValue.arrayRemove()
+    }).then(() => {
+      console.log("Documento Borrado con exito :) ");
   })
     .catch((error) => {
       console.error("Error adding document: ", error);
