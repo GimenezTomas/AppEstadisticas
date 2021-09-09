@@ -121,11 +121,12 @@ h1:after {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #008CBA;
+    background-color: #1b1b1bb0;
     overflow: hidden;
     width: 0;
     height: 100%;
-    transition: .5s ease;
+    border-radius: 15%;
+    transition: .2s ease;
   }
 
   .menu .jugadores1 .jugador .back h6{

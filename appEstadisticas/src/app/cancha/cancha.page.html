@@ -1,17 +1,5 @@
-<ion-content>
-  <!--<div id="mySidebar" class="sidebar" [ngClass]="{'openNav1': openNav==true, 'closeNav1': closeNav==true}" >
-    <a href="javascript:void(0)" class="closebtn" onclick="close()">&times;</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
-  </div>
-  
-  <div id="main">
-    <button class="openbtn" onclick="open()">&#9776; Open Sidebar</button>
-    <h2>Collapsed Sidebar</h2>
-    <p>Content...</p>
-  </div>-->
+<ion-content scrollY="false">
+  <app-drawer (openStateChanged)="toggleBackdrop($event)"></app-drawer>
   <div class="menu">
     <div class="equipo">
       <div class="titulo">

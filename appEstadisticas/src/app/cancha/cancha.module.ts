@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CanchaPageRoutingModule } from './cancha-routing.module';
 
 import { CanchaPage } from './cancha.page';
+import { PruebaModule } from '../components/prueba.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CanchaPageRoutingModule
+    CanchaPageRoutingModule,
+    PruebaModule
   ],
   declarations: [CanchaPage]
 })
