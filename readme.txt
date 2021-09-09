@@ -11,5 +11,4 @@ npm install firebase @angular/fire --save
 
 --------
 // Error doblke click botones inicio // Despues hay que verlo con prusci (probablamente es algo de navegabilidad) //
-ClubService crashea el modal de registarse
 redireccionar a home cuando la sesion esta abierta
