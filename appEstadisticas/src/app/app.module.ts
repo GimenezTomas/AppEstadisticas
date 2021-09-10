@@ -17,11 +17,12 @@ import { AngularFireAuth, AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireModule } from "@angular/fire";
 import { environment } from 'src/environments/environment';
 import { TabService } from './services/tab.service';
+import firebase from 'firebase/app';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FontAwesomeModule,AngularFireModule.initializeApp(environment.firebaseConfig),AngularFireAuthModule],
+  imports: [BrowserModule, AngularFireModule.initializeApp(environment.firebaseConfig),IonicModule.forRoot(), AppRoutingModule, FontAwesomeModule,AngularFireModule.initializeApp(environment.firebaseConfig),AngularFireAuthModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TabService],
   bootstrap: [AppComponent],
 })
@@ -30,6 +31,7 @@ export class AppModule {
 
 	constructor(library: FaIconLibrary) { 
 		library.addIconPacks(fas, fab, far);
+
 	}
 
 }
