@@ -9,18 +9,18 @@
 </ion-header>
 <ion-content>
   <form>
-    <ion-item>
-  <ion-input [value] = "nombreDeporte" id="nombreDeporte" #nombreDeporte required="true" required type="text" placeholder="Nombra tu deporte"></ion-input>
+    <ion-item> 
+  <ion-input value = {{nombreDeporte}} id="nombreDeporte" #nombreDeporteNuevo required="true" required type="text" placeholder="Nombra tu deporte"></ion-input>
 </ion-item>
 <ion-item>
-  <ion-input id="cantEquipos" #cantEquipos type="number" required placeholder="Cantidad de Equipos"></ion-input>
+  <ion-input value = {{cantEquipos}}  id="cantEquipos" #cantEquiposNuevo type="number" required placeholder="Cantidad de Equipos"></ion-input>
 </ion-item>
 <ion-item>
-  <ion-input id="cantParticipantes" #cantParticipantes type="number" required placeholder="Cantidad de Participantes"></ion-input>
+  <ion-input value = {{cantParticipantes}} id="cantParticipantes" #cantParticipantesNuevo type="number" required placeholder="Cantidad de Participantes"></ion-input>
 </ion-item>
 <ion-item>
   <ion-input type="text" placeholder="Estadisticas a Registrar"></ion-input>
 </ion-item>
-  <ion-button type=submit (click)="modificarDeporte(nombreDeporte, nombreDeporte, cantEquipos, cantParticipantes)" size="small" >Guardar</ion-button>
+  <ion-button (click)="modificarDeporte(id , nombreDeporteNuevo, cantEquiposNuevo, cantParticipantesNuevo)" size="small" >Guardar</ion-button>
   </form>
 </ion-content>

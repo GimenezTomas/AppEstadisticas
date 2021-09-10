@@ -22,8 +22,6 @@ import { AuthService } from '../services/auth.service';
 export class CrearDeportePage implements OnInit {
   public DeportesList:any[]=[];
   public modificar:boolean=false;
-  public idDocumentoModificar:string;
-  public nombreDeporteModificar:string;
   constructor(private ABMsvc:AbmService, private AUTHsvc:AuthService, private zone: NgZone, public modalController: ModalController) { }
 
   ngOnInit() {
@@ -96,15 +94,15 @@ export class CrearDeportePage implements OnInit {
     return await modal.present();
   }
    
-  async presentModalModificar(idDoc,nombreDeporteModificar:string,cantEquipos,cantParticipantes){
+  async presentModalModificar(idDoc:string,nombreDeporteModificar:string,cantEquiposModificar:string,cantParticipantesModificar:string){
     const modal = await this.modalController.create({
       component: ModalModificarDeporteComponent,
       cssClass: 'my-custom-class',
       componentProps: {
         'id': idDoc,
         'nombreDeporte': nombreDeporteModificar,
-        'cantEquipos' : cantEquipos,
-        'cantParticipantes' : cantParticipantes
+        'cantEquipos' : cantEquiposModificar,
+        'cantParticipantes' : cantParticipantesModificar
       }
     });
     return await modal.present();
@@ -126,32 +124,10 @@ export class CrearDeportePage implements OnInit {
   }
  
   onEditar(idDoc,nombreModificar,cantEquipos,cantParticipantes){
-   this.idDocumentoModificar=idDoc;
-   this.nombreDeporteModificar=nombreModificar;
-   this.presentModalModificar(idDoc,nombreModificar.value,cantEquipos,cantParticipantes);
+   this.presentModalModificar(idDoc,nombreModificar,cantEquipos,cantParticipantes);
  }
 
- modificarDeporte(idDoc,nombreDeporte,cantEquipos,cantParticipantes){
-  var query = this.ABMsvc.afs.collection("deportes").where('nombreDeporte',"==",idDoc);
-  query.get().then(function(QuerySnapshot){
-    QuerySnapshot.forEach(function(doc){
-  doc.ref.update({
-        nombreDeporte:nombreDeporte.value,
-        cantEquipos:cantEquipos.value,
-        cantParticipantes:cantParticipantes.value
-  })
-  .then(() => {
-    console.log("Documento actualizado exitosamente");
-})
-.catch((error) => {
-    console.error("error--->", error);
-});
-  
-  })
 
-  })
-  this.modificar=false;
- }
 
 
 }

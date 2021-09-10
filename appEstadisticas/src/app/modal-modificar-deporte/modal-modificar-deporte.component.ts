@@ -14,7 +14,13 @@ export class ModalModificarDeporteComponent implements OnInit {
   @Input() cantParticipantes: string;
   constructor(private modalController:ModalController, private zone:NgZone, private ABMsvc:AbmService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.id);
+    console.log(this.nombreDeporte);
+    console.log(this.cantEquipos);
+    console.log(this.cantParticipantes);
+    
+  }
 
   dismiss() {
    
@@ -23,8 +29,16 @@ export class ModalModificarDeporteComponent implements OnInit {
     });
   }
 
+  reloadPage(){
+    this.zone.runOutsideAngular(() => {
+      location.reload();
+  });
+  }
+
+
   modificarDeporte(idDoc,nombreDeporte,cantEquipos,cantParticipantes){
     var query = this.ABMsvc.afs.collection("deportes").where('nombreDeporte',"==",idDoc);
+    var zona = this.zone;
     query.get().then(function(QuerySnapshot){
       QuerySnapshot.forEach(function(doc){
     doc.ref.update({
@@ -34,6 +48,9 @@ export class ModalModificarDeporteComponent implements OnInit {
     })
     .then(() => {
       console.log("Documento actualizado exitosamente");
+      zona.runOutsideAngular(() => {
+        location.reload();
+    });
   })
   .catch((error) => {
       console.error("error--->", error);
