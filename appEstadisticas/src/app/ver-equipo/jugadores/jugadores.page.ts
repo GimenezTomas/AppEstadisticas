@@ -23,7 +23,7 @@ export class JugadoresPage implements OnInit {
         })
     })) 
   }
-  borrar():void {
-    this.jugadoresService.borrar('RIGtETEOcR9WyBN9MLL1', 1)
+  borrar(jugador:object):void {
+    this.jugadoresService.borrar('RIGtETEOcR9WyBN9MLL1', jugador)
   }
 }

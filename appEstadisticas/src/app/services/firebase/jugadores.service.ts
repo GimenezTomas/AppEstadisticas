@@ -21,10 +21,10 @@ export class JugadoresService {
         console.error("Error adding document: ", error);
     });
   }
-  borrar(idClub: string, doc: number){
+  borrar(idClub: string, jugador: object){
     this.ABMsvc.afs.collection("clubes").doc(idClub).update({
 
-      jugadores: firebase.firestore.FieldValue.arrayRemove()
+      jugadores: firebase.firestore.FieldValue.arrayRemove(jugador)
     }).then(() => {
       console.log("Documento Borrado con exito :) ");
   })

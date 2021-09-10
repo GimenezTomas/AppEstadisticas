@@ -13,26 +13,11 @@ import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 export class JugadoresAgregarPage implements OnInit {
 
   constructor(private ABMsvc:AbmService, private jugadoresService: JugadoresService,private AUTHsvc:AuthService) { }
-  ngOnInit(): void {throw new Error('Method not implemented.');}
+  ngOnInit(): void {
+
+  }
 
   agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion):void{
-    /*this.ABMsvc.afs.collection("jugadores").add({
-      Jugador : 
-        {nombre : nombre.value,
-        apellido : apellido.value,
-        nCamiseta : nCamiseta.value,
-        nacimiento : nacimiento.value,
-        peso : peso.value,
-        altura : altura.value,
-        posicion : posicion.value}
-    })
-    .then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
-  })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-  });*/
-   
     this.jugadoresService.agregar('RIGtETEOcR9WyBN9MLL1', {
       nombre : nombre.value,
       apellido : apellido.value,
@@ -42,6 +27,10 @@ export class JugadoresAgregarPage implements OnInit {
       altura : altura.value,
       posicion : posicion.value
     })
+    /*usar el mail como en la otra funcion para autodetectar el usuario y subir automaticamente los 
+      jugadores al club que corresponde (primer argumento de la funcion agregar) 
+      revisar si hace falta el for each para agarrar el dato 
+    */
   }
 }
 
