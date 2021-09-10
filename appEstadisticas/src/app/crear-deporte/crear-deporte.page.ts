@@ -42,10 +42,28 @@ export class CrearDeportePage implements OnInit {
         location.reload();
     });
 }
-  
+
+public deporteExistente(nombreDeporte):boolean{
+  var a:boolean = false;
+  this.AUTHsvc.user$.forEach(i=>
+    this.ABMsvc.afs.collection("deportes").where("uid","==",i.uid).get().then((data)=>{
+        data.forEach(e => {
+          console.log("jeje=>", e.data().nombreDeporte);
+          if (e.data().nombreDeporte == nombreDeporte){
+            console.log("Son igualess");
+            a = true;
+            console.log(a);
+            return a;
+          }
+        });
+  }));
+  console.log(a);
+  return a;
+}
 
   crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{
-    if(this.deporteExistente(nombreDeporte)){
+    if((this.deporteExistente(nombreDeporte.value)) == true){
+      console.log("existeeee");
       this.presentModalExistente();
     }else{
       this.AUTHsvc.user$.forEach(i=> 
@@ -109,19 +127,7 @@ export class CrearDeportePage implements OnInit {
   }
 
 
-  public deporteExistente(nombreDeporte:string):boolean{
-    this.AUTHsvc.user$.forEach(i=>
-      this.ABMsvc.afs.collection("deportes").where("uid","==",i.uid).get().then((data)=>{
-          data.forEach(e => {
-            console.log("jeje=>", e.data().nombreDeporte);
-            if (e.data().nombreDeporte == nombreDeporte){
-              console.log("Son igualess");
-              return true;
-            }
-          });
-    }));
-    return false;
-  }
+  
  
   onEditar(idDoc,nombreModificar,cantEquipos,cantParticipantes){
    this.presentModalModificar(idDoc,nombreModificar,cantEquipos,cantParticipantes);
