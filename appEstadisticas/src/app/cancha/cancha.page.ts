@@ -6,9 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cancha.page.scss'],
 })
 export class CanchaPage implements OnInit {
-  
-  openNav: boolean = false
-  closeNav: boolean = true
+  backdropVisible = false
 
 
   constructor() { }
@@ -16,11 +14,7 @@ export class CanchaPage implements OnInit {
   ngOnInit() {
   }
 
-  open(){
-    this.openNav = !this.openNav
-  }
-  
-  close(){
-    this.closeNav = !this.closeNav
+  toggleBackdrop(isVisible){
+    this.backdropVisible = isVisible
   }
 }

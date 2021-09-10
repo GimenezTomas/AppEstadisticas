@@ -30,7 +30,17 @@ export class DrawerComponent implements AfterViewInit {
         drawer.style.transform = `translateY(${ev.deltaY}px)`
       },
       onEnd: ev =>{
-        console.log('end: ', ev)
+        if (ev.deltaY < -50 && !this.isOpen){
+          drawer.style.transition = '.4s ease-out'
+          drawer.style.transition = `translateY(${-this.openHeight}px)`
+          this.openState.emit(true)
+          this.isOpen = true
+        }else if(ev.deltaY > 50 && this.isOpen){
+          drawer.style.transition = '.4s ease-out'
+          drawer.style.transition = ``
+          this.openState.emit(false)
+          this.isOpen = false
+        }
         
       }
     });
@@ -38,7 +48,18 @@ export class DrawerComponent implements AfterViewInit {
   }
 
   toggleDrawer(){
+    const drawer = this.drawer.nativeElement;
+    this.openState.emit(!this.isOpen)
 
+    if (this.isOpen){
+      drawer.style.transition = '.4s ease-out'
+      drawer.style.transition = ``
+      this.isOpen = false
+    }else{
+      drawer.style.transition = '.4s ease-in'
+      drawer.style.transition = `translateY(${-this.openHeight}px)`
+      this.isOpen = true
+    }
   }
 
 }
