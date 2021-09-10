@@ -7,7 +7,7 @@ import { fromDocRef } from '@angular/fire/firestore';
   providedIn: 'root'
 })
 
-export class JugadoresService {
+export class JugadoresService { 
 
   constructor(private ABMsvc:AbmService) { }
 

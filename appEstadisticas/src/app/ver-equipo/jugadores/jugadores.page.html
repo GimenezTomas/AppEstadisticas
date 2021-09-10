@@ -9,28 +9,27 @@
 
 <ion-content>
   <ion-grid id = "tabla">
+    <ion-row>
+      <ion-col>Foto</ion-col>
+      <ion-col>Nombre</ion-col>
+      <ion-col>Apellido</ion-col>
+      <ion-col>Numero de Camiseta</ion-col>
+      <ion-col>Altura</ion-col>
+      <ion-col>Posicion</ion-col>
+      <ion-col>Peso</ion-col>
+      <ion-col>Nacimiento</ion-col>
+    </ion-row>
     <ion-row *ngFor="let jugador of jugadorList; let i = index">
-      <ion-col>
-        {{jugador.nombre}}
-      </ion-col>
-      <ion-col>
-        {{jugador.apellido}}
-      </ion-col>
-      <ion-col>
-        {{jugador.nCamiseta}}
-      </ion-col>
-      <ion-col>
-        {{jugador.altura}}
-      </ion-col>
-      <ion-col>
-        {{jugador.posicion}}
-      </ion-col>
-      <ion-col>
-        {{jugador.peso}}
-      </ion-col>
-      <ion-col>
-        {{jugador.nacimiento}}
-      </ion-col>
+      <ion-col>foto placeholder</ion-col>
+      <ion-col>{{jugador.nombre}}</ion-col>
+      <ion-col>{{jugador.apellido}}</ion-col>
+      <ion-col>{{jugador.nCamiseta}}</ion-col>
+      <ion-col>{{jugador.altura}}</ion-col>
+      <ion-col>{{jugador.posicion}}</ion-col>
+      <ion-col>{{jugador.peso}}</ion-col>
+      <ion-col>{{jugador.nacimiento}}</ion-col>
+      <ion-button id="boton-eliminar" (click)="borrar" size="small">X</ion-button> <!--Eliminar-->
+      <ion-button id="boton-eliminar" (click)="editar" size="small">E</ion-button> <!--Editar-->
     </ion-row>
   </ion-grid>
   </ion-content>
