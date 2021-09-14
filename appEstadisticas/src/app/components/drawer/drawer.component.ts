@@ -18,7 +18,7 @@ export class DrawerComponent implements AfterViewInit {
 
   async ngAfterViewInit() {
     const drawer = this.drawer.nativeElement;
-    this.openHeight = (this.plt.height()/100*70)
+    this.openHeight = (this.plt.height()/100*80)
     
     const gesture = await this.gestureCtrl.create({
       el: drawer,
