@@ -1,6 +1,4 @@
 <ion-content scrollY=false>
-  <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in' : 'fade'" tappable (click) = "drawer.toggleDrawer()"></div>
-  <ion-button (click) = "drawer.toggleDrawer()" expand="full">Open drawer</ion-button>
   <app-drawer (openStateChanged)="toggleBackdrop($event)" #drawer></app-drawer>
 </ion-content>
 <!--<ion-content scrollY="false">
