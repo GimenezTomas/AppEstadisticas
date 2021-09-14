@@ -44,25 +44,30 @@ export class CrearDeportePage implements OnInit {
 }
 
 public deporteExistente(nombreDeporte):boolean{
-  var a:boolean = false;
+  var datos = [];
   this.AUTHsvc.user$.forEach(i=>
     this.ABMsvc.afs.collection("deportes").where("uid","==",i.uid).get().then((data)=>{
         data.forEach(e => {
-          console.log("jeje=>", e.data().nombreDeporte);
-          if (e.data().nombreDeporte == nombreDeporte){
-            console.log("Son igualess");
-            a = true;
-            console.log(a);
-            return a;
-          }
+          datos.push(e);
         });
   }));
-  console.log(a);
-  return a;
+  console.log(datos);
+  if(datos){
+  datos.forEach(element => {
+    if(element.data().nombreDeporte==nombreDeporte){
+      return true;
+    }else{
+      return false;
+    }
+  });
+}else{
+  return false;
+}
+
 }
 
   crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{
-    if((this.deporteExistente(nombreDeporte.value)) == true){
+    if(this.deporteExistente(nombreDeporte.value)){
       console.log("existeeee");
       this.presentModalExistente();
     }else{
