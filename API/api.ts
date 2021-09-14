@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
 import { initializeApp } from 'firebase/app';
 import { collection, DocumentData, getDocs, getFirestore } from 'firebase/firestore';
 import * as admin from 'firebase-admin';
@@ -21,11 +21,6 @@ admin.initializeApp({
   databaseURL: "https://appestadisticas-888ea-default-rtdb.firebaseio.com"
 });
 
-
-
-
-
-
 var express = require('express');
 var app = express();
 var port = 3000;
@@ -47,66 +42,11 @@ function getNombresEquipos(idClub:string){
   return nombres;
 }
 
-/*
-function getClubes(){
-  let clubes = [];
-  admin.firestore().collection("clubes").get()
-  .then((data => {
-    data.forEach(element => {
-      clubes.push(element.data());  
-    });
-
-  }))
-  .catch((error =>{
-    console.log("Error--> ", error);
-    
-  }))
-  return clubes;
-}
-
-/*
-async function getClubes(db){
-  const collectionClubes = collection(db, 'clubes').get()
-   .then(function(querySnapshot) {
-       querySnapshot.forEach(function(doc) {
-           // doc.data() is never undefined for query doc snapshots
-           //nombres.push(doc.id)
-       });
-   })
-   .catch(function(error) {
-       console.log("Error getting documents: ", error);
-   });
-  const Snapshot = await getDocs(collectionClubes);
-  const List = Snapshot.docs.map(doc => doc.data());
-  console.log(List);
-  
-  return List;
-}
-*/
-
-/*
-getClubes(){
-  let nombres = []
-  this.ABMsvc.afs.collection("clubes"). doc('RIGtETEOcR9WyBN9MLL1'). collection('equipos')
-  .get()
-  .then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-          // doc.data() is never undefined for query doc snapshots
-          nombres.push(doc.id)
-      });
-  })
-  .catch(function(error) {
-      console.log("Error getting documents: ", error);
-  });
-  return nombres
-}
-*/
-
 app.get('/', (req, res) => {
-    //res.send('Bienvenido a nuestra Api de Estadisticas!');
-  let a = getNombresEquipos("RIGtETEOcR9WyBN9MLL1");
-  console.log(a);
-  
+  res.send('Bienvenido a nuestra Api de Estadisticas!');
+  //let a = getNombresEquipos("RIGtETEOcR9WyBN9MLL1");
+  //console.log(a);
+
   })
 
   app.listen(port, () => {
@@ -140,15 +80,25 @@ app.get('/', (req, res) => {
     await snapshot.forEach(async doc => { clubes.push(doc.data().equipos)
     });
     res.json(clubes);
-
-
-   
-    
     
   })
 */
   app.get('/estadisticas/:id_club/jugador',async (req , res)=>{
+    let idClub = req.params.idClub;
+    const snapshot = await admin.firestore().collection("clubes").get()
+    let clubes = []
+    let stats = new Map();
 
+    await snapshot.forEach(async doc => { clubes.push(doc.data().jugadores)
+    });
+
+    clubes.forEach(x => {
+      x.forEach(y => {
+        stats.set(y.apellido, y.estadisticas)
+      });
+    });
+    console.log(stats)
+    res.json(stats)
   })
 
 
@@ -162,5 +112,16 @@ app.get('/', (req, res) => {
 
 
   app.get('/:id_club/entrenadores',async (req , res)=>{
+    let idClub = req.params.idClub;
+    const snapshot = await admin.firestore().collection("clubes").get()
+    let clubes = []
+    let entrenadores = []
 
-  })
+    await snapshot.forEach(async doc => { clubes.push(doc.data().entrenadores)
+    });
+
+    clubes.forEach(x => {
+      entrenadores.push(x)
+    });
+    res.json(entrenadores);
+  }) 
