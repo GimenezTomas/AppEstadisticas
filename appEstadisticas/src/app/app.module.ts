@@ -22,7 +22,7 @@ import firebase from 'firebase/app';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, AngularFireModule.initializeApp(environment.firebaseConfig),IonicModule.forRoot(), AppRoutingModule, FontAwesomeModule,AngularFireModule.initializeApp(environment.firebaseConfig),AngularFireAuthModule],
+  imports: [BrowserModule, AngularFireModule.initializeApp(environment.firebaseConfig),IonicModule.forRoot(), AppRoutingModule, FontAwesomeModule,AngularFireAuthModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TabService],
   bootstrap: [AppComponent],
 })
