@@ -42,15 +42,12 @@ function getNombresEquipos(idClub:string){
   return nombres;
 }
 
-app.get('/', (req, res) => {
-  res.send('Bienvenido a nuestra Api de Estadisticas!');
-  //let a = getNombresEquipos("RIGtETEOcR9WyBN9MLL1");
-  //console.log(a);
+  app.get('/', (req, res) => {
+    res.send('Bienvenido a nuestra Api de Estadisticas!');
+    })
 
-  })
-
-  app.listen(port, () => {
-    console.log(`App listening at http://localhost:${port}`);
+    app.listen(port, () => {
+      console.log(`App listening at http://localhost:${port}`);
   })
 
 
@@ -65,9 +62,9 @@ app.get('/', (req, res) => {
     res.json(clubes);
 })
 
-  app.post("/:idClub/equipos", async (req, res)=>{
+  app.get("/:idClub/equipos", async (req, res)=>{
     let clubes = []
-    let idClub = req.params.idClub;
+    let idClub = req.params.id_club;
     const snapshot = await admin.firestore().collection("clubes").doc(idClub).get()
     clubes.push(snapshot.data());
       res.json(clubes);
@@ -83,8 +80,9 @@ app.get('/', (req, res) => {
     
   })
 */
-  app.get('/estadisticas/:id_club/jugador',async (req , res)=>{
-    let idClub = req.params.idClub;
+
+  app.get('/estadisticas/:id_club/jugadores',async (req , res)=>{
+    let idClub = req.params.id_club;
     const snapshot = await admin.firestore().collection("clubes").get()
     let clubes = []
     let stats = new Map();
@@ -98,30 +96,37 @@ app.get('/', (req, res) => {
       });
     });
     console.log(stats)
+    // res.json(stats)
+  })
+
+
+
+
+  app.get('/estadisticas/:id_club/:id_equipo',async (req , res)=>{
+    let idClub = req.params.id_club;
+    let idEquipo = req.params.id_equipo;
+    const snapshot = await admin.firestore().collection("clubes").doc(idClub).collection("equipos").get()
+    let stats = []
+
+    await snapshot.forEach(async doc => { stats.push(doc.data().estadisticasGenerales)
+    });
+
     res.json(stats)
   })
 
 
 
 
-  app.get('/estadisticas/:id_club/deporte',async (req , res)=>{
-
-  })
-
-
-
-
   app.get('/:id_club/entrenadores',async (req , res)=>{
-    let idClub = req.params.idClub;
+    let idClub = req.params.id_club;
     const snapshot = await admin.firestore().collection("clubes").get()
     let clubes = []
     let entrenadores = []
 
-    await snapshot.forEach(async doc => { clubes.push(doc.data().entrenadores)
-    });
-
-    clubes.forEach(x => {
-      entrenadores.push(x)
+    await snapshot.forEach(async doc => { 
+      if(doc.id == idClub){
+        entrenadores.push(doc.data().entrenadores)
+      }
     });
     res.json(entrenadores);
   }) 
