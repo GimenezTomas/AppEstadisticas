@@ -1,7 +1,8 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit, NgZone } from '@angular/core';
-import { AngularFirestoreDocument, QuerySnapshot } from '@angular/fire/firestore';
+import { AngularFirestoreDocument, DocumentData, QuerySnapshot } from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
+import { isCordovaPackageJson } from '@ionic/cli';
 import * as firebase from 'firebase';
 import { observeOn } from 'rxjs/operators';
 import { ModalBorrarDeporteComponent } from '../modal-borrar-deporte/modal-borrar-deporte.component';
@@ -44,30 +45,30 @@ export class CrearDeportePage implements OnInit {
 }
 
 public deporteExistente(nombreDeporte):boolean{
-  var datos = [];
+  var listo:boolean=false;
+  let datos = [];
+  var userID;
   this.AUTHsvc.user$.forEach(i=>
-    this.ABMsvc.afs.collection("deportes").where("uid","==",i.uid).get().then((data)=>{
-        data.forEach(e => {
-          datos.push(e);
-        });
-  }));
-  console.log(datos);
-  if(datos){
-  datos.forEach(element => {
-    if(element.data().nombreDeporte==nombreDeporte){
-      return true;
-    }else{
-      return false;
-    }
-  });
-}else{
-  return false;
+  
+
+  this.ABMsvc.afs.collection("deportes").where("uid","==",i.uid).get().then((data)=>{
+        datos = data;
+        
+      })
+      );
+      datos.forEach(e => {
+        if(e.data().nombreDeporte==nombreDeporte){
+          return true;
+        }
+       
+      });
+      return ;
 }
 
-}
+
 
   crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{
-    if(this.deporteExistente(nombreDeporte.value)){
+    if(this.deporteExistente(nombreDeporte)){
       console.log("existeeee");
       this.presentModalExistente();
     }else{
@@ -141,4 +142,4 @@ public deporteExistente(nombreDeporte):boolean{
 
 
 
-}
+} 
