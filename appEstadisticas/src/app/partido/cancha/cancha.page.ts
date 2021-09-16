@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EquipoService } from '../services/firebase/equipo.service';
-import { PartidosService } from '../services/firebase/partidos.service';
+import { EquipoService } from '../../services/firebase/equipo.service';
+import { PartidosService } from '../../services/firebase/partidos.service';
 
 @Component({
   selector: 'app-cancha',
