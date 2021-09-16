@@ -32,8 +32,23 @@ export class JugadoresService {
       console.error("Error adding document: ", error);
   }); 
   }
-  editar(){
+  editar(idClub: string, jugador: object, jugadorN: object){
+    this.ABMsvc.afs.collection("clubes").doc(idClub).update({
 
+      jugadores: firebase.firestore.FieldValue.arrayRemove(jugador)
+    }).then(() => {
+      console.log("Borro el documento a modificar");
+      this.ABMsvc.afs.collection("clubes").doc(idClub).update({
+        jugadores: firebase.firestore.FieldValue.arrayUnion(jugadorN)
+      }).then(() =>{
+        console.log("Documento Añadido exitosamente :)")
+      }).catch((error) => {
+        console.error("Error adding document: ", error)
+      })
+  })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+  }); 
   }
   ver(){
 

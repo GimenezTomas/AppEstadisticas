@@ -44,6 +44,10 @@ const routes: Routes = [
   {
     path: 'crear-deporte',
     loadChildren: () => import('./crear-deporte/crear-deporte.module').then( m => m.CrearDeportePageModule)
+  },
+  {
+    path: 'modal-editar',
+    loadChildren: () => import('./modals/modal-editar/modal-editar.module').then( m => m.ModalEditarPageModule)
   }
 
 

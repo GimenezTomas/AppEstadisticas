@@ -29,7 +29,7 @@
       <ion-col>{{jugador.peso}}</ion-col>
       <ion-col>{{jugador.nacimiento}}</ion-col>
       <ion-button id="boton-eliminar" (click)="borrar(jugador)" size="small">X</ion-button> <!--Eliminar-->
-      <ion-button id="boton-eliminar" (click)="editar()" size="small">E</ion-button> <!--Editar-->
+      <ion-button id="boton-eliminar" (click)="openModalEditar()" size="small">E</ion-button> <!--Editar-->
     </ion-row>
   </ion-grid>
   </ion-content>
