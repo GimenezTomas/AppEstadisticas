@@ -70,8 +70,6 @@ function getNombresEquipos(idClub) {
 }
 app.get('/', function (req, res) {
     res.send('Bienvenido a nuestra Api de Estadisticas!');
-    //let a = getNombresEquipos("RIGtETEOcR9WyBN9MLL1");
-    //console.log(a);
 });
 app.listen(port, function () {
     console.log("App listening at http://localhost:" + port);
@@ -100,13 +98,13 @@ app.get('/clubes', function (req, res) { return __awaiter(void 0, void 0, void 0
         }
     });
 }); });
-app.post("/:idClub/equipos", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+app.get("/:idClub/equipos", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var clubes, idClub, snapshot;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 clubes = [];
-                idClub = req.params.idClub;
+                idClub = req.params.id_club;
                 return [4 /*yield*/, admin.firestore().collection("clubes").doc(idClub).get()];
             case 1:
                 snapshot = _a.sent();
@@ -126,12 +124,12 @@ res.json(clubes);
 
 })
 */
-app.get('/estadisticas/:id_club/jugador', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+app.get('/estadisticas/:id_club/jugadores', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var idClub, snapshot, clubes, stats;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                idClub = req.params.idClub;
+                idClub = req.params.id_club;
                 return [4 /*yield*/, admin.firestore().collection("clubes").get()];
             case 1:
                 snapshot = _a.sent();
@@ -148,18 +146,35 @@ app.get('/estadisticas/:id_club/jugador', function (req, res) { return __awaiter
                 clubes.forEach(function (x) {
                     x.forEach(function (y) {
                         stats.set(y.apellido, y.estadisticas);
-                        console.log(y.estadisticas);
                     });
                 });
                 console.log(stats);
-                res.json(stats);
                 return [2 /*return*/];
         }
     });
 }); });
-app.get('/estadisticas/:id_club/deporte', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+app.get('/estadisticas/:id_club/:id_equipo', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var idClub, idEquipo, snapshot, stats;
     return __generator(this, function (_a) {
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0:
+                idClub = req.params.id_club;
+                idEquipo = req.params.id_equipo;
+                return [4 /*yield*/, admin.firestore().collection("clubes").doc(idClub).collection("equipos").get()];
+            case 1:
+                snapshot = _a.sent();
+                stats = [];
+                return [4 /*yield*/, snapshot.forEach(function (doc) { return __awaiter(void 0, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            stats.push(doc.data().estadisticasGenerales);
+                            return [2 /*return*/];
+                        });
+                    }); })];
+            case 2:
+                _a.sent();
+                res.json(stats);
+                return [2 /*return*/];
+        }
     });
 }); });
 app.get('/:id_club/entrenadores', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -167,7 +182,7 @@ app.get('/:id_club/entrenadores', function (req, res) { return __awaiter(void 0,
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                idClub = req.params.idClub;
+                idClub = req.params.id_club;
                 return [4 /*yield*/, admin.firestore().collection("clubes").get()];
             case 1:
                 snapshot = _a.sent();
@@ -175,15 +190,15 @@ app.get('/:id_club/entrenadores', function (req, res) { return __awaiter(void 0,
                 entrenadores = [];
                 return [4 /*yield*/, snapshot.forEach(function (doc) { return __awaiter(void 0, void 0, void 0, function () {
                         return __generator(this, function (_a) {
-                            clubes.push(doc.data().entrenadores);
+                            if (doc.id == idClub) {
+                                entrenadores.push(doc.data().entrenadores);
+                            }
+                            res.send("no hay entrenadores");
                             return [2 /*return*/];
                         });
                     }); })];
             case 2:
                 _a.sent();
-                clubes.forEach(function (x) {
-                    entrenadores.push(x);
-                });
                 res.json(entrenadores);
                 return [2 /*return*/];
         }
