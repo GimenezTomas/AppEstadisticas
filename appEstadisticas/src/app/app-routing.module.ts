@@ -56,6 +56,10 @@ const routes: Routes = [
   },  {
     path: 'crear-partido',
     loadChildren: () => import('./partido/crear-partido/crear-partido.module').then( m => m.CrearPartidoPageModule)
+  },
+  {
+    path: 'modal-jugadores',
+    loadChildren: () => import('./modals/modal-jugadores/modal-jugadores.module').then( m => m.ModalJugadoresPageModule)
   }
 
 
