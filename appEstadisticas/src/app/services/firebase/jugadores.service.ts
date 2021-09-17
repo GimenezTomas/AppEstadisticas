@@ -38,6 +38,7 @@ export class JugadoresService {
       jugadores: firebase.firestore.FieldValue.arrayRemove(jugador)
     }).then(() => {
       console.log("Borro el documento a modificar");
+      console.log(jugadorN)
       this.ABMsvc.afs.collection("clubes").doc(idClub).update({
         jugadores: firebase.firestore.FieldValue.arrayUnion(jugadorN)
       }).then(() =>{

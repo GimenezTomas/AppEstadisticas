@@ -35,14 +35,14 @@ export class JugadoresPage implements OnInit {
     this.jugadoresService.borrar(this.idClub, jugador)
     this.actualizarJugadores()
   }
-  editar(jugador:object, jugadorN:object){
-    this.jugadoresService.editar(this.idClub, jugador, jugador)
-    this.actualizarJugadores()
-  }
-  async openModalEditar(){
-    console.log('entre')
+  async openModalEditar(jugador:object){
+    console.log("Abre modal :)")
     const modal = await this.modalController.create({
-      component: ModalEditarPage
+      component: ModalEditarPage,
+      componentProps: {
+        'id': this.idClub,
+        'jugador': jugador
+      }
     })
     return await modal.present()
   }
