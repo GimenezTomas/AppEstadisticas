@@ -1,9 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item>
-      <ion-icon routerLink="/jugadores-inicio" slot="start" name="arrow-back-outline"></ion-icon>
-      <ion-title>Agregar Jugadores</ion-title>
-    </ion-item>
+    <ion-title>Editar</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,34 +8,35 @@
   <div class="list">
     <ion-item class="form">
       <ion-label class="tit">Nombre</ion-label>
-      <ion-input type="text" #nombre placeholder="Juan"></ion-input>
+      <ion-input type="text" #nombre value={{jugador.nombre}}></ion-input>
     </ion-item>
     <ion-item class="form"> 
       <ion-label class="tit">Apellido</ion-label>
-      <ion-input type="text" #apellido placeholder="Martinez"></ion-input>
+      <ion-input type="text" #apellido value={{jugador.apellido}}></ion-input>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">N° Camiseta</ion-label>
-      <ion-input type="number" #nCamiseta placeholder="32"></ion-input>
+      <ion-input type="number" #nCamiseta value={{jugador.nCamiseta}}></ion-input>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Nacimiento</ion-label>
-      <ion-datetime #nacimiento min="1900-02" max="2006"
+      <ion-datetime value ={{jugador.nacimiento}} #nacimiento min="1900-02" max="2006"
         displayFormat="DDD. MMM DD, YY"
         monthShortNames="Jan, Feb, Mar, Apr, Mai, Jun, Jul, Aug, Sep, Oct, Nov, Dec"></ion-datetime>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Peso (Kg)</ion-label>
-      <ion-input type="number" #peso placeholder="64 (64 Kg)"></ion-input>
+      <ion-input type="number" #peso value={{jugador.peso}}></ion-input>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Altura (Cm)</ion-label>
-      <ion-input type="number" #altura placeholder="175 (1.75m)"></ion-input>
+      <ion-input type="number" #altura value={{jugador.altura}}></ion-input>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Posicion</ion-label>
-      <ion-input type="text"#posicion placeholder="Base, Alero, Arquero, Defensa"></ion-input>
+      <ion-input value = {{jugador.posicion}} type="text" #posicion></ion-input>
     </ion-item>
-    <ion-button (click)="agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion)" class="button button-block button-possitive">Agregar</ion-button>
+    <ion-button (click)="editar(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion)" class="button button-block button-possitive">Agregar</ion-button>
   </div>
 </ion-content>
+

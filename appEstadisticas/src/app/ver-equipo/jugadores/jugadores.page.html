@@ -8,30 +8,28 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-avatar slot="end"><img src="https://teamsport.pe/wp-content/uploads/2020/06/Durant.jpg"></ion-avatar>
-      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
-        <h2>Kevin Durant</h2>
-        <p> 7 | Alero</p>
-      </ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-avatar slot="end"><img src="https://imagenes.milenio.com/exTGQWQpuj4omAbbtEhEDv6vvaY=/958x596/smart/https://www.milenio.com/uploads/media/2021/05/16/stephen-curry-reuters-2_0_23_1024_637.JPG"></ion-avatar>
-      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
-        <h2>Stephen Curry</h2>
-        <p> 30 | Base</p>
-      </ion-label>
-      
-    </ion-item>
-
-    <ion-item>
-      <ion-avatar slot="end"><img src="https://www.mundodeportivo.com/r/GODO/MD/p8/Baloncesto/Imagenes/2021/05/13/Recortada/img_cvila_20201106-185537_imagenes_md_otras_fuentes_no_archivables_lebron-kRKH-U493740258841Q4-980x554@MundoDeportivo-Web.jpg"></ion-avatar>
-      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
-        <h2>Lebron James</h2>
-        <p> 23 | Alero</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-</ion-content>
+  <ion-grid id = "tabla">
+    <ion-row>
+      <ion-col>Foto</ion-col>
+      <ion-col>Nombre</ion-col>
+      <ion-col>Apellido</ion-col>
+      <ion-col>Numero de Camiseta</ion-col>
+      <ion-col>Altura</ion-col>
+      <ion-col>Posicion</ion-col>
+      <ion-col>Peso</ion-col>
+      <ion-col>Nacimiento</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let jugador of jugadorList; let i = index">
+      <ion-col>foto placeholder</ion-col>
+      <ion-col>{{jugador.nombre}}</ion-col>
+      <ion-col>{{jugador.apellido}}</ion-col>
+      <ion-col>{{jugador.nCamiseta}}</ion-col>
+      <ion-col>{{jugador.altura}}</ion-col>
+      <ion-col>{{jugador.posicion}}</ion-col>
+      <ion-col>{{jugador.peso}}</ion-col>
+      <ion-col>{{jugador.nacimiento}}</ion-col>
+      <ion-button id="boton-eliminar" (click)="borrar(jugador)" size="small">X</ion-button> <!--Eliminar-->
+      <ion-button id="boton-eliminar" (click)="openModalEditar(jugador)" size="small">E</ion-button> <!--Editar-->
+    </ion-row>
+  </ion-grid>
+  </ion-content>

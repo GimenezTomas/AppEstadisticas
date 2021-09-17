@@ -53,13 +53,22 @@ const routes: Routes = [
   {
     path: 'partidos/patido-home',
     loadChildren: () => import('./partido/patidos-home/patidos-home.module').then( m => m.PatidosHomePageModule)
-  },  {
+  },
+  {
     path: 'crear-partido',
     loadChildren: () => import('./partido/crear-partido/crear-partido.module').then( m => m.CrearPartidoPageModule)
   },
   {
+    path: 'crear-deporte',
+    loadChildren: () => import('./crear-deporte/crear-deporte.module').then( m => m.CrearDeportePageModule)
+  },
+  {
+    path: 'modal-editar',
+    loadChildren: () => import('./modals/modal-editar/modal-editar.module').then( m => m.ModalEditarPageModule)
+
     path: 'modal-jugadores',
     loadChildren: () => import('./modals/modal-jugadores/modal-jugadores.module').then( m => m.ModalJugadoresPageModule)
+
   }
 
 

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "appestadisticas-888ea": {
+      "hosting": {
+        "app": [
+          "appestadisticas-888ea"
+        ]
+      }
+    }
+  }
+}
