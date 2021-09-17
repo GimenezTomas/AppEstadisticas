@@ -21,7 +21,9 @@ import { AuthService } from '../services/auth.service';
 
 export class CrearDeportePage implements OnInit {
   public DeportesList:any[]=[];
+  public nombreDeportes:any[]=[];
   public modificar:boolean=false;
+  public userID;
   constructor(private ABMsvc:AbmService, private AUTHsvc:AuthService, private zone: NgZone, public modalController: ModalController) { }
 
   ngOnInit() {
@@ -31,8 +33,10 @@ export class CrearDeportePage implements OnInit {
   
     this.AUTHsvc.user$.forEach(i=>
       this.ABMsvc.afs.collection("deportes").where("uid","==",i.uid).get().then((data)=>{
+        this.userID=i.uid;
         data.forEach(e => {
           this.DeportesList.push(e.data());
+          this.nombreDeportes.push(e.data().nombreDeporte);
         })
     }))
   }
@@ -44,25 +48,15 @@ export class CrearDeportePage implements OnInit {
 }
 
 public deporteExistente(nombreDeporte):boolean{
-  var a:boolean = false;
-  this.AUTHsvc.user$.forEach(i=>
-    this.ABMsvc.afs.collection("deportes").where("uid","==",i.uid).get().then((data)=>{
-        data.forEach(e => {
-          console.log("jeje=>", e.data().nombreDeporte);
-          if (e.data().nombreDeporte == nombreDeporte){
-            console.log("Son igualess");
-            a = true;
-            console.log(a);
-            return a;
-          }
-        });
-  }));
-  console.log(a);
-  return a;
+  if(this.nombreDeportes.includes(nombreDeporte)){
+    return true;
+  }else{
+    return false;
+  }
 }
 
   crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{
-    if((this.deporteExistente(nombreDeporte.value)) == true){
+    if(this.deporteExistente(nombreDeporte.value)){
       console.log("existeeee");
       this.presentModalExistente();
     }else{
