@@ -65,17 +65,12 @@ const routes: Routes = [
   {
     path: 'modal-editar',
     loadChildren: () => import('./modals/modal-editar/modal-editar.module').then( m => m.ModalEditarPageModule)
-
+  },
+  {
     path: 'modal-jugadores',
     loadChildren: () => import('./modals/modal-jugadores/modal-jugadores.module').then( m => m.ModalJugadoresPageModule)
 
   }
-
-
-
-
-
-
 
 
 ];
