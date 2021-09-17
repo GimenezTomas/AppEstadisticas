@@ -25,7 +25,7 @@
       
     </ion-item>
 
-    <ion-item>
+    <ion-item class="jugador" *ngFor="let jugador of jugadores" id="{{jugador.id}}" (click)="clickJugador(jugador)" [ngClass]="{'occupied': !butacasDisponibles.includes(butaca), 'selected': butacasSeleccionadas.includes(butaca)}">
       <ion-avatar slot="end"><img src="https://www.mundodeportivo.com/r/GODO/MD/p8/Baloncesto/Imagenes/2021/05/13/Recortada/img_cvila_20201106-185537_imagenes_md_otras_fuentes_no_archivables_lebron-kRKH-U493740258841Q4-980x554@MundoDeportivo-Web.jpg"></ion-avatar>
       <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
         <h2>Lebron James</h2>
