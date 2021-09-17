@@ -26,107 +26,89 @@ var app = express();
 var port = 3000;
 
 
-function getNombresEquipos(idClub:string){
-  let nombres = []
-  admin.firestore().collection("clubes").doc(idClub).collection('equipos')
-  .get()
-  .then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-          // doc.data() is never undefined for query doc snapshots
-          nombres.push(doc.id)
-      });
-  })
-  .catch(function(error) {
-      console.log("Error getting documents: ", error);
-  });
-  return nombres;
-}
-
-  app.get('/', (req, res) => {
-    res.send('Bienvenido a nuestra Api de Estadisticas!');
-    })
-
-    app.listen(port, () => {
-      console.log(`App listening at http://localhost:${port}`);
+app.get('/', (req, res) => {
+  res.send('Bienvenido a nuestra Api de Estadisticas!');
   })
 
-
-  app.get('/clubes',async (req , res)=>{
-    const snapshot = await admin.firestore().collection("clubes").get()
-    let clubes = []
-    if(snapshot.empty){
-      res.json("No hay Clubes ingresados");
-    }
-    await snapshot.forEach(async doc => { clubes.push(doc.data().nombre)
-    });
-    res.json(clubes);
+  app.listen(port, () => {
+    console.log(`App listening at http://localhost:${port}`);
 })
 
-  app.get("/:idClub/equipos", async (req, res)=>{
-    let clubes = []
-    let idClub = req.params.id_club;
-    const snapshot = await admin.firestore().collection("clubes").doc(idClub).get()
-    clubes.push(snapshot.data());
-      res.json(clubes);
-    });
 
-    /*
-    if(snapshot.empty){
-      res.json("No hay Clubes ingresados");
-    }
-    await snapshot.forEach(async doc => { clubes.push(doc.data().equipos)
-    });
-    res.json(clubes);
-    
-  })
-*/
+app.get('/clubes',async (req , res)=>{
+  const snapshot = await admin.firestore().collection("clubes").get()
+  let clubes = []
+  if(snapshot.empty){
+    res.json("No hay Clubes ingresados");
+  }
+  await snapshot.forEach(async doc => { clubes.push(doc.data().nombre)
+  });
+  res.json(clubes);
+})
 
-  app.get('/estadisticas/:id_club/jugadores',async (req , res)=>{
-    let idClub = req.params.id_club;
-    const snapshot = await admin.firestore().collection("clubes").get()
-    let clubes = []
-    let stats = new Map();
+app.get("/:id_club/equipos", async (req, res)=>{
+  let idClub = req.params.id_club;
+  const snapshot = await admin.firestore().collection("clubes").doc(idClub).collection("equipos").get()
+  let teams = []
 
-    await snapshot.forEach(async doc => { clubes.push(doc.data().jugadores)
-    });
+  await snapshot.forEach(async doc => {
+    teams.push(doc.id)
+  });
+  res.json(teams);
+  
+})
 
-    clubes.forEach(x => {
-      x.forEach(y => {
-        stats.set(y.apellido, y.estadisticas)
+app.get('/estadisticas/:id_club/jugadores',async (req , res)=>{
+  let idClub = req.params.id_club;
+  const snapshot = await admin.firestore().collection("clubes").get()
+  let clubes = []
+  let stats = new Map();
+
+  await snapshot.forEach(async doc => { 
+    if(doc.id == idClub){
+      clubes.push(doc.data().jugadores)
+      clubes.forEach(x => {
+        x.forEach(y => {
+          stats.set(y.apellido, y.estadisticas)
+        });
       });
-    });
-    console.log(stats)
-    // res.json(stats)
-  })
+    }
+    
+  });
+  console.log(stats)
+  // res.json(stats)
+})
 
 
 
 
-  app.get('/estadisticas/:id_club/:id_equipo',async (req , res)=>{
-    let idClub = req.params.id_club;
-    let idEquipo = req.params.id_equipo;
-    const snapshot = await admin.firestore().collection("clubes").doc(idClub).collection("equipos").get()
-    let stats = []
+app.get('/estadisticas/:id_club/:id_equipo',async (req , res)=>{
+  let idClub = req.params.id_club;
+  let idEquipo = req.params.id_equipo;
+  const snapshot = await admin.firestore().collection("clubes").doc(idClub).collection("equipos").get()
+  let stats = []
 
-    await snapshot.forEach(async doc => { stats.push(doc.data().estadisticasGenerales)
-    });
+  await snapshot.forEach(async doc => { 
+    if(doc.id == idEquipo){
+      stats.push(doc.data().estadisticasGenerales)
+    }
+  });
 
-    res.json(stats)
-  })
+  res.json(stats)
+})
 
 
 
 
-  app.get('/:id_club/entrenadores',async (req , res)=>{
-    let idClub = req.params.id_club;
-    const snapshot = await admin.firestore().collection("clubes").get()
-    let clubes = []
-    let entrenadores = []
+app.get('/:id_club/entrenadores',async (req , res)=>{
+  let idClub = req.params.id_club;
+  const snapshot = await admin.firestore().collection("clubes").get()
+  let entrenadores = []
 
-    await snapshot.forEach(async doc => { 
-      if(doc.id == idClub){
-        entrenadores.push(doc.data().entrenadores)
-      }
-    });
-    res.json(entrenadores);
-  }) 
+  await snapshot.forEach(async doc => { 
+    if(doc.id == idClub){
+      entrenadores.push(doc.data().entrenadores)
+    }
+  });
+  res.json(entrenadores);
+}) 

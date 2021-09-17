@@ -98,32 +98,30 @@ app.get('/clubes', function (req, res) { return __awaiter(void 0, void 0, void 0
         }
     });
 }); });
-app.get("/:idClub/equipos", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var clubes, idClub, snapshot;
+app.get("/:id_club/equipos", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var idClub, snapshot, teams, clubes;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                clubes = [];
                 idClub = req.params.id_club;
-                return [4 /*yield*/, admin.firestore().collection("clubes").doc(idClub).get()];
+                return [4 /*yield*/, admin.firestore().collection("clubes").doc(idClub).collection("equipos").get()];
             case 1:
                 snapshot = _a.sent();
-                clubes.push(snapshot.data());
-                res.json(clubes);
+                teams = [];
+                clubes = [];
+                return [4 /*yield*/, snapshot.forEach(function (doc) { return __awaiter(void 0, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            teams.push(doc.id);
+                            return [2 /*return*/];
+                        });
+                    }); })];
+            case 2:
+                _a.sent();
+                res.json(teams);
                 return [2 /*return*/];
         }
     });
 }); });
-/*
-if(snapshot.empty){
-  res.json("No hay Clubes ingresados");
-}
-await snapshot.forEach(async doc => { clubes.push(doc.data().equipos)
-});
-res.json(clubes);
-
-})
-*/
 app.get('/estadisticas/:id_club/jugadores', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var idClub, snapshot, clubes, stats;
     return __generator(this, function (_a) {
@@ -137,17 +135,19 @@ app.get('/estadisticas/:id_club/jugadores', function (req, res) { return __await
                 stats = new Map();
                 return [4 /*yield*/, snapshot.forEach(function (doc) { return __awaiter(void 0, void 0, void 0, function () {
                         return __generator(this, function (_a) {
-                            clubes.push(doc.data().jugadores);
+                            if (doc.id == idClub) {
+                                clubes.push(doc.data().jugadores);
+                                clubes.forEach(function (x) {
+                                    x.forEach(function (y) {
+                                        stats.set(y.apellido, y.estadisticas);
+                                    });
+                                });
+                            }
                             return [2 /*return*/];
                         });
                     }); })];
             case 2:
                 _a.sent();
-                clubes.forEach(function (x) {
-                    x.forEach(function (y) {
-                        stats.set(y.apellido, y.estadisticas);
-                    });
-                });
                 console.log(stats);
                 return [2 /*return*/];
         }
@@ -166,7 +166,9 @@ app.get('/estadisticas/:id_club/:id_equipo', function (req, res) { return __awai
                 stats = [];
                 return [4 /*yield*/, snapshot.forEach(function (doc) { return __awaiter(void 0, void 0, void 0, function () {
                         return __generator(this, function (_a) {
-                            stats.push(doc.data().estadisticasGenerales);
+                            if (doc.id == idEquipo) {
+                                stats.push(doc.data().estadisticasGenerales);
+                            }
                             return [2 /*return*/];
                         });
                     }); })];
@@ -178,7 +180,7 @@ app.get('/estadisticas/:id_club/:id_equipo', function (req, res) { return __awai
     });
 }); });
 app.get('/:id_club/entrenadores', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var idClub, snapshot, clubes, entrenadores;
+    var idClub, snapshot, entrenadores;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -186,14 +188,12 @@ app.get('/:id_club/entrenadores', function (req, res) { return __awaiter(void 0,
                 return [4 /*yield*/, admin.firestore().collection("clubes").get()];
             case 1:
                 snapshot = _a.sent();
-                clubes = [];
                 entrenadores = [];
                 return [4 /*yield*/, snapshot.forEach(function (doc) { return __awaiter(void 0, void 0, void 0, function () {
                         return __generator(this, function (_a) {
                             if (doc.id == idClub) {
                                 entrenadores.push(doc.data().entrenadores);
                             }
-                            res.send("no hay entrenadores");
                             return [2 /*return*/];
                         });
                     }); })];
