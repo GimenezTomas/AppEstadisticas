@@ -10,7 +10,6 @@ ng add @angular/fire
 npm install firebase @angular/fire --save
 
 --------
-Sacar tab del login
-Error doblke click botones inicio
-Log con mail css
-boton close registrarse
+// Error doblke click botones inicio // Despues hay que verlo con prusci (probablamente es algo de navegabilidad) //
+ClubService crashea el modal de registarse
+redireccionar a home cuando la sesion esta abierta

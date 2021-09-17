@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EquipoService } from '../services/firebase/equipo.service';
 
 @Component({
   selector: 'app-crear-equipo',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrearEquipoPage implements OnInit {
 
-  constructor() { }
+  constructor(private equipo: EquipoService) { }
 
   ngOnInit() {
   }
 
+  aaa(){
+    this.equipo.crearEquipo('njurv', 'sacd', 'RIGtETEOcR9WyBN9MLL1')
+  }
 }

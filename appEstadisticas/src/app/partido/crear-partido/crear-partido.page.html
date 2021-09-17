@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>crearPartido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="list">
+    <ion-item class="form">
+      <ion-label class="tit">Rival</ion-label>
+      <ion-input type="text" #nombre placeholder="Juan"></ion-input>
+    </ion-item>
+    <ion-item class="form">
+      <ion-label class="tit">Fecha</ion-label><!--Agregarle hora-->
+      <ion-datetime #nacimiento min="1900-02" max="2006"
+        displayFormat="DDD. MMM DD, YY"
+        monthShortNames="Jan, Feb, Mar, Apr, Mai, Jun, Jul, Aug, Sep, Oct, Nov, Dec"></ion-datetime>
+    </ion-item>
+    <ion-button (click)="openModalJugadores()">Agregar jugadores</ion-button>
+    <ion-button (click)="crearDeporte(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion)" class="button button-block button-possitive">Agregar</ion-button>
+  </div>
+</ion-content>
