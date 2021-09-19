@@ -37,14 +37,32 @@ const routes: Routes = [
   {
     path: 'detalles-del-equipo',
     loadChildren: () => import('./ver-equipo/detalles-del-equipo/detalles-del-equipo.module').then( m => m.DetallesDelEquipoPageModule)
-  },  {
+  },
+  {
     path: 'crear-equipo',
     loadChildren: () => import('./crear-equipo/crear-equipo.module').then( m => m.CrearEquipoPageModule)
   },
   {
     path: 'crear-deporte',
     loadChildren: () => import('./crear-deporte/crear-deporte.module').then( m => m.CrearDeportePageModule)
+  },
+  {
+    path: 'partido/cancha',
+    loadChildren: () => import('./partido/cancha/cancha.module').then( m => m.CanchaPageModule)
+  },
+  {
+    path: 'partidos/patido-home',
+    loadChildren: () => import('./partido/patidos-home/patidos-home.module').then( m => m.PatidosHomePageModule)
+  },  {
+    path: 'crear-partido',
+    loadChildren: () => import('./partido/crear-partido/crear-partido.module').then( m => m.CrearPartidoPageModule)
+  },
+  {
+    path: 'modal-jugadores',
+    loadChildren: () => import('./modals/modal-jugadores/modal-jugadores.module').then( m => m.ModalJugadoresPageModule)
   }
+
+
 
 
 
