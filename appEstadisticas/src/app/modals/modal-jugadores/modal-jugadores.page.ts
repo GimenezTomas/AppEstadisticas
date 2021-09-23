@@ -19,7 +19,7 @@ export class ModalJugadoresPage implements OnInit {
   }
 
   getJugadores(){
-    
+    this.partidosService.getPlantilla('RIGtETEOcR9WyBN9MLL1' , 'Equipo1', 'VwCeRP4dxz2AYXpKlumA')
   }
 
   dismiss(){

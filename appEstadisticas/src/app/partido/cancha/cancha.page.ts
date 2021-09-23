@@ -9,7 +9,7 @@ import { PartidosService } from '../../services/firebase/partidos.service';
 })
 export class CanchaPage implements OnInit {
   backdropVisible = false
-
+  plantilla  
 
   constructor(private equipo:EquipoService, private partido: PartidosService) { }
 
