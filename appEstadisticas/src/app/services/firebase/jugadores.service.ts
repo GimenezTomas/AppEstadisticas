@@ -7,7 +7,8 @@ import { fromDocRef } from '@angular/fire/firestore';
   providedIn: 'root'
 })
 
-export class JugadoresService { 
+export class JugadoresService {
+  idPrueba: string = "d9LN16EYgi6MaAmPF0Zl"; 
 
   constructor(private ABMsvc:AbmService) { }
 
@@ -54,4 +55,17 @@ export class JugadoresService {
   ver(){
 
   }
+  estadisticasJugador(idClub:string, idJugador:string):any{
+    const jugadoresRef = this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores');
+      const snapshot = jugadoresRef.where('nombre', '==', 'Esteban').get();
+      if (snapshot.empty) {
+        console.log('No matching documents.');
+        return;
+      }
+      this.ABMsvc.afs.document
+      snapshot.forEach(doc => {
+      console.log(doc.id, '=>', doc.data());
+      return doc
+      });  }
+  /* Retornar jugador por id? */
 }
