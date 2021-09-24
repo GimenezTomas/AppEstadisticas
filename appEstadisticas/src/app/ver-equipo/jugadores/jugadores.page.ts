@@ -17,16 +17,11 @@ export class JugadoresPage implements OnInit {
   private idClub:string 
 
   constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService) {}
-  ngOnInit():void {
-  
+  ngOnInit() {
     this.actualizarJugadores()
-    this.ABMsvc.afs.collection('club').doc('RIGtETEOcR9WyBN9MLL1').collection('jugadores').doc('d9LN16EYgi6MaAmPF0Zl').get().then((data)=> {
-      console.log(data, data.nombre)
-    });
-    //console.log("antes")
-    //const  jugador = this.jugadoresService.estadisticasJugador('RIGtETEOcR9WyBN9MLL1 ','d9LN16EYgi6MaAmPF0Zl')
-    //console.log(jugador.data(),"entra console.log")
-    //console.log("despues")
+    //this.jugadoresService.jugadoresDeUnClub('RIGtETEOcR9WyBN9MLL1')   
+    let jugadorRef = this.jugadoresService.jugadorPorId('RIGtETEOcR9WyBN9MLL1', '8BkKhf5IxT1nlPFNWgBv')
+    console.log(jugadorRef)
   }
   actualizarJugadores(){
     this.jugadorList = [];
@@ -35,7 +30,6 @@ export class JugadoresPage implements OnInit {
       this.ABMsvc.afs.collection("clubes").where("mail","==",i.email).get().then((data)=>{
         data.forEach(e => {
           this.idClub = e.id
-          //console.log(this.idClub)
           e.data().jugadores.forEach(j=>
             this.jugadorList.push(j))
         })

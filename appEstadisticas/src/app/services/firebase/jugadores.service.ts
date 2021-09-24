@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AbmService } from '../abm.service';
 import firebase from "firebase/app";
-import { fromDocRef } from '@angular/fire/firestore';
+import { DocumentData, fromDocRef } from '@angular/fire/firestore';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -52,20 +53,17 @@ export class JugadoresService {
       console.error("Error adding document: ", error);
   }); 
   }
-  ver(){
-
+   jugadoresDeUnClub(idClub:string){
+    this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').get().then((data)=> {
+      console.log(data, '=>', data.data())
+      return data
+    }); 
   }
-  estadisticasJugador(idClub:string, idJugador:string):any{
-    const jugadoresRef = this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores');
-      const snapshot = jugadoresRef.where('nombre', '==', 'Esteban').get();
-      if (snapshot.empty) {
-        console.log('No matching documents.');
-        return;
-      }
-      this.ABMsvc.afs.document
-      snapshot.forEach(doc => {
-      console.log(doc.id, '=>', doc.data());
-      return doc
-      });  }
-  /* Retornar jugador por id? */
+  jugadorPorId(idClub:string, idJugador:string){
+    this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').doc(idJugador).get().then((data)=> {
+      console.log(data, '=>', data.data())
+      return data
+    }); 
+  }  
 }
+  
