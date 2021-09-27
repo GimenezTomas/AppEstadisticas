@@ -71,10 +71,6 @@ const routes: Routes = [
     loadChildren: () => import('./modals/modal-jugadores/modal-jugadores.module').then( m => m.ModalJugadoresPageModule)
 
   }
-
-
-
-t
 ];
 @NgModule({
   imports: [

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import 'firebase/firestore'
+import { type } from 'os';
 import { ModalEditarPage } from 'src/app/modals/modal-editar/modal-editar.page';
 import { AbmService } from 'src/app/services/abm.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -22,27 +23,33 @@ export class JugadoresPage implements OnInit {
   }
   actualizarJugadores(){
     this.jugadorList = [];
-
-    this.AUTHsvc.user$.forEach(i=>
-      this.ABMsvc.afs.collection("clubes").where("mail","==",i.email).get().then((data)=>{
-        data.forEach(e => {
-          this.idClub = e.id
-          e.data().jugadores.forEach(j=>
-            this.jugadorList.push(j))
-        })
-    })) 
+    this.AUTHsvc.user$.forEach(i=>{
+      this.ABMsvc.afs.collection("clubes").where("mail", "==", i.email).get().then((data)=>{
+        data.forEach(element => {
+          this.idClub = element.id
+        });
+        this.ABMsvc.afs.collection("clubes").doc(this.idClub).collection('jugadores').get().then((data)=>{
+          data.forEach(element => {
+            let jugador = element.data()
+            jugador.id = element.id
+            this.jugadorList.push(jugador)
+          });
+      })
+      })
+    })
   }
-  borrar(jugador:object):void {
-    this.jugadoresService.borrar(this.idClub, jugador)
+  borrar(idJugador:string):void {
+    this.jugadoresService.borrar(this.idClub, idJugador)
     this.actualizarJugadores()
   }
-  async openModalEditar(jugador:object){
+  async openModalEditar(jugador:object, idJugador:string){
     console.log("Abre modal :)")
     const modal = await this.modalController.create({
       component: ModalEditarPage,
       componentProps: {
-        'id': this.idClub,
-        'jugador': jugador
+        'idClub': this.idClub,
+        'jugador': jugador,
+        'idJugador' : idJugador
       }
     })
     return await modal.present()
