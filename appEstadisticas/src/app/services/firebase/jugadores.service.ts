@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AbmService } from '../abm.service';
 import firebase from "firebase/app";
-import { fromDocRef } from '@angular/fire/firestore';
+import { DocumentData, fromDocRef } from '@angular/fire/firestore';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class JugadoresService { 
+export class JugadoresService {
+  idPrueba: string = "d9LN16EYgi6MaAmPF0Zl"; 
 
   constructor(private ABMsvc:AbmService) { }
 
@@ -51,7 +53,11 @@ export class JugadoresService {
       console.error("Error adding document: ", error);
   }); 
   }
-  ver(){
-
+  jugadoresDeUnClub(idClub:string){
+    return this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').get()
   }
+  jugadorPorId(idClub:string, idJugador:string){
+    return this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').doc(idJugador).get()
+  }  
 }
+  

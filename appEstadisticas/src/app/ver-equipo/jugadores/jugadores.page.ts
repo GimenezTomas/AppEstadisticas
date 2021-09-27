@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import 'firebase/firestore'
 import { ModalEditarPage } from 'src/app/modals/modal-editar/modal-editar.page';
 import { AbmService } from 'src/app/services/abm.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
+
 
 @Component({
   selector: 'app-jugadores',
@@ -15,8 +17,8 @@ export class JugadoresPage implements OnInit {
   private idClub:string 
 
   constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService) {}
-  ngOnInit(): void {
-    this.actualizarJugadores()
+  ngOnInit() {
+    this.actualizarJugadores()  
   }
   actualizarJugadores(){
     this.jugadorList = [];
@@ -25,7 +27,6 @@ export class JugadoresPage implements OnInit {
       this.ABMsvc.afs.collection("clubes").where("mail","==",i.email).get().then((data)=>{
         data.forEach(e => {
           this.idClub = e.id
-          console.log(this.idClub)
           e.data().jugadores.forEach(j=>
             this.jugadorList.push(j))
         })
