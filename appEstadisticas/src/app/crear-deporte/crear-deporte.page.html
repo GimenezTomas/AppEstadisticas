@@ -25,7 +25,7 @@
   <ion-button *ngIf="modificar==false" type=submit (click)="crearDeporte(nombreDeporte, cantEquipos, cantParticipantes)" size="small" >Crear</ion-button>
   </form>
   <ion-button *ngIf="modificar" (click)="modificarDeporte( idDocumentoModificar ,nombreDeporte, cantEquipos, cantParticipantes)" type=submit id="botonGuardar" size="small">Guardar</ion-button>
-<ion-button (click)="mostrarTabla()" size="small">Ver deportes creados</ion-button>
+<ion-label>Mis Deportes</ion-label>
 <ion-grid id="tabla">
   <ion-row>
   <ion-row>
@@ -64,11 +64,11 @@
     
   </ion-col>
   <ion-col>
-  <ion-button id="boton-eliminar" (click)="onEliminarDeporte(deporte.nombreDeporte)" size="small">
+  <ion-button id="boton-eliminar" (click)="presentModalBorrar(deporte.nombreDeporte)" size="small">
   Eliminar
   </ion-button>
   
-  <ion-button (click)="onEditar(deporte.nombreDeporte,deporte.nombreDeporte)" size="small">
+  <ion-button (click)="onEditar(deporte.nombreDeporte,deporte.nombreDeporte,deporte.cantEquipos,deporte.cantParticipantes)" size="small">
     Editar
   </ion-button>
   </ion-col>

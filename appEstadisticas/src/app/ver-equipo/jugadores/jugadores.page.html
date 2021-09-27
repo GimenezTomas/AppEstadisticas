@@ -9,6 +9,21 @@
 
 <ion-content>
   <ion-list>
+    <ion-item *ngFor="let jugador of jugadorList; let i = index">
+      <ion-avatar slot="end"><img src="https://teamsport.pe/wp-content/uploads/2020/06/Durant.jpg"></ion-avatar>
+      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+        <h2>{{jugador.nombre}} {{jugador.apellido}}</h2>
+        <p> {{jugador.nCamiseta}} | {{jugador.posicion}}</p>
+      </ion-label>
+      <ion-button id="boton-eliminar" (click)="borrar(jugador)" size="small">X</ion-button> <!--Eliminar-->
+      <ion-button id="boton-eliminar" (click)="openModalEditar(jugador)" size="small">E</ion-button> <!--Editar-->
+    </ion-item>
+  </ion-list>
+  </ion-content>
+<!--
+  
+<ion-content>
+  <ion-list>
     <ion-item>
       <ion-avatar slot="end"><img src="https://teamsport.pe/wp-content/uploads/2020/06/Durant.jpg"></ion-avatar>
       <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
@@ -35,3 +50,4 @@
     </ion-item>
   </ion-list>
 </ion-content>
+-->
