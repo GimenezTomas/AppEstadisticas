@@ -53,17 +53,11 @@ export class JugadoresService {
       console.error("Error adding document: ", error);
   }); 
   }
-   jugadoresDeUnClub(idClub:string){
-    this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').get().then((data)=> {
-      console.log(data, '=>', data.data())
-      return data
-    }); 
+  jugadoresDeUnClub(idClub:string){
+    return this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').get()
   }
   jugadorPorId(idClub:string, idJugador:string){
-    this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').doc(idJugador).get().then((data)=> {
-      console.log(data, '=>', data.data())
-      return data
-    }); 
+    return this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').doc(idJugador).get()
   }  
 }
   
