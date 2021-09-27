@@ -29,7 +29,7 @@ export class ModalEditarPage implements OnInit {
       altura : altura.value,
       posicion : posicion.value
     })
-    this.reloadPage()
+    console.log("edita")
     this.dismiss()
   }
   reloadPage(){
@@ -38,7 +38,7 @@ export class ModalEditarPage implements OnInit {
   });
   }
   dismiss(){
-    console.log("Pito de Moni")
+    console.log("dismiss")
     this.modalController.dismiss()
   }
 }
