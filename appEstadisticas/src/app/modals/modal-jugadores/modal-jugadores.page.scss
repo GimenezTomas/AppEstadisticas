@@ -28,3 +28,41 @@ ion-header div ion-button{
 .seat.occupied {
 background-color: rgb(163, 29, 29);
 }
+.jugador .seleccionado{
+    
+}
+
+.jugador{
+    display: flex;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+.jugador .dot{
+    height: 15px;
+    width: 15px;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 100%;
+    display: none;
+    transition: all .5s;
+}
+
+.jugador .dotSuplente{
+    background-color: red;
+    display: block;
+}
+
+.jugador .dotTitular{
+    background-color: blue;
+    display: block;
+}
+
+.jugador .data{
+    width: 100%;
+}
+
+ion-fab-button{
+    bottom: 5%;
+    right: 5%;
+}

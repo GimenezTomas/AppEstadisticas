@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbmService } from '../abm.service';
+import { JugadoresService } from './jugadores.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { AbmService } from '../abm.service';
 
 export class EquipoService {
 
-  constructor( private ABMsvc:AbmService) {}
+  constructor( private ABMsvc:AbmService, private jugadoresService: JugadoresService) {}
 
   crearEquipo(nombre: string, deporte: string, id: string){
     this.ABMsvc.afs.collection('clubes').doc(id).collection('equipos').doc(nombre).set({
@@ -58,5 +59,21 @@ export class EquipoService {
         console.log("Error getting documents: ", error);
     });
     return nombres
+  }
+
+  async getJugadoresEquipo(idClub: string, idEquipo: string){
+    
+    let idJugadores = []
+    await this.ABMsvc.afs.collection('clubes').doc(idClub).collection('equipos').doc(idEquipo).get().then((docRef) => {
+      idJugadores = docRef.data().jugadores 
+    })
+    .catch((error) => { })
+    let jugadores = []
+
+    idJugadores.forEach(async element => {
+      jugadores.push(await this.jugadoresService.jugadorPorId(idClub,element.id.toString())) 
+    });  
+    console.log(jugadores)
+    return jugadores 
   }
 }

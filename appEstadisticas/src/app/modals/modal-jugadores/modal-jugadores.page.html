@@ -1,22 +1,24 @@
 <ion-header>
   <IonToolbar>
     <div>
-      <ion-button>Titular</ion-button>
-      <ion-button (click)="getJugadores()">Suplente</ion-button>
+      <ion-button (click)="clickTitular()">Titular</ion-button>
+      <ion-button (click)="clickTitular()">Suplente</ion-button>
     </div>
   </IonToolbar>
 </ion-header>
 <ion-content>
   <ion-list>
-    <ion-item>
-      <ion-avatar slot="end"><img src="https://teamsport.pe/wp-content/uploads/2020/06/Durant.jpg"></ion-avatar>
-      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
-        <h2>Kevin Durant</h2>
-        <p> 7 | Alero</p>
-      </ion-label>
-    </ion-item>
-
-    <ion-item>
+    <div class="jugador" *ngFor="let jugador of jugadores" id="{{jugador.id}}" (click)="seleccionarJugador(jugador)">
+      <div class="dot" [ngClass]="{'dotSuplente': jugadoresSuplentes.includes(jugador), 'dotTitular':jugadoresTitulares.includes(jugador)}"></div>
+      <ion-item class="data">
+        <ion-avatar slot="end"><img src="{{jugador.img}}"></ion-avatar>
+        <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+          <h2>{{jugador.nombre}}</h2>
+          <p> {{jugador.nCamiseta}} | {{jugador.posicion}}</p>
+        </ion-label> 
+      </ion-item>
+    </div>
+    <!--<ion-item>
       <ion-avatar slot="end"><img src="https://imagenes.milenio.com/exTGQWQpuj4omAbbtEhEDv6vvaY=/958x596/smart/https://www.milenio.com/uploads/media/2021/05/16/stephen-curry-reuters-2_0_23_1024_637.JPG"></ion-avatar>
       <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
         <h2>Stephen Curry</h2>
@@ -31,6 +33,9 @@
         <h2>Lebron James</h2>
         <p> 23 | Alero</p>
       </ion-label>
-    </ion-item>
+    </ion-item>-->
   </ion-list>
+
+  <ion-fab-button (click)="dismiss()" horizontal="end" slot="fixed" color="danger" class="ion-color ion-color-danger ios ion-activatable ion-focusable hydrated">
+    <ion-icon name="checkmark-outline"></ion-icon>  </ion-fab-button>        
 </ion-content>
