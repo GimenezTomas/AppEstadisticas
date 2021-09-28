@@ -11,14 +11,20 @@ import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
   styleUrls: ['./jugadores-agregar.page.scss'],
 })
 export class JugadoresAgregarPage implements OnInit {
-
+  private idClub;
   constructor(private ABMsvc:AbmService, private jugadoresService: JugadoresService,private AUTHsvc:AuthService) { }
+    
   ngOnInit(): void {
-
+    this.AUTHsvc.user$.forEach(i=>
+      this.ABMsvc.afs.collection("clubes").where("mail","==",i.email).get().then((data)=>{
+        data.forEach(e => {
+          this.idClub = e.id
+        })
+    })) 
   }
 
   agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion):void{
-    this.jugadoresService.agregar('RIGtETEOcR9WyBN9MLL1', {
+    this.jugadoresService.agregar(this.idClub, {
       nombre : nombre.value,
       apellido : apellido.value,
       nCamiseta : nCamiseta.value,
