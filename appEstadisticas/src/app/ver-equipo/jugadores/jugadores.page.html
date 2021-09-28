@@ -15,11 +15,13 @@
         <h2>{{jugador.nombre}} {{jugador.apellido}}</h2>
         <p> {{jugador.nCamiseta}} | {{jugador.posicion}}</p>
       </ion-label>
-      <ion-button id="boton-eliminar" (click)="borrar(jugador)" size="small">X</ion-button> <!--Eliminar-->
-      <ion-button id="boton-eliminar" (click)="openModalEditar(jugador)" size="small">E</ion-button> <!--Editar-->
+      <ion-button id="boton-eliminar" (click)="borrar(jugador.id)" size="small">X</ion-button> <!--Eliminar-->
+      <ion-button id="boton-eliminar" (click)="openModalEditar(jugador,jugador.id)" size="small">E</ion-button> <!--Editar-->
     </ion-item>
   </ion-list>
+  <!--ion-button expand="block">Agregar</ion-button-->
   </ion-content>
+  
 <!--
   
 <ion-content>

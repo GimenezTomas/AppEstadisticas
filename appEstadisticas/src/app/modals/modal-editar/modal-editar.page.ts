@@ -8,19 +8,21 @@ import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
   styleUrls: ['./modal-editar.page.scss'],
 })
 export class ModalEditarPage implements OnInit {
-  @Input() id:string;
+  @Input() idClub:string;
   @Input() jugador:object;
+  @Input() idJugador:string;
   @Input() jugadorN:object;
-
+  
   
   constructor(private modalController: ModalController, private jugadoresService: JugadoresService, private zone:NgZone) { }
   ngOnInit() {
-    console.log(this.id)
+    console.log(this.idClub)
+    console.log(this.idJugador)
     console.log(this.jugador)
     console.log("Nombre Jugador! ",this.jugador) 
   }
   editar(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion){
-    this.jugadoresService.editar(this.id, this.jugador,{
+    this.jugadoresService.editar(this.idClub,this.idJugador, {
       nombre : nombre.value,
       apellido : apellido.value,
       nCamiseta : nCamiseta.value,
