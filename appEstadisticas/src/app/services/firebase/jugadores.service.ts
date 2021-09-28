@@ -52,11 +52,10 @@ export class JugadoresService {
       console.error("Error adding document: ", error);
   }); 
   }
-  jugadoresDeUnClub(idClub:string){
-    return this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').get()
-  }
-  jugadorPorId(idClub:string, idJugador:string){
-    return this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').doc(idJugador).get()
-  }  
+
+  async jugadorPorId(idClub:string, idJugador:string){
+    let jugadores = await this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').doc(idJugador).get()
+    return jugadores.data()
+  } 
 }
   
