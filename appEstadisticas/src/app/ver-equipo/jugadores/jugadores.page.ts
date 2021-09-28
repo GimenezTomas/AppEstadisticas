@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { modalController } from '@ionic/core';
 import 'firebase/firestore'
 import { type } from 'os';
+import { ModalCrearJugadorComponent } from 'src/app/modals/modal-crear-jugador/modal-crear-jugador.component';
 import { ModalEditarPage } from 'src/app/modals/modal-editar/modal-editar.page';
 import { AbmService } from 'src/app/services/abm.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -52,7 +54,21 @@ export class JugadoresPage implements OnInit {
         'idJugador' : idJugador
       }
     })
+    modal.onDidDismiss().then((data)=>{
+      this.actualizarJugadores();
+    })
     return await modal.present()
   }
-
+  async openModalAgregarJugador(){
+    const modal = await this.modalController.create({
+      component: ModalCrearJugadorComponent,
+      componentProps: {
+        'idClub' : this.idClub
+      }
+    })
+    modal.onDidDismiss().then((data)=>{
+      this.actualizarJugadores();
+    })
+    return await modal.present() 
+  }
 }

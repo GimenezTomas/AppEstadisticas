@@ -21,8 +21,8 @@ export class ModalEditarPage implements OnInit {
     console.log(this.jugador)
     console.log("Nombre Jugador! ",this.jugador) 
   }
-  editar(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion){
-    this.jugadoresService.editar(this.idClub,this.idJugador, {
+  async editar(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion){
+    await this.jugadoresService.editar(this.idClub,this.idJugador, {
       nombre : nombre.value,
       apellido : apellido.value,
       nCamiseta : nCamiseta.value,
@@ -40,7 +40,8 @@ export class ModalEditarPage implements OnInit {
   });
   }
   dismiss(){
-    console.log("dismiss")
-    this.modalController.dismiss()
+    this.modalController.dismiss({
+      'dismissed': true
+    });
   }
 }
