@@ -1,21 +1,45 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Cancha</ion-title>
+    <ion-button *ngIf="futbol" (click)="onBasquet()">
+      Basquet
+    </ion-button>
+    <ion-button *ngIf="basket" (click)="onFutbol()">
+      Futbol
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
+  <center>
+
+  <ion-item id="marcador">
+  <ion-label>HOME</ion-label>
+  <ion-input type="number"></ion-input>
+  <ion-label>AWAY</ion-label>
+</ion-item>
+</center>
+
 
   <div class="container">
-      
-        <ion-img class="imagen" [src]="appEstadisticas/src/assets/footballcourt.jpg"></ion-img>
-     
-      
+      <center>
+        <img *ngIf="futbol" class="imagen" src="assets/img/footballcourt.jpg">
+        <img *ngIf="basket" class="imagen" src="assets/img/basketcourt.jpg">
+        </center>
+
+
       </div>
+      <div>
+        <ion-button>
+          + Punto 
+        </ion-button>
+      </div>
+      <div>
+        
+      </div>
+      <div>
 
-
-
+      </div>
 
 
 </ion-content>

@@ -1,6 +1,8 @@
 <ion-header class="main-header">
   <ion-toolbar>
+    <ion-item>
     <ion-title>Crear Deporte</ion-title>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 <ion-content id="contenido" class="main-content">
@@ -17,56 +19,35 @@
 <ion-item>
   <ion-input type="text" placeholder="Estadisticas a Registrar"></ion-input>
 </ion-item>
-  <ion-button *ngIf="modificar==false" type=submit (click)="crearDeporte(nombreDeporte, cantEquipos, cantParticipantes)" size="small" >Crear</ion-button>
+  <ion-button *ngIf="modificar==false" type=submit (click)="crearDeporte(nombreDeporte, cantEquipos, cantParticipantes)"  color="success">Crear</ion-button>
   </form>
   <ion-button *ngIf="modificar" (click)="modificarDeporte( idDocumentoModificar ,nombreDeporte, cantEquipos, cantParticipantes)" type=submit id="botonGuardar" size="small">Guardar</ion-button>
-<ion-label>Mis Deportes</ion-label>
-<ion-grid id="tabla">
-  <ion-row>
-  <ion-col>
-  <div>
-    Nombre
-  </div>
-</ion-col>
-<ion-col>
-  <div>
-    Cantidad Equipos
-  </div>
-</ion-col>
-<ion-col>
-  <div>
-    Cantidad de Participantes
-  </div>
-</ion-col>
-<ion-col>
-  <div>
-    Opciones
-  </div>
-</ion-col>
-</ion-row>
-  <ion-row *ngFor="let deporte of DeportesList; let i = index">
-    <ion-col>
-      {{deporte.nombreDeporte}}
-    </ion-col>
-    <ion-col>
+  <ion-item>
+    <ion-title>Deportes</ion-title>
+    </ion-item>
+<ion-list>
+  
+  <ion-item *ngFor="let deporte of DeportesList; let i = index">
+  <ion-label>
+     <h3>{{deporte.nombreDeporte}}</h3>
+ 
+    
            
-      {{deporte.cantEquipos}}
+      <p>Equipos {{deporte.cantEquipos}} |  {{deporte.cantParticipantes}} </p>
+    </ion-label>
+  
+  
     
-  </ion-col>
-  <ion-col>
     
-      {{deporte.cantParticipantes}}
     
-  </ion-col>
-  <ion-col>
-  <ion-button id="boton-eliminar" (click)="presentModalBorrar(deporte.nombreDeporte)" size="small">
-  Eliminar
+  <ion-button id="boton-eliminar" color="danger" (click)="presentModalBorrar(deporte.nombreDeporte)" size="small">
+  X
   </ion-button>
   
   <ion-button (click)="onEditar(deporte.nombreDeporte,deporte.nombreDeporte,deporte.cantEquipos,deporte.cantParticipantes)" size="small">
     Editar
   </ion-button>
-  </ion-col>
-  </ion-row>
-</ion-grid>
+  
+  </ion-item>
+</ion-list>
 </ion-content>
