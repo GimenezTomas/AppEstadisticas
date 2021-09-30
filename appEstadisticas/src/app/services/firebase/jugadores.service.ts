@@ -39,6 +39,7 @@ export class JugadoresService {
   }
   editar(idClub: string, idJugador:string, jugadorN: any){
     console.log(jugadorN)
+    console.log(idJugador)
     this.ABMsvc.afs.collection("clubes").doc(idClub).collection('jugadores').doc(idJugador).update({
       nombre : jugadorN.nombre,
       apellido : jugadorN.apellido,
