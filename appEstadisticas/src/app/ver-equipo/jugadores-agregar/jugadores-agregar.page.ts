@@ -33,10 +33,6 @@ export class JugadoresAgregarPage implements OnInit {
       altura : altura.value,
       posicion : posicion.value
     })
-    /*usar el mail como en la otra funcion para autodetectar el usuario y subir automaticamente los 
-      jugadores al club que corresponde (primer argumento de la funcion agregar) 
-      revisar si hace falta el for each para agarrar el dato 
-    */
   }
 }
 
