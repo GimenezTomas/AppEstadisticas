@@ -19,8 +19,10 @@
 <ion-item>
   <ion-input type="text" placeholder="Estadisticas a Registrar"></ion-input>
 </ion-item>
+  <center>
   <ion-button *ngIf="modificar==false" type=submit (click)="crearDeporte(nombreDeporte, cantEquipos, cantParticipantes)"  color="success">Crear</ion-button>
-  </form>
+</center>
+</form>
   <ion-button *ngIf="modificar" (click)="modificarDeporte( idDocumentoModificar ,nombreDeporte, cantEquipos, cantParticipantes)" type=submit id="botonGuardar" size="small">Guardar</ion-button>
   <ion-item>
     <ion-title>Deportes</ion-title>

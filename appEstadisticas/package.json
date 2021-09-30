@@ -31,6 +31,7 @@
     "@ionic-native/screen-orientation": "^5.36.0",
     "@ionic/angular": "^5.5.2",
     "@ionic/cli": "^6.17.0",
+    "cordova-android": "9.1.0",
     "firebase": "^8.9.1",
     "firebase-admin": "^9.11.1",
     "rxjs": "~6.6.0",
@@ -95,7 +96,8 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-screen-orientation": {}
     },
     "platforms": [
       "android"
