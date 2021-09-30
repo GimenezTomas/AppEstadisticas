@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalJugadoresPage } from 'src/app/modals/modal-jugadores/modal-jugadores.page';
 import { PartidosService } from 'src/app/services/firebase/partidos.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-crear-partido',
@@ -10,14 +11,19 @@ import { PartidosService } from 'src/app/services/firebase/partidos.service';
 })
 export class CrearPartidoPage implements OnInit {
 
-  constructor(private modalController: ModalController, private partidoService: PartidosService) { }
+  constructor(private navCtrl: NavController,  private modalController: ModalController, private partidoService: PartidosService) { }
 
   mimodal:any;
   rival: string
-  fecha: string
+  fecha: any; 
   jugadores: any
 
   ngOnInit() {
+  }
+
+  goBack(){
+    this.crearPartido()
+    this.navCtrl.back();
   }
 
   async openModalJugadores(){
@@ -26,6 +32,11 @@ export class CrearPartidoPage implements OnInit {
     })
 
     await modal.present()
+    
+    
+    modal.onDidDismiss().then((data)=>{
+      this.jugadores = data.data.jugadores
+    })
 
     this.mimodal = modal;
   }

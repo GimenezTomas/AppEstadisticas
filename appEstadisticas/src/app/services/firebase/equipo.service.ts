@@ -71,7 +71,7 @@ export class EquipoService {
     let jugadores = []
 
     idJugadores.forEach(async element => {
-      jugadores.push(await this.jugadoresService.jugadorPorId(idClub,element.id.toString())) 
+      jugadores.push({'id': element.id, 'jugador':await this.jugadoresService.jugadorPorId(idClub,element.id.toString())}) 
     });  
     console.log(jugadores)
     return jugadores 
