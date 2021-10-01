@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
+const loggedIntoHome = () => redirectLoggedInTo(['/home']);
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule)
+    loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule),
+    ...canActivate(loggedIntoHome)
   },
   {
     path: 'loading',
@@ -71,10 +75,6 @@ const routes: Routes = [
     loadChildren: () => import('./modals/modal-jugadores/modal-jugadores.module').then( m => m.ModalJugadoresPageModule)
 
   }
-
-
-
-
 ];
 @NgModule({
   imports: [
