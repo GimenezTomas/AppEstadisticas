@@ -7,49 +7,19 @@
   <div class="menu">
     <div class="equipo">
       <div class="titulo">
-        <div class="h1">
+        <div class="h1" (click)="getPlantilla()">
           <h1>TITULARES</h1>
         </div>
       </div>
       <div class="jugadores1">
-        <div class="jugador">
+        <div class="jugador" *ngFor="let titular of titulares;">
           <div class="front">
             <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
-            <h5>24</h5>
-            <h2>Kobe Bryant</h2>
+            <h5>{{titular.nCamiseta}}</h5>
+            <h2>{{titular.nombre}}</h2>
           </div>
           <div class="back">
-            <h6>ESCOLTA</h6>
-          </div>
-        </div>
-        <div class="jugador">
-          <div class="front">
-            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
-            <h5>24</h5>
-            <h2>Kobe Bryant</h2>
-          </div>
-          <div class="back">
-            <h6>ESCOLTA</h6>
-          </div>
-        </div>
-        <div class="jugador">
-          <div class="front">
-            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
-            <h5>24</h5>
-            <h2>Kobe Bryant</h2>
-          </div>
-          <div class="back">
-            <h6>ESCOLTA</h6>
-          </div>
-        </div>
-        <div class="jugador">
-          <div class="front">
-            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
-            <h5>24</h5>
-            <h2>Kobe Bryant</h2>
-          </div>
-          <div class="back">
-            <h6>ESCOLTA</h6>
+            <h6>{{titular.posicion}}</h6>
           </div>
         </div>
       </div>
@@ -59,44 +29,14 @@
         </div>
       </div>
       <div class="jugadores1">
-        <div class="jugador">
+        <div class="jugador" *ngFor="let titular of suplentes;">
           <div class="front">
             <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
-            <h5>24</h5>
-            <h2>Kobe Bryant</h2>
+            <h5>{{titular.nCamiseta}}</h5>
+            <h2>{{titular.nombre}}</h2>
           </div>
           <div class="back">
-            <h6>ESCOLTA</h6>
-          </div>
-        </div>
-        <div class="jugador">
-          <div class="front">
-            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
-            <h5>24</h5>
-            <h2>Kobe Bryant</h2>
-          </div>
-          <div class="back">
-            <h6>ESCOLTA</h6>
-          </div>
-        </div>
-        <div class="jugador">
-          <div class="front">
-            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
-            <h5>24</h5>
-            <h2>Kobe Bryant</h2>
-          </div>
-          <div class="back">
-            <h6>ESCOLTA</h6>
-          </div>
-        </div>
-        <div class="jugador">
-          <div class="front">
-            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
-            <h5>24</h5>
-            <h2>Kobe Bryant</h2>
-          </div>
-          <div class="back">
-            <h6>ESCOLTA</h6>
+            <h6>{{titular.posicion}}</h6>
           </div>
         </div>
       </div>

@@ -26,13 +26,11 @@ export class PartidosService {
 
   getProximosPartidos(idClub: string, idEquipo:string){
     let partidos = []
-    this.ABMsvc.afs.collection("clubes").doc('RIGtETEOcR9WyBN9MLL1').collection('equipos')
-    .get('partidos')
+    this.ABMsvc.afs.collection("clubes").doc('RIGtETEOcR9WyBN9MLL1').collection('equipos').doc(idEquipo).collection('partidos')
+    .get()
     .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            partidos.push(doc.data().partidos)
-            console.log(doc.data().partidos)
+          partidos.push(doc.data()) // filtrar por fechas
       });
     })
     .catch(function(error) {

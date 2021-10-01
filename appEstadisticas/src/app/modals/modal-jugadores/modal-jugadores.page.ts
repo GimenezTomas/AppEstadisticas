@@ -45,7 +45,18 @@ export class ModalJugadoresPage implements OnInit {
   }
 
   dismiss(){
-    this.modalController.dismiss()
+    let jugadores = []
+
+    this.jugadoresTitulares.forEach(element => {
+      jugadores.push({'id':element, 'titular': true})
+    });
+    this.jugadoresSuplentes.forEach(element => {
+      jugadores.push({'id':element, 'titular': false})
+    });
+
+    this.modalController.dismiss({
+      'dismissed': true, 'jugadores': jugadores
+    })
   }
 
   seleccionarJugador(idJugador: any){
