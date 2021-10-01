@@ -70,7 +70,11 @@ const routes: Routes = [
     path: 'modal-jugadores',
     loadChildren: () => import('./modals/modal-jugadores/modal-jugadores.module').then( m => m.ModalJugadoresPageModule)
 
+  },  {
+    path: 'modal-elegir-partido',
+    loadChildren: () => import('./modals/modal-elegir-partido/modal-elegir-partido.module').then( m => m.ModalElegirPartidoPageModule)
   }
+
 ];
 @NgModule({
   imports: [
