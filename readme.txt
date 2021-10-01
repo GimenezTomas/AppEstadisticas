@@ -11,4 +11,4 @@ npm install firebase @angular/fire --save
 
 --------
 Mantenimiento:
-  - Ingresar con mail
+  - Register / Login
