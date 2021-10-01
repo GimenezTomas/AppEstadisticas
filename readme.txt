@@ -12,4 +12,3 @@ npm install firebase @angular/fire --save
 --------
 Mantenimiento:
   - Ingresar con mail
-  - Redireccionar a home cuando la sesion esta abierta(se complico un toque el king tiro la mala)
