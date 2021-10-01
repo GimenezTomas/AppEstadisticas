@@ -13,9 +13,6 @@
   },
   "private": true,
   "dependencies": {
-
-
-
     "@angular-devkit/core": "^12.2.6",
     "@angular-devkit/schematics": "^12.2.6",
     "@angular/common": "~11.2.0",
@@ -31,9 +28,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@ionic/angular": "^5.5.2",
-
     "@ionic/cli": "^6.17.1",
-
     "firebase": "^8.9.1",
     "firebase-admin": "^9.11.1",
     "rxjs": "~6.6.0",
