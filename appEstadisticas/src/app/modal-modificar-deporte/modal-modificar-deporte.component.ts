@@ -15,10 +15,7 @@ export class ModalModificarDeporteComponent implements OnInit {
   constructor(private modalController:ModalController, private zone:NgZone, private ABMsvc:AbmService) { }
 
   ngOnInit() {
-    console.log(this.id);
-    console.log(this.nombreDeporte);
-    console.log(this.cantEquipos);
-    console.log(this.cantParticipantes);
+   
     
   }
 

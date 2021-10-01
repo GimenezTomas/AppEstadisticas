@@ -11,6 +11,8 @@ import { ModalDeporteexistenteComponent } from '../modal-deporteexistente/modal-
 import { ModalModificarDeporteComponent } from '../modal-modificar-deporte/modal-modificar-deporte.component';
 import { AbmService } from '../services/abm.service';
 import { AuthService } from '../services/auth.service';
+import { ToastController } from '@ionic/angular';
+import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-crear-deporte',
@@ -25,10 +27,15 @@ export class CrearDeportePage implements OnInit {
   public nombreDeportes:any[]=[];
   public modificar:boolean=false;
   public userID;
-  constructor(private ABMsvc:AbmService, private AUTHsvc:AuthService, private zone: NgZone, public modalController: ModalController) { }
+  public form = [
+    { val: 'Goles o Puntos', isChecked: false },
+    { val: 'Faltas', isChecked: false },
+    { val: 'Asistencias', isChecked: false }
+  ];
+  constructor(public toastController: ToastController,private ABMsvc:AbmService, private AUTHsvc:AuthService, private zone: NgZone, public modalController: ModalController) { }
 
   ngOnInit() {
-
+    console.log(this.form[0].isChecked);
     this.DeportesList=[];
 
   
@@ -58,16 +65,24 @@ public deporteExistente(nombreDeporte):boolean{
 
 
 
-  crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{
+  crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{   
+    if(nombreDeporte==""){
+      this.presentToast();
+    }else{
     if(this.deporteExistente(nombreDeporte.value)){
       console.log("existeeee");
       this.presentModalExistente();
     }else{
+      let estadisticasRegistrar:Map<string,boolean>=new Map;
+      this.form.forEach(element => {
+          estadisticasRegistrar.set(element.val,element.isChecked);      
+      });
       this.AUTHsvc.user$.forEach(i=> 
         this.ABMsvc.afs.collection("deportes").add({     
           nombreDeporte: nombreDeporte.value,
           cantEquipos: cantEquipos.value,         
           cantParticipantes: cantParticipantes.value,
+          //estadisticasRegistrar: estadisticasRegistrar,  Arreglar que pueda guradar el Map
           uid: i.uid
       })
       .then((docRef) => {
@@ -79,7 +94,7 @@ public deporteExistente(nombreDeporte):boolean{
         })
       ); 
     }
-    
+    }
   }
 
   async presentModalCreado() {
@@ -99,6 +114,14 @@ public deporteExistente(nombreDeporte):boolean{
       }
     });
     return await modal.present();
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Nombre no puede estar vacío',
+      duration: 2000
+    });
+    toast.present();
   }
 
   async presentModalExistente(){
