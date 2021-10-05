@@ -13,7 +13,6 @@
   },
   "private": true,
   "dependencies": {
-
     "@angular-devkit/core": "^12.2.6",
     "@angular-devkit/schematics": "^12.2.6",
     "@angular/common": "~11.2.0",
@@ -31,7 +30,6 @@
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/screen-orientation": "^5.36.0",
     "@ionic/angular": "^5.5.2",
-
     "@ionic/cli": "^6.17.1",
     "ajv": "^8.6.3",
 
