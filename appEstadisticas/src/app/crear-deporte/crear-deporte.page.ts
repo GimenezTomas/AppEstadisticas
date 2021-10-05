@@ -1,16 +1,18 @@
-import { stringify } from '@angular/compiler/src/util';
+
 import { Component, OnInit, NgZone } from '@angular/core';
 import { AngularFirestoreDocument, DocumentData, QuerySnapshot } from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
 import { isCordovaPackageJson } from '@ionic/cli';
 import * as firebase from 'firebase';
-import { observeOn } from 'rxjs/operators';
 import { ModalBorrarDeporteComponent } from '../modal-borrar-deporte/modal-borrar-deporte.component';
 import { ModalDeporteCreadoComponent } from '../modal-deporte-creado/modal-deporte-creado.component';
 import { ModalDeporteexistenteComponent } from '../modal-deporteexistente/modal-deporteexistente.component';
 import { ModalModificarDeporteComponent } from '../modal-modificar-deporte/modal-modificar-deporte.component';
 import { AbmService } from '../services/abm.service';
 import { AuthService } from '../services/auth.service';
+import { ToastController } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-crear-deporte',
@@ -25,10 +27,15 @@ export class CrearDeportePage implements OnInit {
   public nombreDeportes:any[]=[];
   public modificar:boolean=false;
   public userID;
-  constructor(private ABMsvc:AbmService, private AUTHsvc:AuthService, private zone: NgZone, public modalController: ModalController) { }
+  public formEstadisticas = [
+    { val: 'Goles o Puntos', isChecked: false },
+    { val: 'Faltas', isChecked: false },
+    { val: 'Asistencias', isChecked: false },
+    { val: 'Pases', isChecked: false }
+  ];
+  constructor(public toastController: ToastController,private ABMsvc:AbmService, private AUTHsvc:AuthService, private zone: NgZone, public modalController: ModalController) { }
 
   ngOnInit() {
-
     this.DeportesList=[];
 
   
@@ -58,16 +65,24 @@ public deporteExistente(nombreDeporte):boolean{
 
 
 
-  crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{
+  crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{   
+    if(nombreDeporte==null){
+      this.presentToast();
+    }else{
     if(this.deporteExistente(nombreDeporte.value)){
       console.log("existeeee");
       this.presentModalExistente();
     }else{
+      let estadisticasRegistrar:Array<boolean>=[];
+      this.formEstadisticas.forEach(element => {
+           estadisticasRegistrar.push(element.isChecked);
+      });
       this.AUTHsvc.user$.forEach(i=> 
         this.ABMsvc.afs.collection("deportes").add({     
           nombreDeporte: nombreDeporte.value,
           cantEquipos: cantEquipos.value,         
           cantParticipantes: cantParticipantes.value,
+          estadisticasRegistrar: estadisticasRegistrar, 
           uid: i.uid
       })
       .then((docRef) => {
@@ -79,7 +94,7 @@ public deporteExistente(nombreDeporte):boolean{
         })
       ); 
     }
-    
+    }
   }
 
   async presentModalCreado() {
@@ -101,6 +116,14 @@ public deporteExistente(nombreDeporte):boolean{
     return await modal.present();
   }
 
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Nombre no puede estar vacío',
+      duration: 2000
+    });
+    toast.present();
+  }
+
   async presentModalExistente(){
     const modal = await this.modalController.create({
       component: ModalDeporteexistenteComponent,
@@ -109,7 +132,7 @@ public deporteExistente(nombreDeporte):boolean{
     return await modal.present();
   }
    
-  async presentModalModificar(idDoc:string,nombreDeporteModificar:string,cantEquiposModificar:string,cantParticipantesModificar:string){
+  async presentModalModificar(idDoc:string,nombreDeporteModificar:string,cantEquiposModificar:string,cantParticipantesModificar:string,estaditicasModificar:Array<boolean>){
     const modal = await this.modalController.create({
       component: ModalModificarDeporteComponent,
       cssClass: 'my-custom-class',
@@ -117,7 +140,8 @@ public deporteExistente(nombreDeporte):boolean{
         'id': idDoc,
         'nombreDeporte': nombreDeporteModificar,
         'cantEquipos' : cantEquiposModificar,
-        'cantParticipantes' : cantParticipantesModificar
+        'cantParticipantes' : cantParticipantesModificar,
+        'estadisticasRegistrar' : estaditicasModificar
       }
     });
     return await modal.present();
@@ -127,10 +151,12 @@ public deporteExistente(nombreDeporte):boolean{
   
  
   onEditar(idDoc,nombreModificar,cantEquipos,cantParticipantes){
-   this.presentModalModificar(idDoc,nombreModificar,cantEquipos,cantParticipantes);
+    this.DeportesList.forEach(j=>{
+      if (j.nombreDeporte==nombreModificar) {
+        this.presentModalModificar(idDoc,nombreModificar,cantEquipos,cantParticipantes,j.estadisticasRegistrar);
+      }
+    })
+  
  }
-
-
-
 
 } 

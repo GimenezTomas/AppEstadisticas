@@ -1,73 +1,63 @@
 <ion-header class="main-header">
   <ion-toolbar>
+    <ion-item>
+
     <ion-title>Crear Deporte</ion-title>
+
+    </ion-item>
+
     <ion-icon routerLink="/home " slot="start" name="arrow-back-outline"></ion-icon>
   </ion-toolbar>
 </ion-header>
 <ion-content id="contenido" class="main-content">
   <form>
     <ion-item>
-  <ion-input id="nombreDeporte" #nombreDeporte required="true" required type="text" placeholder="Nombra tu deporte"></ion-input>
+  <ion-input id="nombreDeporte" #nombreDeporte  required="true" type="text" placeholder="Nombra tu deporte"></ion-input>
 </ion-item>
 <ion-item>
-  <ion-input id="cantEquipos" #cantEquipos type="number" required placeholder="Cantidad de Equipos"></ion-input>
+  <ion-input id="cantEquipos" #cantEquipos type="number" required="true" placeholder="Cantidad de Equipos" min="1"></ion-input>
 </ion-item>
 <ion-item>
-  <ion-input id="cantParticipantes" #cantParticipantes type="number" required placeholder="Cantidad de Participantes"></ion-input>
+  <ion-input id="cantParticipantes" #cantParticipantes type="number" required="true" placeholder="Cantidad de Participantes" min="1"></ion-input>
 </ion-item>
-<ion-item>
-  <ion-input type="text" placeholder="Estadisticas a Registrar"></ion-input>
-</ion-item>
-  <ion-button *ngIf="modificar==false" type=submit (click)="crearDeporte(nombreDeporte, cantEquipos, cantParticipantes)" size="small" >Crear</ion-button>
-  </form>
+
+  <ion-title>Estadisticas a Registrar</ion-title>
+  <ion-list>
+    <ion-item *ngFor="let entry of formEstadisticas">
+      <ion-label>{{entry.val}}</ion-label>
+      <ion-checkbox slot="end" color="success" [(ngModel)]="entry.isChecked" name="entry.val"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <center>
+  <ion-button  type=submit (click)="crearDeporte(nombreDeporte, cantEquipos, cantParticipantes)"  color="success">Crear</ion-button>
+</center>
+</form>
   <ion-button *ngIf="modificar" (click)="modificarDeporte( idDocumentoModificar ,nombreDeporte, cantEquipos, cantParticipantes)" type=submit id="botonGuardar" size="small">Guardar</ion-button>
-<ion-label>Mis Deportes</ion-label>
-<ion-grid id="tabla">
-  <ion-row>
-  <ion-row>
-  <div>
-    Nombre
-  </div>
-</ion-row>
-<ion-row>
-  <div>
-    Cantidad Equipos
-  </div>
-</ion-row>
-<ion-col>
-  <div>
-    Cantidad de Participantes
-  </div>
-</ion-col>
-<ion-col>
-  <div>
-    Opciones
-  </div>
-</ion-col>
-</ion-row>
-  <ion-row *ngFor="let deporte of DeportesList; let i = index">
-    <ion-col>
-      {{deporte.nombreDeporte}}
-    </ion-col>
-    <ion-col>
+
+  <ion-item>
+    <ion-title>Deportes</ion-title>
+    </ion-item>
+<ion-list>
+  
+  <ion-item *ngFor="let deporte of DeportesList; let i = index">
+  <ion-label>
+     <h3>{{deporte.nombreDeporte}}</h3>
+ 
+
+    
            
-      {{deporte.cantEquipos}}
+      <p>Equipos {{deporte.cantEquipos}} |  {{deporte.cantParticipantes}} </p>
+    </ion-label>
+
     
-  </ion-col>
-  <ion-col>
-    
-      {{deporte.cantParticipantes}}
-    
-  </ion-col>
-  <ion-col>
-  <ion-button id="boton-eliminar" (click)="presentModalBorrar(deporte.nombreDeporte)" size="small">
-  Eliminar
+  <ion-button id="boton-eliminar" color="danger" (click)="presentModalBorrar(deporte.nombreDeporte)" size="small">
+  X
   </ion-button>
   
   <ion-button (click)="onEditar(deporte.nombreDeporte,deporte.nombreDeporte,deporte.cantEquipos,deporte.cantParticipantes)" size="small">
     Editar
   </ion-button>
-  </ion-col>
-  </ion-row>
-</ion-grid>
+  
+  </ion-item>
+</ion-list>
 </ion-content>

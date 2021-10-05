@@ -1,6 +1,6 @@
 <ion-content scrollY=false>
-  <ion-button (click)="sasa()"></ion-button>
-  <app-drawer (openStateChanged)="toggleBackdrop($event)" #drawer></app-drawer>
+  <ion-button (click)="openModalPartidos()" ></ion-button>
+  <app-drawer (openStateChanged)="toggleBackdrop($event)" [partido]="partido" #drawer></app-drawer>
 </ion-content>
 <!--<ion-content scrollY="false">
   <app-drawer (openStateChanged)="toggleBackdrop($event)"></app-drawer>
