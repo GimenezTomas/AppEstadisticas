@@ -75,8 +75,6 @@ const routes: Routes = [
     path: 'cancha',
     loadChildren: () => import('./cancha/cancha.module').then( m => m.CanchaPageModule)
   }
-
-
 ];
 @NgModule({
   imports: [

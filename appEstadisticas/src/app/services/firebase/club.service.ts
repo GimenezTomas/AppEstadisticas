@@ -5,7 +5,7 @@ import { AbmService } from '../abm.service';
   providedIn: 'root'
 })
 
-export class FirebaseClubService {
+export class clubService {
 
   constructor( private ABMsvc:AbmService) { 
     

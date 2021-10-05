@@ -8,28 +8,16 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid id = "tabla">
-    <ion-row>
-      <ion-col>Foto</ion-col>
-      <ion-col>Nombre</ion-col>
-      <ion-col>Apellido</ion-col>
-      <ion-col>Numero de Camiseta</ion-col>
-      <ion-col>Altura</ion-col>
-      <ion-col>Posicion</ion-col>
-      <ion-col>Peso</ion-col>
-      <ion-col>Nacimiento</ion-col>
-    </ion-row>
-    <ion-row *ngFor="let jugador of jugadorList; let i = index">
-      <ion-col>foto placeholder</ion-col>
-      <ion-col>{{jugador.nombre}}</ion-col>
-      <ion-col>{{jugador.apellido}}</ion-col>
-      <ion-col>{{jugador.nCamiseta}}</ion-col>
-      <ion-col>{{jugador.altura}}</ion-col>
-      <ion-col>{{jugador.posicion}}</ion-col>
-      <ion-col>{{jugador.peso}}</ion-col>
-      <ion-col>{{jugador.nacimiento}}</ion-col>
-      <ion-button id="boton-eliminar" (click)="borrar(jugador)" size="small">X</ion-button> <!--Eliminar-->
-      <ion-button id="boton-eliminar" (click)="openModalEditar(jugador)" size="small">E</ion-button> <!--Editar-->
-    </ion-row>
-  </ion-grid>
+  <ion-list>
+    <ion-item *ngFor="let jugador of jugadorList; let i = index">
+      <ion-avatar slot="end"><img src="https://teamsport.pe/wp-content/uploads/2020/06/Durant.jpg"></ion-avatar>
+      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+        <h2>{{jugador.nombre}} {{jugador.apellido}}</h2>
+        <p> {{jugador.nCamiseta}} | {{jugador.posicion}}</p>
+      </ion-label>
+      <ion-button id="boton-eliminar" (click)="borrar(jugador.id)" size="small">X</ion-button> <!--Eliminar-->
+      <ion-button id="boton-eliminar" (click)="openModalEditar(jugador,jugador.id)" size="small">E</ion-button> <!--Editar-->
+    </ion-item>
+  </ion-list>
+  <ion-button id="boton-agregar"expand="block" (click)="openModalAgregarJugador()">Agregar</ion-button>
   </ion-content>

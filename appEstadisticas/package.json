@@ -13,6 +13,11 @@
   },
   "private": true,
   "dependencies": {
+
+
+
+
+
     "@angular-devkit/core": "^12.2.6",
     "@angular-devkit/schematics": "^12.2.6",
     "@angular/common": "~11.2.0",
@@ -30,8 +35,11 @@
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/screen-orientation": "^5.36.0",
     "@ionic/angular": "^5.5.2",
-    "@ionic/cli": "^6.17.0",
-    "cordova-android": "9.1.0",
+
+
+    "@ionic/cli": "^6.17.1",
+
+
     "firebase": "^8.9.1",
     "firebase-admin": "^9.11.1",
     "rxjs": "~6.6.0",
