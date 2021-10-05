@@ -74,6 +74,13 @@ const routes: Routes = [
   {
     path: 'modal-jugadores',
     loadChildren: () => import('./modals/modal-jugadores/modal-jugadores.module').then( m => m.ModalJugadoresPageModule)
+
+
+  },
+  {
+    path: 'cancha',
+    loadChildren: () => import('./cancha/cancha.module').then( m => m.CanchaPageModule)
+
   },
   {
     path: 'modal-elegir-partido',
