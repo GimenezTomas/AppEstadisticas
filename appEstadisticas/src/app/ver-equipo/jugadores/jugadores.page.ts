@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { modalController } from '@ionic/core';
 import 'firebase/firestore'
 import { type } from 'os';
+import { ModalBorrarJugadorPage } from 'src/app/modals/modal-borrar-jugador/modal-borrar-jugador.page';
 import { ModalCrearJugadorComponent } from 'src/app/modals/modal-crear-jugador/modal-crear-jugador.component';
 import { ModalEditarPage } from 'src/app/modals/modal-editar/modal-editar.page';
 import { AbmService } from 'src/app/services/abm.service';
@@ -40,9 +41,9 @@ export class JugadoresPage implements OnInit {
       })
     })
   }
-  borrar(idJugador:string):void {
-    this.jugadoresService.borrar(this.idClub, idJugador)
-    this.actualizarJugadores()
+  borrar(idJugador:string) {
+    this.jugadoresService.borrar(this.idClub, idJugador);
+    this.actualizarJugadores();
   }
   async openModalEditar(jugador:object, idJugador:string){
     console.log("Abre modal :)")
@@ -70,5 +71,16 @@ export class JugadoresPage implements OnInit {
       this.actualizarJugadores();
     })
     return await modal.present() 
+  }
+  async openModalEliminar(idJugador:string){
+    const modal = await this.modalController.create({
+      component: ModalBorrarJugadorPage
+    })
+    modal.onDidDismiss().then((data)=> {
+      if(data.data.borra){
+        this.borrar(idJugador);
+      }
+    })
+    return await modal.present()
   }
 }
