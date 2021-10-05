@@ -8,24 +8,24 @@
 <ion-content id="contenido" class="main-content">
   <form>
     <ion-item>
-  <ion-input id="nombreDeporte" #nombreDeporte required="true"  type="text" placeholder="Nombra tu deporte"></ion-input>
+  <ion-input id="nombreDeporte" #nombreDeporte  required="true" type="text" placeholder="Nombra tu deporte"></ion-input>
 </ion-item>
 <ion-item>
-  <ion-input id="cantEquipos" #cantEquipos type="number" required placeholder="Cantidad de Equipos" min="1"></ion-input>
+  <ion-input id="cantEquipos" #cantEquipos type="number" required="true" placeholder="Cantidad de Equipos" min="1"></ion-input>
 </ion-item>
 <ion-item>
-  <ion-input id="cantParticipantes" #cantParticipantes type="number" required placeholder="Cantidad de Participantes" min="1"></ion-input>
+  <ion-input id="cantParticipantes" #cantParticipantes type="number" required="true" placeholder="Cantidad de Participantes" min="1"></ion-input>
 </ion-item>
 
   <ion-title>Estadisticas a Registrar</ion-title>
   <ion-list>
-    <ion-item *ngFor="let entry of form">
+    <ion-item *ngFor="let entry of formEstadisticas">
       <ion-label>{{entry.val}}</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+      <ion-checkbox slot="end" color="success" [(ngModel)]="entry.isChecked" name="entry.val"></ion-checkbox>
     </ion-item>
   </ion-list>
   <center>
-  <ion-button *ngIf="modificar==false" type=submit (click)="crearDeporte(nombreDeporte, cantEquipos, cantParticipantes)"  color="success">Crear</ion-button>
+  <ion-button  type=submit (click)="crearDeporte(nombreDeporte, cantEquipos, cantParticipantes)"  color="success">Crear</ion-button>
 </center>
 </form>
   <ion-button *ngIf="modificar" (click)="modificarDeporte( idDocumentoModificar ,nombreDeporte, cantEquipos, cantParticipantes)" type=submit id="botonGuardar" size="small">Guardar</ion-button>

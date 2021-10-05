@@ -20,9 +20,17 @@
 <ion-item>
   <ion-input value = {{cantParticipantes}} id="cantParticipantes" #cantParticipantesNuevo type="number" required placeholder="Cantidad de Participantes" min="1"></ion-input>
 </ion-item>
-<ion-item>
-  <ion-input type="text" placeholder="Estadisticas a Registrar"></ion-input>
-</ion-item>
+
+<ion-title>Estadisticas a Registrar</ion-title>
+<ion-list>
+  <ion-item *ngFor="let entry of form">
+    <ion-label>{{entry.val}}</ion-label>
+    <ion-checkbox slot="end" color="success"  [(ngModel)]="entry.isChecked" name="entry.val"></ion-checkbox>
+  </ion-item>
+</ion-list>
+
+<center>
   <ion-button (click)="modificarDeporte(id , nombreDeporteNuevo, cantEquiposNuevo, cantParticipantesNuevo)" color="success">Guardar</ion-button>
+</center>
   </form>
 </ion-content>

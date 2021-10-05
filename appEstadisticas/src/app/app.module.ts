@@ -18,11 +18,14 @@ import { AngularFireModule } from "@angular/fire";
 import { environment } from 'src/environments/environment';
 import { TabService } from './services/tab.service';
 import firebase from 'firebase/app';
+import { CommonModule } from '@angular/common';
+import { ModalModificarDeporteComponent } from './modal-modificar-deporte/modal-modificar-deporte.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ModalModificarDeporteComponent],
   entryComponents: [],
-  imports: [BrowserModule, AngularFireModule.initializeApp(environment.firebaseConfig),IonicModule.forRoot(), AppRoutingModule, FontAwesomeModule,AngularFireAuthModule],
+  imports: [BrowserModule, FormsModule, CommonModule, AngularFireModule.initializeApp(environment.firebaseConfig),IonicModule.forRoot(), AppRoutingModule, FontAwesomeModule,AngularFireAuthModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TabService],
   bootstrap: [AppComponent],
 })
