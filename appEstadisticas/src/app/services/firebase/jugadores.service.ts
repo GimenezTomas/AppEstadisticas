@@ -3,6 +3,8 @@ import { AbmService } from '../abm.service';
 import firebase from "firebase/app";
 import { DocumentData, fromDocRef } from '@angular/fire/firestore';
 import { promise } from 'protractor';
+import { EquipoService } from './equipo.service';
+import { resolve } from 'dns';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +23,10 @@ export class JugadoresService {
       peso : jugador.peso,
       altura : jugador.altura,
       posicion : jugador.posicion
-    }).then(() => {
+    }).then( (data) => {
         console.log("Document written");
-    })
+        return data.id
+      })
       .catch((error) => {
         console.error("Error adding document: ", error);
     });
