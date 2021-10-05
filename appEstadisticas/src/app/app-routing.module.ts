@@ -1,10 +1,15 @@
+
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
+const loggedIntoHome = () => redirectLoggedInTo(['/home']);
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule)
+    loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule),
+    ...canActivate(loggedIntoHome)
   },
   {
     path: 'loading',
@@ -70,11 +75,18 @@ const routes: Routes = [
     path: 'modal-jugadores',
     loadChildren: () => import('./modals/modal-jugadores/modal-jugadores.module').then( m => m.ModalJugadoresPageModule)
 
+
   },
   {
     path: 'cancha',
     loadChildren: () => import('./cancha/cancha.module').then( m => m.CanchaPageModule)
+
+  },
+  {
+    path: 'modal-elegir-partido',
+    loadChildren: () => import('./modals/modal-elegir-partido/modal-elegir-partido.module').then( m => m.ModalElegirPartidoPageModule)
   }
+
 ];
 @NgModule({
   imports: [

@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Partidos</ion-title>
+    <ion-item>
+     <ion-title>Partidos</ion-title>
+     <ion-icon routerLink="/home" slot="start" name="arrow-back-outline"></ion-icon>
+    </ion-item> 
   </ion-toolbar>
 </ion-header>
 
@@ -13,10 +16,12 @@
       <ion-button>
         <ion-icon name="arrow-forward-outline"></ion-icon>      
       </ion-button>
-      <ion-card-title color="primary">Comenzar partido</ion-card-title>
+      <ion-card-title style="color:  	 	 	#00FFFF;">
+        Comenzar partido
+      </ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      Consulta las estadísticas de tus jugadores. También puedes agregar nuevos, borrarlos y editarlos.
+    <ion-card-content style="color:  	 	 	#FFFFFF;">
+      Comienza el partido previamente creado y con el equipo seleccionado.
     </ion-card-content>
   </ion-card>
   <ion-card class="card2" routerLink="../../crear-partido">
@@ -27,10 +32,10 @@
       <ion-button>
         <ion-icon name="arrow-forward-outline"></ion-icon>      
       </ion-button>
-      <ion-card-title color="primary">Crear partido</ion-card-title>
+      <ion-card-title style="color:  	 	 	#00FFFF;">Crear partido</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      Consulta las estadísticas de tus jugadores. También puedes agregar nuevos, borrarlos y editarlos.
+    <ion-card-content style="color:  	 	 	#FFFFFF;">
+      Crea el partido para tu equipo.
     </ion-card-content>
   </ion-card>
   <ion-card class="card2" routerLink="/partidos/patido-home">
@@ -41,10 +46,10 @@
       <ion-button>
         <ion-icon name="arrow-forward-outline"></ion-icon>      
       </ion-button>
-      <ion-card-title color="primary">Borrar o Editar partidos existentes</ion-card-title>
+      <ion-card-title style="color:  	 	 	#00FFFF;">Borrar o editar partidos </ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      Consulta las estadísticas de tus jugadores. También puedes agregar nuevos, borrarlos y editarlos.
+    <ion-card-content style="color:  	 	 	#FFFFFF;">
+       Borra y edita los partidos existentes.
     </ion-card-content>
   </ion-card>
 </ion-content>
