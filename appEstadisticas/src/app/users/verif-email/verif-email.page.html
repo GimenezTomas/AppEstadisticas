@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Verificacion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="user$ | async as user">
+  <ion-row>
+    <ion-col>
+      <h2>App Estadísticas!</h2>
+      <p>Gracias <strong>{{user.email}}</strong> por registrarte!</p>
+      <p>Revisa y verifica tu mail para ingresar a nuestra app!</p>
+      <p>Checkee la carpeta Spam o Correo no deseado!</p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" color="primary" expand="block" (click)="onSendEmail()">Reenviar mail</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

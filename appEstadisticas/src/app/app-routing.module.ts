@@ -32,14 +32,6 @@ const routes: Routes = [
     loadChildren: () => import('./ver-equipo/jugadores-agregar/jugadores-agregar.module').then( m => m.JugadoresAgregarPageModule)
   },
   {
-    path: 'modal-sign-in',
-    loadChildren: () => import('./modals/modal-sign-in/modal-sign-in.module').then( m => m.ModalSignInPageModule)
-  },
-  {
-    path: 'modal-sign-up',
-    loadChildren: () => import('./modals/modal-sign-up/modal-sign-up.module').then( m => m.ModalSignUpPageModule)
-  },
-  {
     path: 'detalles-del-equipo',
     loadChildren: () => import('./ver-equipo/detalles-del-equipo/detalles-del-equipo.module').then( m => m.DetallesDelEquipoPageModule)
   },
@@ -85,6 +77,18 @@ const routes: Routes = [
   {
     path: 'modal-elegir-partido',
     loadChildren: () => import('./modals/modal-elegir-partido/modal-elegir-partido.module').then( m => m.ModalElegirPartidoPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./users/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./users/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'verif-email',
+    loadChildren: () => import('./users/verif-email/verif-email.module').then( m => m.VerifEmailPageModule)
   }
 
 ];

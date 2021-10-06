@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ModalSignInPage } from './modal-sign-in.page';
+import { VerifEmailPage } from './verif-email.page';
 
-describe('ModalSignInPage', () => {
-  let component: ModalSignInPage;
-  let fixture: ComponentFixture<ModalSignInPage>;
+describe('VerifEmailPage', () => {
+  let component: VerifEmailPage;
+  let fixture: ComponentFixture<VerifEmailPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalSignInPage ],
+      declarations: [ VerifEmailPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ModalSignInPage);
+    fixture = TestBed.createComponent(VerifEmailPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

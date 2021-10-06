@@ -1,0 +1,37 @@
+<ion-header class="main-header">
+  <ion-toolbar>
+    <ion-title>Registrate</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="end" (click)="cerrar()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main-content">
+  <div>
+    <div>
+      <ion-text>¡Bienvenido a la App de estadísticas!</ion-text>        
+    </div>
+    <ion-form>
+      <ion-item lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="text" #email required></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" #password required></ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" (click)="onRegister(email, password)" expand="block">Register</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-form>
+    <div class="cambiar">
+      <ion-text>¿Ya tienes una cuenta?</ion-text>
+      <a color="primary" routerLink="/login">Iniciar Sesion</a>
+    </div>
+  </div>
+</ion-content>

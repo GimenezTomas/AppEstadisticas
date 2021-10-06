@@ -4,9 +4,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ModalController } from '@ionic/angular';
 //import { ModalComponent } from '../components/modal/modal.component';
 //import { ModalRegistroComponent } from '../components/modal-registro/modal-registro.component';
-import { ModalSignInPage } from '../modals/modal-sign-in/modal-sign-in.page';
-import { ModalSignUpPage } from '../modals/modal-sign-up/modal-sign-up.page';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { LoginPage } from '../users/login/login.page';
+import { RegisterPage } from '../users/register/register.page';
 
 @Component({
   selector: 'app-tab1',
@@ -15,23 +15,13 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 })
 export class Tab1Page{
 
-  constructor(private modalController: ModalController, /*private router: Router*/) {}
+  constructor(private modalController: ModalController, private router: Router) {}
 
   mimodal:any;
 
-
-  /*canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      if (localStorage.getItem('currentUser')) {
-        this.router.navigate(['/home'], { queryParams: { returnUrl: state.url }});
-        return true;
-      }
-  }*/
-
-
-
   async openModalSignIn(){
     const modal = await this.modalController.create({
-      component: ModalSignInPage
+      component: LoginPage
     })
 
     await modal.present()
@@ -43,11 +33,7 @@ export class Tab1Page{
     this.mimodal.dismiss()
   }
   
-  async openModalSignUp(){
-    const modal = await this.modalController.create({
-      component: ModalSignUpPage
-    })
-
-    return await modal.present()
-  }
+  //openregister(){
+  //  this.router.navigate(['/users/register']);
+  //}
 }

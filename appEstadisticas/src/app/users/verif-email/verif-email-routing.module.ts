@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ModalSignInPage } from './modal-sign-in.page';
+import { VerifEmailPage } from './verif-email.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ModalSignInPage
+    component: VerifEmailPage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ModalSignInPageRoutingModule {}
+export class VerifEmailPageRoutingModule {}

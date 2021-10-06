@@ -19,8 +19,8 @@ export class User{
 })
 export class AuthService {
   public user$: Observable<User>;
-  
-  constructor(private afAuth:AngularFireAuth, private afs: AngularFirestore){ 
+
+  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -29,16 +29,17 @@ export class AuthService {
         return of(null);
       })
     );
-    }
-  
- 
-
-  
-  emailVerificado(user: User): boolean {
-    return user.emailVerified === true ? true : false;
   }
 
-    async loginGoogle(): Promise<User> {
+  async resetPassword(email: string): Promise<void> {
+    try {
+      return this.afAuth.sendPasswordResetEmail(email);
+    } catch (error) {
+      console.log('Error->', error);
+    }
+  }
+
+  async loginGoogle(): Promise<User> {
     try {
       const { user } = await this.afAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
       this.updateUserData(user);
@@ -48,47 +49,43 @@ export class AuthService {
     }
   }
 
-
-
-  async register(email:string, password:string): Promise<User>{
+  async register(email: string, password: string): Promise<User> {
     try {
-      const {user} = await this.afAuth.createUserWithEmailAndPassword(email,password);
-      await this.enviarVerificacion();
+      const { user } = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      await this.sendVerifcationEmail();
       return user;
     } catch (error) {
-      console.log("error--->",error);
-      
+      console.log('Error->', error);
     }
   }
 
+  async login(email: string, password: string): Promise<User> {
+    try {
+      const { user } = await this.afAuth.signInWithEmailAndPassword(email, password);
+      this.updateUserData(user);
+      return user;
+    } catch (error) {
+      console.log('Error->', error);
+    }
+  }
 
-
-  async enviarVerificacion() {
-     try {
+  async sendVerifcationEmail(): Promise<void> {
+    try {
       return (await this.afAuth.currentUser).sendEmailVerification();
     } catch (error) {
       console.log('Error->', error);
     }
   }
 
-
-  async login(email:string,password:string): Promise<User> {
-    try {
-      const{user} = await this.afAuth.signInWithEmailAndPassword(email,password);
-      this.updateUserData(user);
-      return user;
-    } catch (error) {
-      console.log("error--->",error);
-      
-    }
+  isEmailVerified(user: User): boolean {
+    return user.emailVerified === true ? true : false;
   }
 
-
-  async logout(): Promise<void>{
+  async logout(): Promise<void> {
     try {
       await this.afAuth.signOut();
     } catch (error) {
-      console.log("error--->",error);
+      console.log('Error->', error);
     }
   }
 
