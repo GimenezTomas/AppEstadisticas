@@ -16,10 +16,10 @@ export class ModalEditarPage implements OnInit {
   
   constructor(private modalController: ModalController, private jugadoresService: JugadoresService, private zone:NgZone) { }
   ngOnInit() {
-    console.log(this.idClub)
-    console.log(this.idJugador)
-    console.log(this.jugador)
-    console.log("Nombre Jugador! ",this.jugador) 
+    // console.log(this.idClub)
+    // console.log(this.idJugador)
+    // console.log(this.jugador)
+    // console.log("Nombre Jugador! ",this.jugador) 
   }
   async editar(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion){
     await this.jugadoresService.editar(this.idClub,this.idJugador, {
