@@ -1,18 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore,AngularFirestoreDocument } from "@angular/fire/firestore";
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-
-
-
-export class User{
-  uid:string;
-  email: string;
-  displayName: string;
-  emailVerified: boolean;
-}
+import { User } from '../shared/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +12,7 @@ export class User{
 export class AuthService {
   public user$: Observable<User>;
 
-  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
+  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {

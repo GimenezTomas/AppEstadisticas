@@ -14,9 +14,6 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   }
-  cerrar(){
-    this.navCtrl.pop();
-  }
 
   async onLogin(email, password) {
     try {

@@ -13,10 +13,6 @@ export class RegisterPage implements OnInit {
 
     ngOnInit() {}
 
-    cerrar(){
-      this.navCtrl.pop();
-    }
-
     async onRegister(email, password) {
       try {
         const user = await this.authSvc.register(email.value, password.value);

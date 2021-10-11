@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthService, User } from 'src/app/services/auth.service';
+import { AuthService, } from 'src/app/services/auth.service';
+import { User } from 'src/app/shared/user.interface';
 
 @Component({
   selector: 'app-verif-email',
