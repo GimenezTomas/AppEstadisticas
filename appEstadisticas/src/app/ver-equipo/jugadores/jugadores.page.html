@@ -5,6 +5,8 @@
       <ion-title>Jugadores</ion-title>
     </ion-item>
   </ion-toolbar>
+  <ion-button id="boton-agregar"expand="block" (click)="openModalAgregarJugador()">Agregar</ion-button>
+
 </ion-header>
 
 <ion-content>
@@ -19,5 +21,4 @@
       <ion-button id="boton-editar" (click)="openModalEditar(jugador,jugador.id)" size="small">E</ion-button> <!--Editar-->
     </ion-item>
   </ion-list>
-  <ion-button id="boton-agregar"expand="block" (click)="openModalAgregarJugador()">Agregar</ion-button>
   </ion-content>
