@@ -1,5 +1,5 @@
 import { Component, Input, NgZone, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class ModalEditarPage implements OnInit {
   @Input() jugadorN:object;
   
   
-  constructor(private modalController: ModalController, private jugadoresService: JugadoresService, private zone:NgZone) { }
+  constructor(private toastcontroller:ToastController,private modalController: ModalController, private jugadoresService: JugadoresService, private zone:NgZone) { }
   ngOnInit() {
     // console.log(this.idClub)
     // console.log(this.idJugador)
@@ -22,6 +22,9 @@ export class ModalEditarPage implements OnInit {
     // console.log("Nombre Jugador! ",this.jugador) 
   }
   async editar(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion){
+    if(nombre.value=="" || apellido.value==""){
+      this.presentToast();
+    }else{
     await this.jugadoresService.editar(this.idClub,this.idJugador, {
       nombre : nombre.value,
       apellido : apellido.value,
@@ -32,7 +35,8 @@ export class ModalEditarPage implements OnInit {
       posicion : posicion.value
     })
     console.log("edita")
-    this.dismiss()
+    this.dismiss();
+  }
   }
   reloadPage(){
     this.zone.runOutsideAngular(() => {
@@ -43,5 +47,13 @@ export class ModalEditarPage implements OnInit {
     this.modalController.dismiss({
       'dismissed': true
     });
+  }
+
+  async presentToast(){
+    const toast = await this.toastcontroller.create({
+      message: 'Nombre y Apellido no pueden estar vacío',
+      duration: 3000
+    });
+    toast.present();
   }
 }
