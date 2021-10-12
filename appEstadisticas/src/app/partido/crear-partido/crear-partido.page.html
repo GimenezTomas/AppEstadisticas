@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>crearPartido</ion-title>
+    <ion-item>
+      <ion-title>Crear partido</ion-title>
+      <ion-icon routerLink="/partidos-home" slot="start" name="arrow-back-outline"></ion-icon>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
@@ -8,15 +11,15 @@
   <div class="list">
     <ion-item class="form">
       <ion-label class="tit">Rival</ion-label>
-      <ion-input type="text" #nombre placeholder="Juan"></ion-input>
+      <ion-input type="text" #nombre placeholder="Juan" [(ngModel)]="rival"></ion-input>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Fecha</ion-label><!--Agregarle hora-->
       <ion-datetime #nacimiento min="1900-02" max="2006"
         displayFormat="DDD. MMM DD, YY"
-        monthShortNames="Jan, Feb, Mar, Apr, Mai, Jun, Jul, Aug, Sep, Oct, Nov, Dec"></ion-datetime>
+        monthShortNames="Jan, Feb, Mar, Apr, Mai, Jun, Jul, Aug, Sep, Oct, Nov, Dec" [(ngModel)]="fecha"></ion-datetime>
     </ion-item>
     <ion-button (click)="openModalJugadores()">Agregar jugadores</ion-button>
-    <ion-button (click)="crearDeporte(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion)" class="button button-block button-possitive">Agregar</ion-button>
+    <ion-button (click)="goBack()" class="button button-block button-possitive">Agregar</ion-button>
   </div>
 </ion-content>

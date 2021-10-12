@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalElegirPartidoPage } from 'src/app/modals/modal-elegir-partido/modal-elegir-partido.page';
 import { EquipoService } from '../../services/firebase/equipo.service';
 import { PartidosService } from '../../services/firebase/partidos.service';
 
@@ -8,19 +10,38 @@ import { PartidosService } from '../../services/firebase/partidos.service';
   styleUrls: ['./cancha.page.scss'],
 })
 export class CanchaPage implements OnInit {
-  backdropVisible = false
+  
+  backdropVisible = false 
+  mimodal:any;
+  partido: number = 230
 
-
-  constructor(private equipo:EquipoService, private partido: PartidosService) { }
+  constructor(private equipo:EquipoService, private modalController: ModalController) { }
 
   ngOnInit() {
-  }
-
-  sasa(){
-    this.partido.getProximosPartidos("RIGtETEOcR9WyBN9MLL1", "Equipo1")
+    this.openModalPartidos()
   }
 
   toggleBackdrop(isVisible){
     this.backdropVisible = isVisible
   }
+
+  async openModalPartidos(){
+    const modal = await this.modalController.create({
+      component: ModalElegirPartidoPage
+    })
+
+    await modal.present()
+    
+    modal.onDidDismiss().then((data)=>{
+      this.partido = data.data.partido
+    })
+
+    this.mimodal = modal;
+  }
+
+  dismiss(){
+    this.mimodal.dismiss()
+  }
+
+
 }
