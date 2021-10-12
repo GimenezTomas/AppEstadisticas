@@ -89,6 +89,10 @@ const routes: Routes = [
   {
     path: 'verif-email',
     loadChildren: () => import('./users/verif-email/verif-email.module').then( m => m.VerifEmailPageModule)
+  },
+  {
+    path: 'eleccion-usuario',
+    loadChildren: () => import('./users/eleccion-usuario/eleccion-usuario.module').then( m => m.EleccionUsuarioPageModule)
   }
 
 ];

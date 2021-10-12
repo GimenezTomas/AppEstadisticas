@@ -11,11 +11,13 @@ import { User } from '../shared/user.interface';
 })
 export class AuthService {
   public user$: Observable<User>;
+  public uid: string;
 
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
+          this.uid = user.uid;
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         }
         return of(null);
@@ -41,7 +43,7 @@ export class AuthService {
     }
   }
 
-  async register(email: string, password: string): Promise<User> {
+  async register(email: string, password: string, name: string): Promise<User> {
     try {
       const { user } = await this.afAuth.createUserWithEmailAndPassword(email, password);
       await this.sendVerifcationEmail();
