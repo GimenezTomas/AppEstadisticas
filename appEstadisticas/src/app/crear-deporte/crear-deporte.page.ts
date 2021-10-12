@@ -11,6 +11,7 @@ import { ModalModificarDeporteComponent } from '../modal-modificar-deporte/modal
 import { AbmService } from '../services/abm.service';
 import { AuthService } from '../services/auth.service';
 import { ToastController } from '@ionic/angular';
+import { element } from 'protractor';
 
 
 
@@ -24,6 +25,8 @@ import { ToastController } from '@ionic/angular';
 
 export class CrearDeportePage implements OnInit {
   public DeportesList:any[]=[];
+  public Posiciones:Array<string>=new Array;
+  public posicionName:string= "";
   public nombreDeportes:any[]=[];
   public modificar:boolean=false;
   public userID;
@@ -66,8 +69,8 @@ public deporteExistente(nombreDeporte):boolean{
 
 
   crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{   
-    if(nombreDeporte==null){
-      this.presentToast();
+    if(nombreDeporte.value==""){
+      this.presentToastVacio();
     }else{
     if(this.deporteExistente(nombreDeporte.value)){
       console.log("existeeee");
@@ -83,6 +86,7 @@ public deporteExistente(nombreDeporte):boolean{
           cantEquipos: cantEquipos.value,         
           cantParticipantes: cantParticipantes.value,
           estadisticasRegistrar: estadisticasRegistrar, 
+          posiciones : this.Posiciones,
           uid: i.uid
       })
       .then((docRef) => {
@@ -118,8 +122,16 @@ public deporteExistente(nombreDeporte):boolean{
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Nombre no puede estar vacío',
-      duration: 2000
+      message: 'Ya existe esa Posición',
+      duration: 3000
+    });
+    toast.present();
+  }
+
+  async presentToastVacio() {
+    const toast = await this.toastController.create({
+      message: 'El nombre no puede estar vacío',
+      duration: 3000
     });
     toast.present();
   }
@@ -148,8 +160,24 @@ public deporteExistente(nombreDeporte):boolean{
   }
 
 
-  
+  agregarPosicion(){
+    if (this.Posiciones.includes(this.posicionName)) {
+      this.presentToast();
+    }else if(this.posicionName==""){
+      this.presentToastVacio()
+    }else{
+      this.Posiciones.push(this.posicionName.valueOf());
+    }
+  }
  
+  eliminarPosicion(posicion:String){
+    this.Posiciones.forEach((element,index)=>{
+      if(element==posicion){
+        this.Posiciones.splice(index,1);
+      }
+    });
+  }
+
   onEditar(idDoc,nombreModificar,cantEquipos,cantParticipantes){
     this.DeportesList.forEach(j=>{
       if (j.nombreDeporte==nombreModificar) {
