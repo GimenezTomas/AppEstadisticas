@@ -25,6 +25,10 @@ export class AuthService {
     );
   }
 
+  async idUsuario(){
+    return await this.afAuth.authState.toPromise()
+  }
+
   async resetPassword(email: string): Promise<void> {
     try {
       return this.afAuth.sendPasswordResetEmail(email);

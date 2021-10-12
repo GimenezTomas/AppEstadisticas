@@ -41,15 +41,18 @@ export class LoginPage implements OnInit {
     }
   }
 
-  private redirectUser(isVerified: boolean): void {
+  private async redirectUser(isVerified: boolean): Promise<void> {
+    var uid = (await this.authSvc.idUsuario()).uid
     //var entrenadores = this.afs.afs.collection("entrenadores").doc(this.authSvc.uid).get();
     if (isVerified) {
-      var clubes = this.afs.afs.collection("clubes").doc(this.authSvc.uid).get();
+      var clubes = await this.afs.afs.collection("clubes").doc(uid).get();
       if(!clubes){
         this.router.navigate(['eleccion-usuario']);
+        console.log(uid)
       }
       else{
         this.router.navigate(['home']);
+        console.log(uid)
       }
     } else {
       this.router.navigate(['verif-email']);
