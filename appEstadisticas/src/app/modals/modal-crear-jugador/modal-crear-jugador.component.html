@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-item>
-      <ion-icon routerLink="/jugadores-inicio" slot="start" name="arrow-back-outline"></ion-icon>
       <ion-title>Agregar Jugadores</ion-title>
     </ion-item>
+    <ion-button slot="end" size="small"(click)="dismiss()" color="danger">
+      X
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -19,21 +21,21 @@
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">N° Camiseta</ion-label>
-      <ion-input type="number" #nCamiseta placeholder="32"></ion-input>
+      <ion-input type="number" min="1" max="99" #nCamiseta placeholder="32"></ion-input>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Nacimiento</ion-label>
-      <ion-datetime #nacimiento min="1900-02" max="2006"
+      <ion-datetime #nacimiento min="1900-02" max="2018"
         displayFormat="DDD. MMM DD, YY"
         monthShortNames="Jan, Feb, Mar, Apr, Mai, Jun, Jul, Aug, Sep, Oct, Nov, Dec"></ion-datetime>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Peso (Kg)</ion-label>
-      <ion-input type="number" #peso placeholder="64 (64 Kg)"></ion-input>
+      <ion-input type="number" min="1" max="650" #peso placeholder="64 (64 Kg)"></ion-input>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Altura (Cm)</ion-label>
-      <ion-input type="number" #altura placeholder="175 (1.75m)"></ion-input>
+      <ion-input type="number" min="1" #altura placeholder="175 (1.75m)"></ion-input>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Posicion</ion-label>
