@@ -28,7 +28,21 @@
     <ion-checkbox slot="end" color="success"  [(ngModel)]="entry.isChecked" name="entry.val"></ion-checkbox>
   </ion-item>
 </ion-list>
-
+<ion-title>Posiciones</ion-title>
+  <ion-item>
+  <ion-input type="text" placeholder="Nombre de la posición" [(ngModel)]="posicionName" name="posicioninput">
+  </ion-input>
+  <ion-button (click)="agregarPosicion()">+</ion-button>
+  </ion-item>
+ 
+  <ion-list>
+    <ion-item *ngFor="let posicion of Posiciones">
+      <ion-label>
+        {{posicion}}
+      </ion-label>
+      <ion-button color="danger" size="small" (click)="eliminarPosicion(posicion)">X</ion-button>
+    </ion-item>
+  </ion-list>
 <center>
   <ion-button (click)="modificarDeporte(id , nombreDeporteNuevo, cantEquiposNuevo, cantParticipantesNuevo)" color="success">Guardar</ion-button>
 </center>
