@@ -69,8 +69,8 @@ public deporteExistente(nombreDeporte):boolean{
 
 
   crearDeporte(nombreDeporte, cantEquipos, cantParticipantes):void{   
-    if(nombreDeporte==null){
-      this.presentToast();
+    if(nombreDeporte.value==""){
+      this.presentToastVacio();
     }else{
     if(this.deporteExistente(nombreDeporte.value)){
       console.log("existeeee");
