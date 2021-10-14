@@ -11,7 +11,6 @@ import { ModalModificarDeporteComponent } from '../modal-modificar-deporte/modal
 import { AbmService } from '../services/abm.service';
 import { AuthService } from '../services/auth.service';
 import { ToastController } from '@ionic/angular';
-import { element } from 'protractor';
 
 
 
