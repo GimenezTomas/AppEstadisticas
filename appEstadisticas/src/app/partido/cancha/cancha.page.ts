@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalElegirPartidoPage } from 'src/app/modals/modal-elegir-partido/modal-elegir-partido.page';
+import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 import { EquipoService } from '../../services/firebase/equipo.service';
 import { PartidosService } from '../../services/firebase/partidos.service';
 
@@ -13,9 +14,11 @@ export class CanchaPage implements OnInit {
   
   backdropVisible = false 
   mimodal:any;
-  partido: number = 230
+  partido: any;
+  titulares: any = []
+  suplentes: any = []
 
-  constructor(private equipo:EquipoService, private modalController: ModalController) { }
+  constructor(private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { }
 
   ngOnInit() {
     this.openModalPartidos()
@@ -25,6 +28,19 @@ export class CanchaPage implements OnInit {
     this.backdropVisible = isVisible
   }
 
+  async getPlantilla(){    
+    this.partido.jugadores.forEach(async element => {
+      console.log(element)
+      let jugador = await this.jugadoresService.jugadorPorId('RIGtETEOcR9WyBN9MLL1', element.id)
+      if(element.titular){
+        this.titulares.push(jugador)
+      }else{
+        this.suplentes.push(jugador)
+        console.log(jugador)
+      }
+    });
+  }
+
   async openModalPartidos(){
     const modal = await this.modalController.create({
       component: ModalElegirPartidoPage
@@ -32,8 +48,9 @@ export class CanchaPage implements OnInit {
 
     await modal.present()
     
-    modal.onDidDismiss().then((data)=>{
+    modal.onDidDismiss().then(async (data)=>{
       this.partido = data.data.partido
+      this.getPlantilla()
     })
 
     this.mimodal = modal;

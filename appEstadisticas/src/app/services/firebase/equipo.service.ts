@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import firebase from "firebase/app";
 import { AbmService } from '../abm.service';
 import { JugadoresService } from './jugadores.service';
 
@@ -75,5 +76,17 @@ export class EquipoService {
     });  
     console.log(jugadores)
     return jugadores 
+  }
+
+  agregarJugadorEquipo(idClub: any, idEquipo: any, body: any){
+    console.log(body)
+    this.ABMsvc.afs.collection("clubes").doc(idClub).collection('equipos').doc(idEquipo).update({
+      jugadores: firebase.firestore.FieldValue.arrayUnion(body)
+    }).then(() => {
+        console.log("Document written");
+    })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+    });
   }
 }

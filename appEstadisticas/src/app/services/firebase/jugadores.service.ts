@@ -3,6 +3,8 @@ import { AbmService } from '../abm.service';
 import firebase from "firebase/app";
 import { DocumentData, fromDocRef } from '@angular/fire/firestore';
 import { promise } from 'protractor';
+import { EquipoService } from './equipo.service';
+import { resolve } from 'dns';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +13,9 @@ import { promise } from 'protractor';
 export class JugadoresService {
   idPrueba: string = "d9LN16EYgi6MaAmPF0Zl"; 
 
-  constructor(private ABMsvc:AbmService) { }
-  agregar(idClub: string, jugador: any) {
-    this.ABMsvc.afs.collection("clubes").doc(idClub).collection('jugadores').add({
+  constructor(private ABMsvc:AbmService){ }
+  agregar(idClub: string, jugador: any){
+    return this.ABMsvc.afs.collection("clubes").doc(idClub).collection('jugadores').add({
       nombre : jugador.nombre,
       apellido : jugador.apellido,
       nCamiseta : jugador.nCamiseta,
@@ -21,13 +23,9 @@ export class JugadoresService {
       peso : jugador.peso,
       altura : jugador.altura,
       posicion : jugador.posicion
-    }).then(() => {
-        console.log("Document written");
     })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-    });
   }
+
   borrar(idClub: string, idJugador:string){
     this.ABMsvc.afs.collection("clubes").doc(idClub).collection('jugadores').doc(idJugador).delete( 
     ).then(() => {
