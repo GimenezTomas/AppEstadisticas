@@ -9,10 +9,10 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 export class CanchaPage implements OnInit {
   public futbol=true;
   public basket=false;
-  constructor(/*private screenOrientation: ScreenOrientation*/) { }
+  constructor(private screenOrientation: ScreenOrientation) { }
 
   ngOnInit() {
-    //console.log(this.screenOrientation.type);
+    console.log(this.screenOrientation.type);
   }
 
   onBasquet(){
