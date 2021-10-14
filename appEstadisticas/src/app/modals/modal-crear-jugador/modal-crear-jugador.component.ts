@@ -13,7 +13,7 @@ import { ToastController } from '@ionic/angular';
 export class ModalCrearJugadorComponent implements OnInit {
   @Input() idClub:string;
   
-  constructor(private toastcontroller:ToastController,private modalController:ModalController, private jugadoresService: JugadoresService) { }
+  constructor(private equipoService: EquipoService,private toastcontroller:ToastController,private modalController:ModalController, private jugadoresService: JugadoresService) { }
 
   ngOnInit() {}
 
