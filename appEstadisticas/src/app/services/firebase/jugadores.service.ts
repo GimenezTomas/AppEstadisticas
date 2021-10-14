@@ -3,6 +3,8 @@ import { AbmService } from '../abm.service';
 import firebase from "firebase/app";
 import { DocumentData, fromDocRef } from '@angular/fire/firestore';
 import { promise } from 'protractor';
+import { EquipoService } from './equipo.service';
+import { resolve } from 'dns';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +25,7 @@ export class JugadoresService {
       posicion : jugador.posicion
     })
   }
+
   borrar(idClub: string, idJugador:string){
     this.ABMsvc.afs.collection("clubes").doc(idClub).collection('jugadores').doc(idJugador).delete( 
     ).then(() => {

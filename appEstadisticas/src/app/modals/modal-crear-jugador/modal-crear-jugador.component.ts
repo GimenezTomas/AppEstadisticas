@@ -32,6 +32,7 @@ export class ModalCrearJugadorComponent implements OnInit {
     }).then( data => {
       this.equipoService.agregarJugadorEquipo(this.idClub, 'Equipo1', {id: data.id, nCamiseta: nCamiseta.value})
     })
+
     this.dismiss()
     }
   }
