@@ -16,8 +16,8 @@ export class ModalCrearJugadorComponent implements OnInit {
 
   ngOnInit() {}
 
-  async agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion){
-    let id = await this.jugadoresService.agregar(this.idClub, {
+  agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion){
+    this.jugadoresService.agregar(this.idClub, {
       nombre: nombre.value,
       apellido: apellido.value,
       nCamiseta: nCamiseta.value,
@@ -25,10 +25,10 @@ export class ModalCrearJugadorComponent implements OnInit {
       peso: peso.value,
       altura: altura.value,
       posicion: posicion.value
+    }).then( data => {
+      this.equipoService.agregarJugadorEquipo(this.idClub, 'Equipo1', {id: data.id, nCamiseta: nCamiseta.value})
     })
-    
-    this.equipoService.agregarJugadorEquipo(this.idClub, 'Equipo1', {id: id, nCamiseta: nCamiseta.value
-    })
+
     this.dismiss()
   }
 

@@ -13,9 +13,9 @@ import { resolve } from 'dns';
 export class JugadoresService {
   idPrueba: string = "d9LN16EYgi6MaAmPF0Zl"; 
 
-  constructor(private ABMsvc:AbmService) { }
-  agregar(idClub: string, jugador: any) {
-    this.ABMsvc.afs.collection("clubes").doc(idClub).collection('jugadores').add({
+  constructor(private ABMsvc:AbmService){ }
+  agregar(idClub: string, jugador: any){
+    return this.ABMsvc.afs.collection("clubes").doc(idClub).collection('jugadores').add({
       nombre : jugador.nombre,
       apellido : jugador.apellido,
       nCamiseta : jugador.nCamiseta,
@@ -23,14 +23,9 @@ export class JugadoresService {
       peso : jugador.peso,
       altura : jugador.altura,
       posicion : jugador.posicion
-    }).then( (data) => {
-        console.log("Document written");
-        return data.id
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-    });
+    })
   }
+
   borrar(idClub: string, idJugador:string){
     this.ABMsvc.afs.collection("clubes").doc(idClub).collection('jugadores').doc(idJugador).delete( 
     ).then(() => {
