@@ -17,7 +17,6 @@ export class AuthService {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
-          this.uid = user.uid;
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         }
         return of(null);
@@ -41,13 +40,14 @@ export class AuthService {
     try {
       const { user } = await this.afAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
       this.updateUserData(user);
+      this.uid = user.uid;
       return user;
     } catch (error) {
       console.log('Error->', error);
     }
   }
 
-  async register(email: string, password: string, name: string): Promise<User> {
+  async register(email: string, password: string): Promise<User> {
     try {
       const { user } = await this.afAuth.createUserWithEmailAndPassword(email, password);
       await this.sendVerifcationEmail();
@@ -61,6 +61,7 @@ export class AuthService {
     try {
       const { user } = await this.afAuth.signInWithEmailAndPassword(email, password);
       this.updateUserData(user);
+      this.uid = user.uid;
       return user;
     } catch (error) {
       console.log('Error->', error);

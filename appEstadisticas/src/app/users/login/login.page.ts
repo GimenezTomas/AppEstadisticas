@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { AbmService } from 'src/app/services/abm.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { exists } from 'fs';
 
 @Component({
   selector: 'app-login',
@@ -42,19 +43,18 @@ export class LoginPage implements OnInit {
   }
 
   private async redirectUser(isVerified: boolean): Promise<void> {
-    var uid = (await this.authSvc.idUsuario()).uid
     //var entrenadores = this.afs.afs.collection("entrenadores").doc(this.authSvc.uid).get();
     if (isVerified) {
-      var clubes = await this.afs.afs.collection("clubes").doc(uid).get();
-      if(!clubes){
+      const clubes = await this.afs.afs.collection("clubes").doc(this.authSvc.uid).get();
+      if(!clubes.exists){
         this.router.navigate(['eleccion-usuario']);
-        console.log(uid)
       }
       else{
         this.router.navigate(['home']);
-        console.log(uid)
+        console.log(clubes);
       }
     } else {
+
       this.router.navigate(['verif-email']);
     }
   }

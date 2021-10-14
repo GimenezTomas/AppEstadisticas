@@ -32,8 +32,4 @@ export class Tab1Page{
   dismiss(){
     this.mimodal.dismiss()
   }
-  
-  //openregister(){
-  //  this.router.navigate(['/users/register']);
-  //}
 }

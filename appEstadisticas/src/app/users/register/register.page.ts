@@ -15,9 +15,9 @@ export class RegisterPage implements OnInit {
 
     ngOnInit() {}
 
-    async onRegister(email, password, name) {
+    async onRegister(email, password) {
       try {
-        const user = await this.authSvc.register(email.value, password.value, name.value);
+        const user = await this.authSvc.register(email.value, password.value);
         if (user) {
           /*this.afs.afs.collection('clubes').doc(user.uid).set({
             nombre: name.value,
