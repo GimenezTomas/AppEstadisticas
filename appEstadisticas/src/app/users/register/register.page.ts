@@ -19,11 +19,6 @@ export class RegisterPage implements OnInit {
       try {
         const user = await this.authSvc.register(email.value, password.value);
         if (user) {
-          /*this.afs.afs.collection('clubes').doc(user.uid).set({
-            nombre: name.value,
-            email: user.email,
-          }).then((docref)=>console.log('guardado'))
-          .catch((error)=>console.error(error))*/
           const isVerified = this.authSvc.isEmailVerified(user);
           this.redirectUser(isVerified);
         }

@@ -97,10 +97,7 @@ export class AuthService {
     return userRef.set(data, { merge: true });
   }
 
-  /*  async esClub(): boolean{
-    return (await this.afAuth.currentUser).sendEmailVerification();
-
+  /*async esClub(){
     const club = this.afs.collection("clubes").doc().get();
-    return club
   }*/
 }

@@ -20,11 +20,11 @@ export class ClubPage implements OnInit {
         this.afs.afs.collection('clubes').doc(data.uid).set({
         nombre: name.value,
         email: data.email,
-      }).then((docref)=>console.log('guardado'))
+      }).then((docref)=> console.log('guardado'))
       .catch((error)=>console.error(error))
-    })
-        //this.redirectUser(isVerified);
-    } catch (error) {
+      })
+    } 
+    catch (error) {
       console.log('Error', error);
     }
   }
