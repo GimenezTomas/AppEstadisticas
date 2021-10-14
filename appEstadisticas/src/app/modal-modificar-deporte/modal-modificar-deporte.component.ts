@@ -62,14 +62,17 @@ export class ModalModificarDeporteComponent implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
+      color:"danger",
       message: 'Ya existe esa Posición',
       duration: 3000
     });
+
     toast.present();
   }
 
   async presentToastVacio() {
     const toast = await this.toastController.create({
+      color:"danger",
       message: 'El nombre no puede estar vacío',
       duration: 3000
     });
