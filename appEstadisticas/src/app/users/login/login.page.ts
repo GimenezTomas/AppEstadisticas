@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { AbmService } from 'src/app/services/abm.service';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { exists } from 'fs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +12,9 @@ import { exists } from 'fs';
 })
 export class LoginPage implements OnInit {
 
-  constructor(public navCtrl: NavController,private authSvc: AuthService, private router: Router, private afs: AbmService, private angularFirestore:AngularFirestore) { }
-
+  constructor(public navCtrl: NavController,private authSvc: AuthService, private router: Router, private afs: AbmService, private angularFirestore:AngularFirestore) { 
+  }
+    
   ngOnInit() {
   }
 
@@ -43,18 +43,18 @@ export class LoginPage implements OnInit {
   }
 
   private async redirectUser(isVerified: boolean): Promise<void> {
-    //var entrenadores = this.afs.afs.collection("entrenadores").doc(this.authSvc.uid).get();
     if (isVerified) {
       const clubes = await this.afs.afs.collection("clubes").doc(this.authSvc.uid).get();
+      const entrenadores = await this.afs.afs.collection("entrenadores").doc(this.authSvc.uid).get();
       if(!clubes.exists){
         this.router.navigate(['eleccion-usuario']);
+        console.log(entrenadores)
+        console.log(clubes)
       }
       else{
         this.router.navigate(['home']);
-        console.log(clubes);
       }
     } else {
-
       this.router.navigate(['verif-email']);
     }
   }

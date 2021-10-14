@@ -24,10 +24,6 @@ export class AuthService {
     );
   }
 
-  async idUsuario(){
-    return await this.afAuth.authState.toPromise()
-  }
-
   async resetPassword(email: string): Promise<void> {
     try {
       return this.afAuth.sendPasswordResetEmail(email);
@@ -100,4 +96,11 @@ export class AuthService {
 
     return userRef.set(data, { merge: true });
   }
+
+  /*  async esClub(): boolean{
+    return (await this.afAuth.currentUser).sendEmailVerification();
+
+    const club = this.afs.collection("clubes").doc().get();
+    return club
+  }*/
 }
