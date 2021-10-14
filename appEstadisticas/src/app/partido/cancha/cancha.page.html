@@ -1,4 +1,45 @@
 <ion-content scrollY=false>
-  <ion-button (click)="openModalPartidos()" ></ion-button>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Cancha</ion-title>
+      <ion-button *ngIf="futbol" (click)="onBasquet()">
+        Basquet
+      </ion-button>
+      <ion-button *ngIf="basket" (click)="onFutbol()">
+        Futbol
+      </ion-button>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <center>
+  
+    <ion-item id="marcador">
+    <ion-label>HOME</ion-label>
+    <ion-input type="number" value="0" min="0"></ion-input>
+    <ion-label>AWAY</ion-label>
+    <ion-input type="number" value="0" min="0"></ion-input>
+  </ion-item>
+  </center>
+  
+  
+    <div class="container">
+        <center>
+          <img *ngIf="futbol" class="imagen" src="assets/img/footballcourt.jpg">
+          <img *ngIf="basket" class="imagen" src="assets/img/basketcourt.jpg">
+          </center>
+  
+  
+        </div>
+        <div>
+          <ion-button color= "danger">
+            + Falta
+          </ion-button>
+        </div>
+        <div>
+        </div>
+        <div>
+        </div>
+  </ion-content>  
   <app-drawer (openStateChanged)="toggleBackdrop($event)" [titulares]="titulares" [suplentes]="suplentes" #drawer></app-drawer>
 </ion-content>

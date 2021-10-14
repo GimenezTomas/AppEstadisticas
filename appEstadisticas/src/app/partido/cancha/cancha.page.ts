@@ -11,7 +11,8 @@ import { PartidosService } from '../../services/firebase/partidos.service';
   styleUrls: ['./cancha.page.scss'],
 })
 export class CanchaPage implements OnInit {
-  
+  futbol=true;
+  basket=false;
   backdropVisible = false 
   mimodal:any;
   partido: any;
@@ -60,5 +61,13 @@ export class CanchaPage implements OnInit {
     this.mimodal.dismiss()
   }
 
+  onBasquet(){
+    this.basket=true;
+    this.futbol=false;
+  }
 
+  onFutbol(){
+    this.basket=false;
+    this.futbol=true;
+  }
 }
