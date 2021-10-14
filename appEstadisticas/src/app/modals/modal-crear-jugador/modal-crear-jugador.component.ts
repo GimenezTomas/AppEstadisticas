@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { EquipoService } from 'src/app/services/firebase/equipo.service';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -11,12 +12,15 @@ import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 })
 export class ModalCrearJugadorComponent implements OnInit {
   @Input() idClub:string;
-
-  constructor(private modalController:ModalController, private equipoService:EquipoService, private jugadoresService: JugadoresService) { }
+  
+  constructor(private toastcontroller:ToastController,private modalController:ModalController, private jugadoresService: JugadoresService) { }
 
   ngOnInit() {}
 
-  agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion){
+  agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion):void{
+    if(nombre.value =="" || apellido.value==""){
+      this.presentToast();
+    }else{ 
     this.jugadoresService.agregar(this.idClub, {
       nombre: nombre.value,
       apellido: apellido.value,
@@ -30,12 +34,20 @@ export class ModalCrearJugadorComponent implements OnInit {
     })
 
     this.dismiss()
+    }
   }
-
   dismiss() {
    
     this.modalController.dismiss({
       'dismissed': true
     });
+  }
+
+  async presentToast(){
+    const toast = await this.toastcontroller.create({
+      message: 'Nombre y Apellido no pueden estar vacío',
+      duration: 3000
+    });
+    toast.present();
   }
 }
