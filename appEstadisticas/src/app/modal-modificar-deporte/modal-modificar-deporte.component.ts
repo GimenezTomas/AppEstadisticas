@@ -125,7 +125,7 @@ export class ModalModificarDeporteComponent implements OnInit {
       }
     });
   }
-
+  
   modificarDeporte(idDoc,nombreDeporte,cantEquipos,cantParticipantes){
     if(nombreDeporte.value==""){
       this.presentToastVacio();
