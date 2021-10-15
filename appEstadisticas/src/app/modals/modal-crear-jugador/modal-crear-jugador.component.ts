@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 import { ToastController } from '@ionic/angular';
+import { EquipoService } from 'src/app/services/firebase/equipo.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { ToastController } from '@ionic/angular';
 export class ModalCrearJugadorComponent implements OnInit {
   @Input() idClub:string;
 
-  constructor(private toastcontroller:ToastController,private modalController:ModalController, private jugadoresService: JugadoresService) { }
+  constructor(private equipoService: EquipoService,private toastcontroller:ToastController,private modalController:ModalController, private jugadoresService: JugadoresService) { }
 
   ngOnInit() {}
 
@@ -28,7 +29,10 @@ export class ModalCrearJugadorComponent implements OnInit {
       peso : peso.value,
       altura : altura.value,
       posicion : posicion.value
+    }).then( data => {
+      this.equipoService.agregarJugadorEquipo(this.idClub, 'Equipo1', {id: data.id, nCamiseta: nCamiseta.value})
     })
+
     this.dismiss()
     }
   }
