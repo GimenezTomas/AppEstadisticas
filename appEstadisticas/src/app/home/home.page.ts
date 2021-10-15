@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
 
   noticias: any[] = Array(20)
 
-  constructor(private menu: MenuController, private router: Router, public popoverController: PopoverController, private authSvc: AuthService) { }
+  constructor(private menu: MenuController, private router: Router, public popoverController: PopoverController, private authSvc: AuthService) {  }
 
   async presentPopover(ev: any) {
     console.log("entro")

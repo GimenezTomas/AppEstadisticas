@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore,AngularFirestoreDocument } from "@angular/fire/firestore";
+import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -14,12 +15,16 @@ export class AuthService {
   public uid: string;
   public esClub;
   
-  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore ) {
+  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router ) {
+    this.esClub = false;
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
           this.afs.collection('clubes').doc(user.uid).get().subscribe(data=>{
             this.esClub=data.exists;
+            if(this.esClub == false){
+              this.router.navigate(['/eleccion-usuario'])
+            }
           });
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         }
