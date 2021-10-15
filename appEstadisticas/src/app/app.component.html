@@ -1,6 +1,6 @@
 <ion-app>
   <ion-router-outlet id="main"></ion-router-outlet>  
-  <ion-tabs #myTabBar id="myTabBar" *ngIf="(authService.user$ | async)">
+  <ion-tabs #myTabBar id="myTabBar" *ngIf="(authService.user$ | async) && authService.esClub">
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="calendar">
         <ion-icon name="calendar-outline"></ion-icon>

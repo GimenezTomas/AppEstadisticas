@@ -12,11 +12,15 @@ import { User } from '../shared/user.interface';
 export class AuthService {
   public user$: Observable<User>;
   public uid: string;
-
+  public esClub;
+  
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
+          this.afs.collection('clubes').doc(user.uid).get().subscribe(data=>{
+            this.esClub=data.exists;
+          });
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         }
         return of(null);
@@ -97,7 +101,5 @@ export class AuthService {
     return userRef.set(data, { merge: true });
   }
 
-  /*async esClub(){
-    const club = this.afs.collection("clubes").doc().get();
-  }*/
+
 }
