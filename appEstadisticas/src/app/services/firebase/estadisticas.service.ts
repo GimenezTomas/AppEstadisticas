@@ -28,7 +28,7 @@ export class EstadisticasService {
 
   async getStatsGenerales(idClub:string, idEquipo:string){
     let equipo = await this.ABMsvc.afs.collection("clubes").doc(idClub).collection("equipos").doc(idEquipo).get()
-    return equipo.data().estadisticasGenerales;
+    return equipo.data().estadisticas;
   }
   
   async getStatsJugador(idClub:string, idJugador:string){
