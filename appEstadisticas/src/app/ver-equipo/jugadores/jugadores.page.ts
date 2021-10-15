@@ -9,6 +9,7 @@ import { ModalEditarPage } from 'src/app/modals/modal-editar/modal-editar.page';
 import { AbmService } from 'src/app/services/abm.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
+import { EstadisticasService } from 'src/app/services/firebase/estadisticas.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class JugadoresPage implements OnInit {
   private jugadorList:any[] = [];
   private idClub:string 
 
-  constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService) {}
+  constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService, private estadisticasService: EstadisticasService) {}
   ngOnInit() {
     this.actualizarJugadores()  
   }
