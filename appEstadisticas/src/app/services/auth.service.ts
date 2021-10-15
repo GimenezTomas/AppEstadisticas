@@ -22,7 +22,7 @@ export class AuthService {
         if (user) {
           this.afs.collection('clubes').doc(user.uid).get().subscribe(data=>{
             this.esClub=data.exists;
-            if(this.esClub == false){
+            if(this.esClub == false && user.emailVerified == true){
               this.router.navigate(['/eleccion-usuario'])
             }
           });
