@@ -1,45 +1,107 @@
 <ion-content scrollY=false>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Cancha</ion-title>
-      <ion-button *ngIf="futbol" (click)="onBasquet()">
-        Basquet
-      </ion-button>
-      <ion-button *ngIf="basket" (click)="onFutbol()">
-        Futbol
-      </ion-button>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-    <center>
-  
-    <ion-item id="marcador">
-    <ion-label>HOME</ion-label>
-    <ion-input type="number" value="0" min="0"></ion-input>
-    <ion-label>AWAY</ion-label>
-    <ion-input type="number" value="0" min="0"></ion-input>
-  </ion-item>
-  </center>
-  
-  
-    <div class="container">
-        <center>
-          <img *ngIf="futbol" class="imagen" src="assets/img/footballcourt.jpg">
-          <img *ngIf="basket" class="imagen" src="assets/img/basketcourt.jpg">
-        </center>
-  
-  
-        </div>
-        <div>
-          <ion-button color= "danger">
-            + Falta
-          </ion-button>
-        </div>
-        <div>
-        </div>
-        <div>
-        </div>
-  </ion-content>  
-  <app-drawer (openStateChanged)="toggleBackdrop($event)" [titulares]="titulares" [suplentes]="suplentes" #drawer></app-drawer>
+  <ion-button (click)="openModalPartidos()" ></ion-button>
+  <ion-icon routerLink="/home" slot="start" name="arrow-back-outline"></ion-icon>
+  <app-drawer (openStateChanged)="toggleBackdrop($event)" [partido]="partido" #drawer></app-drawer>
 </ion-content>
+<!--<ion-content scrollY="false">
+  <app-drawer (openStateChanged)="toggleBackdrop($event)"></app-drawer>
+  <div class="menu">
+    <div class="equipo">
+      <div class="titulo">
+        <div class="h1">
+          <h1>TITULARES</h1>
+        </div>
+      </div>
+      <div class="jugadores1">
+        <div class="jugador">
+          <div class="front">
+            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
+            <h5>24</h5>
+            <h2>Kobe Bryant</h2>
+          </div>
+          <div class="back">
+            <h6>ESCOLTA</h6>
+          </div>
+        </div>
+        <div class="jugador">
+          <div class="front">
+            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
+            <h5>24</h5>
+            <h2>Kobe Bryant</h2>
+          </div>
+          <div class="back">
+            <h6>ESCOLTA</h6>
+          </div>
+        </div>
+        <div class="jugador">
+          <div class="front">
+            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
+            <h5>24</h5>
+            <h2>Kobe Bryant</h2>
+          </div>
+          <div class="back">
+            <h6>ESCOLTA</h6>
+          </div>
+        </div>
+        <div class="jugador">
+          <div class="front">
+            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
+            <h5>24</h5>
+            <h2>Kobe Bryant</h2>
+          </div>
+          <div class="back">
+            <h6>ESCOLTA</h6>
+          </div>
+        </div>
+      </div>
+      <div class="titulo">
+        <div class="h1">
+          <h1>SUPLENTES</h1>
+        </div>
+      </div>
+      <div class="jugadores1">
+        <div class="jugador">
+          <div class="front">
+            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
+            <h5>24</h5>
+            <h2>Kobe Bryant</h2>
+          </div>
+          <div class="back">
+            <h6>ESCOLTA</h6>
+          </div>
+        </div>
+        <div class="jugador">
+          <div class="front">
+            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
+            <h5>24</h5>
+            <h2>Kobe Bryant</h2>
+          </div>
+          <div class="back">
+            <h6>ESCOLTA</h6>
+          </div>
+        </div>
+        <div class="jugador">
+          <div class="front">
+            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
+            <h5>24</h5>
+            <h2>Kobe Bryant</h2>
+          </div>
+          <div class="back">
+            <h6>ESCOLTA</h6>
+          </div>
+        </div>
+        <div class="jugador">
+          <div class="front">
+            <img src="http://img.bleacherreport.net/img/images/photos/002/521/094/hi-res-170733062-kobe-bryant-of-the-los-angeles-lakers-looks-on-during-a_crop_exact.jpg?w=1500&h=1500&q=85" alt="">
+            <h5>24</h5>
+            <h2>Kobe Bryant</h2>
+          </div>
+          <div class="back">
+            <h6>ESCOLTA</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>-->
+

@@ -1,5 +1,8 @@
 import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
+import { CrearDeportePageModule } from '../crear-deporte/crear-deporte.module';
+import { CrearDeportePage } from '../crear-deporte/crear-deporte.page';
+import { ModalDeporteexistenteComponent } from '../modal-deporteexistente/modal-deporteexistente.component';
 import { AbmService } from '../services/abm.service';
 import { AuthService } from '../services/auth.service';
 
@@ -14,6 +17,7 @@ export class ModalModificarDeporteComponent implements OnInit {
   @Input() cantEquipos: string;
   @Input() cantParticipantes: string;
   @Input() estadisticasRegistrar: Array<boolean>;
+  public nombreDeportes:any[]=[];
   public Posiciones:Array<string>;
   public posicionName:string= "";
   public form = [
@@ -36,6 +40,7 @@ export class ModalModificarDeporteComponent implements OnInit {
       this.AUTHsvc.user$.forEach(i=>
         this.ABMsvc.afs.collection("deportes").where("uid","==",i.uid).get().then((data)=>{
           data.forEach(element => {
+            this.nombreDeportes.push(element.data().nombreDeporte);
             if (element.data().nombreDeporte==this.nombreDeporte) {
               this.Posiciones=element.data().posiciones;
               console.log(this.Posiciones);
@@ -59,24 +64,50 @@ export class ModalModificarDeporteComponent implements OnInit {
   });
   }
 
-
+  public deporteExistente(nombreDeporte):boolean{
+    if(this.nombreDeportes.includes(nombreDeporte)){
+      return true;
+    }else{
+      return false;
+    }
+  }
   async presentToast() {
     const toast = await this.toastController.create({
+      color:"danger",
       message: 'Ya existe esa Posición',
       duration: 3000
     });
+
     toast.present();
   }
 
   async presentToastVacio() {
     const toast = await this.toastController.create({
+      color:"danger",
       message: 'El nombre no puede estar vacío',
       duration: 3000
     });
     toast.present();
   }
 
+  async presentToastCamposVacios(){
+    const toast = await this.toastController.create({
+      color:"danger",
+      message: 'Cantidad de Equipos o Particiapntes no puede estar vacío o incluir letras',
+      duration: 3000
+    });
+    toast.present();
+  }
 
+  async presentModalExistente(){
+    const modal = await this.modalController.create({
+      component: ModalDeporteexistenteComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
+  
   agregarPosicion(){
     if (this.Posiciones.includes(this.posicionName)) {
       this.presentToast();
@@ -94,8 +125,17 @@ export class ModalModificarDeporteComponent implements OnInit {
       }
     });
   }
-
+  
   modificarDeporte(idDoc,nombreDeporte,cantEquipos,cantParticipantes){
+    if(nombreDeporte.value==""){
+      this.presentToastVacio();
+    }else{
+    if(this.deporteExistente(nombreDeporte.value)){
+      console.log("existeeee");
+      this.presentModalExistente();
+    }else if(cantEquipos.value=="" || cantParticipantes.value==""){
+      this.presentToastCamposVacios();
+    }else{
     var query = this.ABMsvc.afs.collection("deportes").where('nombreDeporte',"==",idDoc);
     var zona = this.zone;
     let posiciones = this.Posiciones;
@@ -127,5 +167,6 @@ export class ModalModificarDeporteComponent implements OnInit {
   
     })
    }
-  
+  }
+  }
 }
