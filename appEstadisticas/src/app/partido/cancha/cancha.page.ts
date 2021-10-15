@@ -31,13 +31,11 @@ export class CanchaPage implements OnInit {
 
   async getPlantilla(){    
     this.partido.jugadores.forEach(async element => {
-      console.log(element)
       let jugador = await this.jugadoresService.jugadorPorId('RIGtETEOcR9WyBN9MLL1', element.id)
       if(element.titular){
         this.titulares.push(jugador)
       }else{
         this.suplentes.push(jugador)
-        console.log(jugador)
       }
     });
   }

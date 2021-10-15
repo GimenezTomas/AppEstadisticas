@@ -25,8 +25,17 @@
   
     <div class="container">
         <center>
-          <img *ngIf="futbol" class="imagen" src="assets/img/footballcourt.jpg">
-          <img *ngIf="basket" class="imagen" src="assets/img/basketcourt.jpg">
+          <div class="cont">
+            <img *ngIf="futbol" class="imagen" src="assets/img/footballcourt.jpg">
+            <img *ngIf="basket" class="imagen" src="assets/img/basketcourt.jpg">
+            <div class="cancha">
+              <div class="secciones">  
+                <div *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">
+                  <div *ngFor="let j of [0,1,2,3,4,5,6,7,8,9]">| {{i}} - {{j}} |</div>  
+                </div>
+              </div>  
+            </div>
+          </div>
         </center>
   
   

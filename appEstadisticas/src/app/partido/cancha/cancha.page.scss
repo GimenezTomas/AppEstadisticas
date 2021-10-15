@@ -71,4 +71,22 @@
 #marcador{
     width: 100%;
 }
-  
+.cont{
+  position: relative;
+}
+.cont .cancha{
+  position: absolute;
+  z-index: 5;
+  left: 50%; /* position the left edge of the element at the middle of the parent */
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  height: 100%;
+}
+.cont .cancha .secciones{
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
