@@ -1,4 +1,17 @@
+.form{
+    padding: 0px;
+}
+
 ion-title {
     padding: 0;
-    text-align: left;
+    text-align: center;
+}
+
+ion-toolbar ion-item ion-icon{
+    position: absolute;
+    z-index: 2;
+}
+
+.tit{
+    color: black;
 }
