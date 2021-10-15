@@ -22,20 +22,8 @@ export class JugadoresPage implements OnInit {
   private idClub:string 
 
   constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService, private estadisticasService: EstadisticasService) {}
-  async ngOnInit() {
+  ngOnInit() {
     this.actualizarJugadores()  
-    let map /*en realidad es un objeto pero los gorrudos de firebase te dicen que es un mapa*/  = {
-      tieneMascota : true,
-      mascota : "/clubes/RIGtETEOcR9WyBN9MLL1/jugadores/EZUXuuG2IuVHEd9RBNJZ"
-    }    
-    this.estadisticasService.agregarGenerales("RIGtETEOcR9WyBN9MLL1", "Equipo1", map);
-    let stat = {
-      goles: 10,
-      empates : 1
-    }
-    this.estadisticasService.agregarAJugador("RIGtETEOcR9WyBN9MLL1","DczXezAM5elfXbKOwlDN", stat);
-    //console.log(await this.estadisticasService.getStatsGenerales("RIGtETEOcR9WyBN9MLL1", "Equipo1"));
-    //console.log(await this.estadisticasService.getStatsJugador("RIGtETEOcR9WyBN9MLL1", "DczXezAM5elfXbKOwlDN"))
   }
   actualizarJugadores(){
     this.jugadorList = [];

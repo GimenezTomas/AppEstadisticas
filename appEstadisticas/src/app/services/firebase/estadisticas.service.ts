@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import firebase from "firebase/app";
 import { AbmService } from '../abm.service';
-//const FieldValue = require('firebase-admin').firestore.FieldValue;
 
 @Injectable({
   providedIn: 'root'
@@ -10,22 +10,20 @@ export class EstadisticasService {
   constructor(private ABMsvc: AbmService) {
   }
 
-  async agregarGenerales(idClub:string,idEquipo:string,estadisticas){
-    let stats = await this.getStatsGenerales(idClub,idEquipo);
-    estadisticas = Object.assign(stats, estadisticas);
-    console.log(estadisticas);
-    this.ABMsvc.afs.collection("clubes").doc(idClub).collection("equipos").doc(idEquipo).update({
-      'estadisticasGenerales': estadisticas 
-    });
+  agregarGenerales(idClub:string,idEquipo:string,estadisticas:object){
+    for(let estadistica in estadisticas){
+      this.ABMsvc.afs.collection("clubes").doc(idClub).collection("equipos").doc(idEquipo).update({
+        ['estadisticas.'+ estadistica] : estadisticas[estadistica] 
+      });
+    }
   }
 
-  async agregarAJugador(idClub:string, idJugador:string, estadisticas){
-    let stats = await this.getStatsJugador(idClub,idJugador);
-    estadisticas = Object.assign(stats, estadisticas);
-    console.log(estadisticas)
-    this.ABMsvc.afs.collection("clubes").doc(idClub).collection("jugadores").doc(idJugador).update({
-      'estadisticas' : estadisticas
-    });
+  agregarAJugador(idClub:string, idJugador:string, estadisticas:object){
+    for(let estadistica in estadisticas){
+      this.ABMsvc.afs.collection("clubes").doc(idClub).collection("jugadores").doc(idJugador).update({
+        ['estadisticas.'+ estadistica] : estadisticas[estadistica] 
+      });
+    }
   }
 
   async getStatsGenerales(idClub:string, idEquipo:string){
@@ -36,5 +34,21 @@ export class EstadisticasService {
   async getStatsJugador(idClub:string, idJugador:string){
     let jugador = await this.ABMsvc.afs.collection("clubes").doc(idClub).collection("jugadores").doc(idJugador).get()
     return jugador.data().estadisticas;
+  }
+
+  borrarGenerales(idClub:string, idEquipo:string, estadisticasABorrar:Array<string>){
+    estadisticasABorrar.forEach(estadistica => {
+      this.ABMsvc.afs.collection("clubes").doc(idClub).collection("equipos").doc(idEquipo).update({
+        ['estadisticas.'+ estadistica] : firebase.firestore.FieldValue.delete()
+      });  
+    });
+  }
+
+  borrarJugador(idClub:string, idJugador:string, estadisticasABorrar:Array<string>){
+    estadisticasABorrar.forEach(estadistica => {
+      this.ABMsvc.afs.collection("clubes").doc(idClub).collection("jugadores").doc(idJugador).update({
+        ['estadisticas.'+ estadistica] : firebase.firestore.FieldValue.delete()
+      });  
+    });
   }
 }
