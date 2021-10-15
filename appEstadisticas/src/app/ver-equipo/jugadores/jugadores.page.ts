@@ -21,16 +21,21 @@ export class JugadoresPage implements OnInit {
   private jugadorList:any[] = [];
   private idClub:string 
 
-  constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService, private estadisticas:EstadisticasService) {}
-  ngOnInit() {
+  constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService, private estadisticasService: EstadisticasService) {}
+  async ngOnInit() {
     this.actualizarJugadores()  
-    let map = [
-      {goles: 16},
-      {victorias: 5},
-      {derrotas: 200},
-      {empates: 1}
-    ]
-    this.estadisticas.agregarGenerales("RIGtETEOcR9WyBN9MLL1", "Equipo1", map)
+    let map /*en realidad es un objeto pero los gorrudos de firebase te dicen que es un mapa*/  = {
+      tieneMascota : true,
+      mascota : "/clubes/RIGtETEOcR9WyBN9MLL1/jugadores/EZUXuuG2IuVHEd9RBNJZ"
+    }    
+    this.estadisticasService.agregarGenerales("RIGtETEOcR9WyBN9MLL1", "Equipo1", map);
+    let stat = {
+      goles: 10,
+      empates : 1
+    }
+    this.estadisticasService.agregarAJugador("RIGtETEOcR9WyBN9MLL1","DczXezAM5elfXbKOwlDN", stat);
+    //console.log(await this.estadisticasService.getStatsGenerales("RIGtETEOcR9WyBN9MLL1", "Equipo1"));
+    //console.log(await this.estadisticasService.getStatsJugador("RIGtETEOcR9WyBN9MLL1", "DczXezAM5elfXbKOwlDN"))
   }
   actualizarJugadores(){
     this.jugadorList = [];
