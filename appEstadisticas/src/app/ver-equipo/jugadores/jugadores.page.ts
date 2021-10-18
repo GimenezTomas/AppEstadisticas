@@ -22,8 +22,10 @@ export class JugadoresPage implements OnInit {
   private idClub:string 
 
   constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService, private estadisticasService: EstadisticasService) {}
-  ngOnInit() {
-    this.actualizarJugadores()  
+  async ngOnInit() {
+    this.actualizarJugadores()
+    let jugador = await this.jugadoresService.jugadoresDeUnEquipo("RIGtETEOcR9WyBN9MLL1", "Equipo1"); 
+    // console.log(jugador);
   }
   actualizarJugadores(){
     this.jugadorList = [];

@@ -9,7 +9,6 @@ import { promise } from 'protractor';
 })
 
 export class JugadoresService {
-  idPrueba: string = "d9LN16EYgi6MaAmPF0Zl"; 
 
   constructor(private ABMsvc:AbmService) { }
   agregar(idClub: string, jugador: any) {
@@ -55,8 +54,29 @@ export class JugadoresService {
   }
 
   async jugadorPorId(idClub:string, idJugador:string){
-    let jugadores = await this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').doc(idJugador).get()
-    return jugadores.data()
-  } 
+    let jugadores = await this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').doc(idJugador).get();
+    return jugadores.data();
+  }
+
+  async jugadoresDeUnClub(idClub:string){
+    return await this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').get();
+  }
+
+  async jugadoresDeUnEquipo(idClub:string, idEquipo:string){
+    let jugadores = await this.jugadoresDeUnClub(idClub);
+    let equipo = await this.ABMsvc.afs.collection('clubes').doc(idClub).collection('equipos').doc(idEquipo).get();
+    // console.log(equipo.data().Jugadores[0].id);
+    let tmp:object = {}
+    jugadores.forEach(jugador => {
+      equipo.data().Jugadores.forEach(element => {
+        if(jugador.id == element.id){
+          Object.assign(tmp, jugador);
+        }
+      });
+    });
+    for(let jugador in tmp){
+      console.log(typeof tmp[jugador]);
+    }
+  }
 }
   
