@@ -28,7 +28,7 @@ export class JugadoresPage implements OnInit {
   actualizarJugadores(){
     this.jugadorList = [];
     this.AUTHsvc.user$.forEach(i=>{
-      this.ABMsvc.afs.collection("clubes").where("mail", "==", i.email).get().then((data)=>{
+      this.ABMsvc.afs.collection("clubes").where("email", "==", i.email).get().then((data)=>{
         data.forEach(element => {
           this.idClub = element.id
         });
