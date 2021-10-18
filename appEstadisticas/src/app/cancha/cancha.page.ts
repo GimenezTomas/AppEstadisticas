@@ -47,8 +47,7 @@ export class CanchaPage implements OnInit {
 
 
   onClickGol(equipo){
-    console.log(equipo);
-    
+    console.log(equipo);  
     equipo.value=equipo.value+1;
   }
 }
