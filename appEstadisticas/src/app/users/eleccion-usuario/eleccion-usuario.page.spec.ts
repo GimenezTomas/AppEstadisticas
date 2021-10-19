@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ModalSignInPage } from './modal-sign-in.page';
+import { EleccionUsuarioPage } from './eleccion-usuario.page';
 
-describe('ModalSignInPage', () => {
-  let component: ModalSignInPage;
-  let fixture: ComponentFixture<ModalSignInPage>;
+describe('EleccionUsuarioPage', () => {
+  let component: EleccionUsuarioPage;
+  let fixture: ComponentFixture<EleccionUsuarioPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalSignInPage ],
+      declarations: [ EleccionUsuarioPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ModalSignInPage);
+    fixture = TestBed.createComponent(EleccionUsuarioPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
