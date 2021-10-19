@@ -46,11 +46,9 @@ export class LoginPage implements OnInit {
   private async redirectUser(isVerified: boolean): Promise<void> {
     if (isVerified) {
       const clubes = await this.afs.afs.collection("clubes").doc(this.authSvc.uid).get();
-      const entrenadores = await this.afs.afs.collection("entrenadores").doc(this.authSvc.uid).get();
-      if(!clubes.exists){
+      const entrenador = await this.afs.afs.collection("entrenadores").doc(this.authSvc.uid).get();
+      if(!clubes.exists && !entrenador.exists){
         this.router.navigate(['eleccion-usuario']);
-        console.log(entrenadores)
-        console.log(clubes)
       }
       else{
         this.router.navigate(['home']);

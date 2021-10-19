@@ -1,9 +1,34 @@
-<ion-header>
+<ion-header class="main-header">
   <ion-toolbar>
-    <ion-title>entrenador</ion-title>
+    <ion-title>Entrenador</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="end" routerLink="/">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="main-content">
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" #name required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input type="text" #apellido required></ion-input>
+    </ion-item>
+    <ion-item class="form">
+      <ion-label class="tit">Nacimiento</ion-label>
+      <ion-datetime #fecha required min="1900-02" max="2006"
+        displayFormat="DDD. MMM DD, YY"
+        monthShortNames="Jan, Feb, Mar, Apr, Mai, Jun, Jul, Aug, Sep, Oct, Nov, Dec"></ion-datetime>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" (click)="registerEntrenador(name,apellido,fecha)" routerLink="/home" expand="block">Crear</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>

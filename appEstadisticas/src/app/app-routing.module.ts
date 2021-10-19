@@ -4,6 +4,7 @@ import { PreloadAllModules, Router, RouterLink, RouterModule, Routes } from '@an
 import { AngularFireAuthGuard, canActivate, emailVerified, isNotAnonymous, loggedIn, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const loggedIntoHome = () => redirectLoggedInTo(['/home']);
 
@@ -26,7 +27,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    canActivate: [AngularFireAuthGuard],
+    canActivate: [AngularFireAuthGuard, AuthGuardService],
     data: {authGuardPipe: redirectNoVerified}
   },
   {

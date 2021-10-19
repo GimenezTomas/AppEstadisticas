@@ -14,17 +14,22 @@ export class AuthService {
   public user$: Observable<User>;
   public uid: string;
   public esClub;
-  
+  public esEntrenador;
+
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router ) {
     this.esClub = false;
+    this.esEntrenador = false;
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
           this.afs.collection('clubes').doc(user.uid).get().subscribe(data=>{
-            this.esClub=data.exists;
-            if(this.esClub == false && user.emailVerified == true){
-              this.router.navigate(['/eleccion-usuario'])
+            this.afs.collection('entrenadores').doc(user.uid).get().subscribe(data1=>{
+              this.esClub=data.exists;
+              this.esEntrenador=data1.exists;
+              if(this.esClub == false && this.esEntrenador == false && user.emailVerified == true){
+                this.router.navigate(['/eleccion-usuario'])
             }
+            });
           });
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         }
