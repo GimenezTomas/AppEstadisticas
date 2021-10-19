@@ -68,8 +68,7 @@ export class JugadoresService {
     equipo.data().jugadores.forEach(element => {
       idJugadores.push(element.id);
     });
-    let jugadoresFinal = await this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').where('__name__','in',idJugadores).get();
-    return jugadoresFinal;
+    return await this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').where('__name__','in',idJugadores).get();
   }
 }
   

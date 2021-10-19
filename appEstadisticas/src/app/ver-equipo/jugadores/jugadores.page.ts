@@ -24,9 +24,9 @@ export class JugadoresPage implements OnInit {
   constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService, private estadisticasService: EstadisticasService) {}
   async ngOnInit() {
     this.actualizarJugadores()
-    let jugador = await this.jugadoresService.jugadoresDeUnEquipo("RIGtETEOcR9WyBN9MLL1", "Equipo1"); 
-    jugador.forEach(element => {
-      console.log(element.data())
+    let jugadores = await this.ABMsvc.afs.collectionGroup('equipos').get();
+    jugadores.forEach(element => {
+      console.log(element,'=> ', element.data());
     });
   }
   actualizarJugadores(){
