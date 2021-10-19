@@ -13,6 +13,9 @@ export class CanchaPage implements OnInit {
 
   ngOnInit() {
     //console.log(this.screenOrientation.type);
+    var pic = document.getElementById('aaa');
+    console.log("CW ", pic.clientWidth);
+    console.log("CH ", pic.clientHeight);
   }
 
   onBasquet(){

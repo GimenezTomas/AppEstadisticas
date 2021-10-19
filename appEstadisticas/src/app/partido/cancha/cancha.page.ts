@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { ModalElegirPartidoPage } from 'src/app/modals/modal-elegir-partido/modal-elegir-partido.page';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 import { EquipoService } from '../../services/firebase/equipo.service';
-import { PartidosService } from '../../services/firebase/partidos.service';
 
 @Component({
   selector: 'app-cancha',
@@ -18,11 +17,31 @@ export class CanchaPage implements OnInit {
   partido: any;
   titulares: any = []
   suplentes: any = []
-
-  constructor(private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { }
+  width = 0
+  height = 0
+  algo=100;
+  constructor(private platform: Platform, private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { 
+    this.sasa();
+  }
 
   ngOnInit() {
     this.openModalPartidos()
+    //this.width = 600//(<HTMLInputElement>document.getElementById('cancha')).clientWidth
+    //this.height =400// (<HTMLInputElement>document.getElementById('cancha')).clientHeight
+
+  }
+  sasa()
+  {
+    (<HTMLElement>document.getElementById('cont')).innerHTML="rojo"
+    this.width = (<HTMLInputElement>document.getElementById('cancha')).clientWidth
+    this.height = (<HTMLInputElement>document.getElementById('cancha')).clientHeight
+    console.log(this.width);
+  }
+  onResize(event){
+    this.width = (<HTMLInputElement>document.getElementById('cancha')).clientWidth
+    this.height = (<HTMLInputElement>document.getElementById('cancha')).clientHeight
+
+    
   }
 
   toggleBackdrop(isVisible){

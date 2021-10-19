@@ -1,16 +1,4 @@
 <ion-content scrollY=false>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Cancha</ion-title>
-      <ion-button *ngIf="futbol" (click)="onBasquet()">
-        Basquet
-      </ion-button>
-      <ion-button *ngIf="basket" (click)="onFutbol()">
-        Futbol
-      </ion-button>
-    </ion-toolbar>
-  </ion-header>
-  
   <ion-content>
     <center>
   
@@ -25,16 +13,13 @@
   
     <div class="container">
         <center>
-          <div class="cont">
-            <img *ngIf="futbol" class="imagen" src="assets/img/footballcourt.jpg">
+          <div class="cont" id="cont">
+            <ion-button (click)="sasa()">sasa</ion-button>
+            <img id="cancha" *ngIf="futbol" usemap="#workmap" class="imagen" src="assets/img/footballcourt.jpg">
             <img *ngIf="basket" class="imagen" src="assets/img/basketcourt.jpg">
-            <div class="cancha">
-              <div class="secciones">  
-                <div *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">
-                  <div *ngFor="let j of [0,1,2,3,4,5,6,7,8,9]">| {{i}} - {{j}} |</div>  
-                </div>
-              </div>  
-            </div>
+            <!--<map name="workmap">
+              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},0,{{width*(i/10)}},{{height}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+            </map>-->
           </div>
         </center>
   
