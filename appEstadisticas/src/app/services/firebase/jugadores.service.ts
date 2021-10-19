@@ -63,20 +63,13 @@ export class JugadoresService {
   }
 
   async jugadoresDeUnEquipo(idClub:string, idEquipo:string){
-    let jugadores = await this.jugadoresDeUnClub(idClub);
     let equipo = await this.ABMsvc.afs.collection('clubes').doc(idClub).collection('equipos').doc(idEquipo).get();
-    // console.log(equipo.data().Jugadores[0].id);
-    let tmp:object = {}
-    jugadores.forEach(jugador => {
-      equipo.data().Jugadores.forEach(element => {
-        if(jugador.id == element.id){
-          Object.assign(tmp, jugador);
-        }
-      });
+    let idJugadores:Array<string> = []
+    equipo.data().jugadores.forEach(element => {
+      idJugadores.push(element.id);
     });
-    for(let jugador in tmp){
-      console.log(typeof tmp[jugador]);
-    }
+    let jugadoresFinal = await this.ABMsvc.afs.collection('clubes').doc(idClub).collection('jugadores').where('__name__','in',idJugadores).get();
+    return jugadoresFinal;
   }
 }
   

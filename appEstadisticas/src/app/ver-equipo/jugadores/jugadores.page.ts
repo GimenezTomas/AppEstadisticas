@@ -25,7 +25,9 @@ export class JugadoresPage implements OnInit {
   async ngOnInit() {
     this.actualizarJugadores()
     let jugador = await this.jugadoresService.jugadoresDeUnEquipo("RIGtETEOcR9WyBN9MLL1", "Equipo1"); 
-    // console.log(jugador);
+    jugador.forEach(element => {
+      console.log(element.data())
+    });
   }
   actualizarJugadores(){
     this.jugadorList = [];
