@@ -1,5 +1,6 @@
 <ion-content scrollY=false>
   <ion-button (click)="openModalPartidos()" ></ion-button>
+  <ion-icon routerLink="/home" slot="start" name="arrow-back-outline"></ion-icon>
   <app-drawer (openStateChanged)="toggleBackdrop($event)" [partido]="partido" #drawer></app-drawer>
 </ion-content>
 <!--<ion-content scrollY="false">
@@ -103,3 +104,4 @@
     </div>
   </div>
 </ion-content>-->
+

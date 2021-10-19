@@ -1,8 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, AfterViewInit, Input} from '@angular/core';
-import { ɵangular_packages_platform_browser_platform_browser_g } from '@angular/platform-browser';
 import { GestureController, Platform } from '@ionic/angular';
-import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
-import { PartidosService } from 'src/app/services/firebase/partidos.service';
 
 @Component({
   selector: 'app-drawer',
@@ -13,15 +10,13 @@ export class DrawerComponent implements AfterViewInit {
   @ViewChild('drawer', { read:ElementRef}) drawer: ElementRef;
   @Output('openStateChanged') openState: EventEmitter<boolean> = new EventEmitter();
 
-  @Input()
-    partido: any;
-    
+  @Input() suplentes: any = [];
+  @Input() titulares: any = [];    
+  
   isOpen = false;
   openHeight =  0;
-  titulares: any = []
-  suplentes: any = []
 
-  constructor(private plt: Platform, private gestureCtrl: GestureController, private jugadoresService: JugadoresService) { }
+  constructor(private plt: Platform, private gestureCtrl: GestureController) { }
 
   async ngAfterViewInit() {
     const drawer = this.drawer.nativeElement;
@@ -66,20 +61,6 @@ export class DrawerComponent implements AfterViewInit {
       drawer.style.transition = `translateY(${-this.openHeight}px)`
       this.isOpen = true
     }
-  }
-
-  async getPlantilla(){    
-    this.partido.jugadores.forEach(element => {
-      console.log(element)
-      let jugador = this.jugadoresService.jugadorPorId('RIGtETEOcR9WyBN9MLL1', element.id)
-      if(element.titular){
-        this.titulares.push(jugador)
-      }else{
-        this.suplentes.push(jugador)
-      }
-    });
-
-    console.log(await this.suplentes[0])
   }
 
 }
