@@ -1,5 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-modal-agregar-falta',
@@ -7,11 +9,15 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./modal-agregar-falta.component.scss'],
 })
 export class ModalAgregarFaltaComponent implements OnInit {
-
+  public Jugadores:any[]=[];
   constructor(public modalController:ModalController) { }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.Jugadores.push("a");
+    this.Jugadores.push("a");
+    
+  }
+    
 
   dismiss() {
    

@@ -12,6 +12,8 @@ import { ModalDeporteCreadoComponent } from '../modal-deporte-creado/modal-depor
 export class CanchaPage implements OnInit {
   public futbol=true;
   public basket=false;
+  public HomeScore:string="";
+  public AwayScore:string="";
   constructor(private modalController:ModalController) { }
 
   ngOnInit() {
@@ -47,7 +49,9 @@ export class CanchaPage implements OnInit {
 
 
   onClickGol(equipo){
-    console.log(equipo);  
-    equipo.value=equipo.value+1;
+    console.log(this.HomeScore);
+    this.HomeScore=this.HomeScore+1;
+    console.log("AAAAAA:",this.HomeScore);
+    
   }
 }
