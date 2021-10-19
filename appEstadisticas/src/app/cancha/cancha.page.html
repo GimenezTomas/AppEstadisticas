@@ -15,10 +15,14 @@
 
   <ion-item id="marcador">
   <ion-label>HOME</ion-label>
-  <ion-input type="number" value="0" min="0"></ion-input>
+  <ion-item>
+  <ion-label name="HomeScore" #HomeScore>0</ion-label>
+  </ion-item>
   <ion-label>AWAY</ion-label>
-  <ion-input type="number" value="0" min="0"></ion-input>
-</ion-item>
+  <ion-item>
+    <ion-label name="AwayScore">0</ion-label>
+    </ion-item>
+  </ion-item>
 </center>
 
 
@@ -30,11 +34,19 @@
 
 
       </div>
-      <div>
-        <ion-button>
-          + Punto 
+      <ion-item>
+        <center>
+          <ion-button id = "BotonFalta" color= "success" (click)="onClickGol(HomeScore)">
+            + Gol
+          </ion-button>
+          <ion-button id = "BotonFalta" color= "danger" (click)="presentModalAgregarFalta()">
+          + Falta
         </ion-button>
-      </div>
+        <ion-button id = "BotonFalta" color= "success" (click)="onClickGol(AwayScore)">
+          + Gol
+        </ion-button>
+        </center>
+        </ion-item>
       <div>
         
       </div>

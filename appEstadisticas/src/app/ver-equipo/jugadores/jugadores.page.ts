@@ -3,11 +3,13 @@ import { ModalController } from '@ionic/angular';
 import { modalController } from '@ionic/core';
 import 'firebase/firestore'
 import { type } from 'os';
+import { ModalBorrarJugadorPage } from 'src/app/modals/modal-borrar-jugador/modal-borrar-jugador.page';
 import { ModalCrearJugadorComponent } from 'src/app/modals/modal-crear-jugador/modal-crear-jugador.component';
 import { ModalEditarPage } from 'src/app/modals/modal-editar/modal-editar.page';
 import { AbmService } from 'src/app/services/abm.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
+import { EstadisticasService } from 'src/app/services/firebase/estadisticas.service';
 
 
 @Component({
@@ -19,14 +21,14 @@ export class JugadoresPage implements OnInit {
   private jugadorList:any[] = [];
   private idClub:string 
 
-  constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService) {}
+  constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService, private estadisticasService: EstadisticasService) {}
   ngOnInit() {
     this.actualizarJugadores()  
   }
   actualizarJugadores(){
     this.jugadorList = [];
     this.AUTHsvc.user$.forEach(i=>{
-      this.ABMsvc.afs.collection("clubes").where("mail", "==", i.email).get().then((data)=>{
+      this.ABMsvc.afs.collection("clubes").where("email", "==", i.email).get().then((data)=>{
         data.forEach(element => {
           this.idClub = element.id
         });
@@ -40,9 +42,9 @@ export class JugadoresPage implements OnInit {
       })
     })
   }
-  borrar(idJugador:string):void {
-    this.jugadoresService.borrar(this.idClub, idJugador)
-    this.actualizarJugadores()
+  borrar(idJugador:string) {
+    this.jugadoresService.borrar(this.idClub, idJugador);
+    this.actualizarJugadores();
   }
   async openModalEditar(jugador:object, idJugador:string){
     console.log("Abre modal :)")
@@ -70,5 +72,16 @@ export class JugadoresPage implements OnInit {
       this.actualizarJugadores();
     })
     return await modal.present() 
+  }
+  async openModalEliminar(idJugador:string){
+    const modal = await this.modalController.create({
+      component: ModalBorrarJugadorPage
+    })
+    modal.onDidDismiss().then((data)=> {
+      if(data.data.borra){
+        this.borrar(idJugador);
+      }
+    })
+    return await modal.present()
   }
 }

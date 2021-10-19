@@ -11,8 +11,7 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-
-
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { AngularFireAuth, AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireModule } from "@angular/fire";
 import { environment } from 'src/environments/environment';
@@ -26,7 +25,9 @@ import { FormsModule } from '@angular/forms';
   declarations: [AppComponent, ModalModificarDeporteComponent],
   entryComponents: [],
   imports: [BrowserModule, FormsModule, CommonModule, AngularFireModule.initializeApp(environment.firebaseConfig),IonicModule.forRoot(), AppRoutingModule, FontAwesomeModule,AngularFireAuthModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TabService],
+  providers: [
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+     TabService],
   bootstrap: [AppComponent],
 })
 

@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Editar</ion-title>
+    <ion-button slot="end" size="small"(click)="dismiss()" color="danger">
+      X
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -16,21 +19,21 @@
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">N° Camiseta</ion-label>
-      <ion-input type="number" #nCamiseta value={{jugador.nCamiseta}}></ion-input>
+      <ion-input type="number" maxlenght="2" min="1" max="99" #nCamiseta value={{jugador.nCamiseta}}></ion-input>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Nacimiento</ion-label>
-      <ion-datetime value ={{jugador.nacimiento}} #nacimiento min="1900-02" max="2006"
+      <ion-datetime value ={{jugador.nacimiento}} #nacimiento min="1900-02" max="2018"
         displayFormat="DDD. MMM DD, YY"
         monthShortNames="Jan, Feb, Mar, Apr, Mai, Jun, Jul, Aug, Sep, Oct, Nov, Dec"></ion-datetime>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Peso (Kg)</ion-label>
-      <ion-input type="number" #peso value={{jugador.peso}}></ion-input>
+      <ion-input type="number" min="1" max="650" #peso value={{jugador.peso}}></ion-input>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Altura (Cm)</ion-label>
-      <ion-input type="number" #altura value={{jugador.altura}}></ion-input>
+      <ion-input type="number" min="1" max="300" #altura value={{jugador.altura}}></ion-input>
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Posicion</ion-label>
