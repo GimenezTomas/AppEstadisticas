@@ -10,8 +10,7 @@ import { EquipoService } from '../../services/firebase/equipo.service';
   styleUrls: ['./cancha.page.scss'],
 })
 export class CanchaPage implements OnInit {
-  futbol=true;
-  basket=false;
+  refresh = false
   backdropVisible = false 
   mimodal:any;
   partido: any;
@@ -21,27 +20,22 @@ export class CanchaPage implements OnInit {
   height = 0
   algo=100;
   constructor(private platform: Platform, private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { 
-    this.sasa();
   }
 
   ngOnInit() {
     this.openModalPartidos()
-    //this.width = 600//(<HTMLInputElement>document.getElementById('cancha')).clientWidth
-    //this.height =400// (<HTMLInputElement>document.getElementById('cancha')).clientHeight
-
   }
-  sasa()
+  refreshMap()
   {
-    (<HTMLElement>document.getElementById('cont')).innerHTML="rojo"
     this.width = (<HTMLInputElement>document.getElementById('cancha')).clientWidth
-    this.height = (<HTMLInputElement>document.getElementById('cancha')).clientHeight
-    console.log(this.width);
+    this.height = (<HTMLInputElement>document.getElementById('cancha')).clientHeight;
+    this.refresh = false
+    this.refresh = true
   }
   onResize(event){
     this.width = (<HTMLInputElement>document.getElementById('cancha')).clientWidth
     this.height = (<HTMLInputElement>document.getElementById('cancha')).clientHeight
-
-    
+    this.refreshMap()
   }
 
   toggleBackdrop(isVisible){
@@ -72,19 +66,10 @@ export class CanchaPage implements OnInit {
     })
 
     this.mimodal = modal;
+    this.refreshMap()
   }
 
   dismiss(){
     this.mimodal.dismiss()
-  }
-
-  onBasquet(){
-    this.basket=true;
-    this.futbol=false;
-  }
-
-  onFutbol(){
-    this.basket=false;
-    this.futbol=true;
   }
 }

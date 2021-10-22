@@ -10,16 +10,23 @@
   </ion-item>
   </center>
   
-  
+  <ion-button (click)="sasa()">dsd</ion-button>
     <div class="container">
         <center>
           <div class="cont" id="cont">
-            <ion-button (click)="sasa()">sasa</ion-button>
-            <img id="cancha" *ngIf="futbol" usemap="#workmap" class="imagen" src="assets/img/footballcourt.jpg">
-            <img *ngIf="basket" class="imagen" src="assets/img/basketcourt.jpg">
-            <!--<map name="workmap">
-              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},0,{{width*(i/10)}},{{height}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-            </map>-->
+            <img id="cancha" usemap="#workmap" class="imagen" src="assets/img/footballcourt.jpg">
+            <map *ngIf="refresh" name="workmap">
+              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((1-1)/10)}},{{width*(i/10)}},{{height*(1/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((2-1)/10)}},{{width*(i/10)}},{{height*(2/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((3-1)/10)}},{{width*(i/10)}},{{height*(3/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((4-1)/10)}},{{width*(i/10)}},{{height*(4/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((5-1)/10)}},{{width*(i/10)}},{{height*(5/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((6-1)/10)}},{{width*(i/10)}},{{height*(6/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((7-1)/10)}},{{width*(i/10)}},{{height*(7/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((8-1)/10)}},{{width*(i/10)}},{{height*(8/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((9-1)/10)}},{{width*(i/10)}},{{height*(9/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((10-1)/10)}},{{width*(i/10)}},{{height*(10/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+            </map>
           </div>
         </center>
   
