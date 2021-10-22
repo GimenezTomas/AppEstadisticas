@@ -18,18 +18,26 @@ import { EstadisticasService } from 'src/app/services/firebase/estadisticas.serv
   styleUrls: ['./jugadores.page.scss'],
 })
 export class JugadoresPage implements OnInit {
-  private jugadorList:any[] = [];
+  private jugadorList: any[];
   private idClub:string 
 
   constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService, private estadisticasService: EstadisticasService) {}
   async ngOnInit() {
-    this.actualizarJugadores()
-    let jugadores = await this.ABMsvc.afs.collectionGroup('equipos').get();
+    // Inicializar idclub manualmente y no en actualizarJugadores y arreglar que pushee solo los que no estan o algo parecido  
+    //this.actualizarJugadores();
+    /*let jugadores = await this.ABMsvc.afs.collectionGroup('equipos').get();
     jugadores.forEach(element => {
-      console.log(element,'=> ', element.data());
-    });
+      console.log(element.id, '=> ', element,'=> ', element.data());
+    });*/
+    const observer = this.ABMsvc.afs.collection("clubes").doc("RIGtETEOcR9WyBN9MLL1").collection("jugadores").onSnapshot(docSnapshot => {
+      docSnapshot.forEach(element => {
+        let jugador = element.data()
+        jugador.id = element.id()
+        if(this.jugadorList.indexOf(jugador) == -1) this.jugadorList.push(jugador)       
+      });
+    })
   }
-  actualizarJugadores(){
+  /*actualizarJugadores(){
     this.jugadorList = [];
     this.AUTHsvc.user$.forEach(i=>{
       this.ABMsvc.afs.collection("clubes").where("email", "==", i.email).get().then((data)=>{
@@ -45,10 +53,10 @@ export class JugadoresPage implements OnInit {
       })
       })
     })
-  }
+  }*/
   borrar(idJugador:string) {
     this.jugadoresService.borrar(this.idClub, idJugador);
-    this.actualizarJugadores();
+    //this.actualizarJugadores();
   }
   async openModalEditar(jugador:object, idJugador:string){
     console.log("Abre modal :)")
@@ -61,7 +69,7 @@ export class JugadoresPage implements OnInit {
       }
     })
     modal.onDidDismiss().then((data)=>{
-      this.actualizarJugadores();
+      //this.actualizarJugadores();
     })
     return await modal.present()
   }
@@ -73,7 +81,7 @@ export class JugadoresPage implements OnInit {
       }
     })
     modal.onDidDismiss().then((data)=>{
-      this.actualizarJugadores();
+     // this.actualizarJugadores();
     })
     return await modal.present() 
   }
@@ -87,5 +95,11 @@ export class JugadoresPage implements OnInit {
       }
     })
     return await modal.present()
+  }
+  typeof(any){
+    return typeof any; 
+  }
+  log(any){
+    console.log(any);
   }
 }
