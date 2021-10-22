@@ -15,34 +15,31 @@
 
   <ion-item id="marcador">
   <ion-label>HOME</ion-label>
-  <ion-item>
-  <ion-label name="HomeScore"  [(ngModel)]="HomeScore" >0</ion-label>
-  </ion-item>
+  <ion-label name="HomeScore" >{{HomeScore}}</ion-label>
   <ion-label>AWAY</ion-label>
-  <ion-item>
-    <ion-label name="AwayScore"  [(ngModel)]="AwayScore" >0</ion-label>
-    </ion-item>
+  
+    <ion-label name="AwayScore" >{{AwayScore}}</ion-label>
   </ion-item>
 </center>
 
 
-  <div class="container">
+  <ion-item>
       <center>
         <img *ngIf="futbol" class="imagen" src="assets/img/footballcourt.jpg">
         <img *ngIf="basket" class="imagen" src="assets/img/basketcourt.jpg">
         </center>
+</ion-item>
 
-
-      </div>
+      
       <center>
       <ion-item>
-          <ion-button id = "BotonGol" color= "success" (click)="onClickGol(HomeScore)">
+          <ion-button id = "BotonGol" color= "success" (click)="onClickGolHome()">
             + Gol
           </ion-button>
           <ion-button id = "BotonFalta" color= "danger" (click)="presentModalAgregarFalta()">
           + Falta
         </ion-button>
-        <ion-button id = "BotonGol" color= "success" (click)="onClickGol(AwayScore)">
+        <ion-button id = "BotonGol" color= "success" (click)="onClickGolAway()">
           + Gol
         </ion-button>
         </ion-item>

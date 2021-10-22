@@ -1,3 +1,4 @@
+import { typeWithParameters } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalAgregarFaltaComponent } from '../modal-agregar-falta/modal-agregar-falta.component';
@@ -12,8 +13,8 @@ import { ModalDeporteCreadoComponent } from '../modal-deporte-creado/modal-depor
 export class CanchaPage implements OnInit {
   public futbol=true;
   public basket=false;
-  public HomeScore:string="";
-  public AwayScore:string="";
+  public HomeScore:number=0;
+  public AwayScore:number=0;
   constructor(private modalController:ModalController) { }
 
   ngOnInit() {
@@ -39,6 +40,9 @@ export class CanchaPage implements OnInit {
     return await modal.present();
   }
 
+
+ 
+
   async presentModalAgregarGol(){
     const modal = await this.modalController.create({
       component: ModalAgregarGolComponent,
@@ -48,10 +52,16 @@ export class CanchaPage implements OnInit {
   }
 
 
-  onClickGol(equipo){
-    console.log(this.HomeScore);
+  onClickGolHome(){
+    this.presentModalAgregarGol();
     this.HomeScore=this.HomeScore+1;
-    console.log("AAAAAA:",this.HomeScore);
+    console.log("HomeScore:",this.HomeScore);
+  }
+
+  onClickGolAway(){
+    this.presentModalAgregarGol();
+    this.AwayScore=this.AwayScore+1;
+    console.log("AwayScore: ",this.AwayScore);
     
   }
 }

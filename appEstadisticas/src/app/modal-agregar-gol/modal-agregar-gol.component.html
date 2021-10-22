@@ -1,3 +1,36 @@
-<p>
-  modal-agregar-gol works!
-</p>
+<ion-header class="main-header">
+  <ion-toolbar>
+    <ion-item>
+    <ion-label>Agregar Gol</ion-label>
+    </ion-item>
+    <ion-button slot="end" size="small" (click)="dismiss()" color="danger">
+      X
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-label>
+      Jugador que hizo el Gol
+    </ion-label>
+    
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let jugador of Jugadores">
+      <ion-label>
+        <h2>AAAAAAAAAAAA</h2>
+        
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-item>
+<ion-input>
+    Minuto
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input>
+        Jugador Asistidor
+        </ion-input>
+      </ion-item>
+</ion-content>
