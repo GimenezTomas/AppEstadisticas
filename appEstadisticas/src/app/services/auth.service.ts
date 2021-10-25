@@ -17,6 +17,7 @@ export class AuthService {
   public esEntrenador;
 
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router ) {
+    console.log("constructor de auth service");
     this.esClub = false;
     this.esEntrenador = false;
     this.user$ = this.afAuth.authState.pipe(
@@ -26,9 +27,6 @@ export class AuthService {
             this.afs.collection('entrenadores').doc(user.uid).get().subscribe(data1=>{
               this.esClub=data.exists;
               this.esEntrenador=data1.exists;
-              if(this.esClub == false && this.esEntrenador == false && user.emailVerified == true){
-                this.router.navigate(['/eleccion-usuario'])
-            }
             });
           });
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
@@ -36,6 +34,22 @@ export class AuthService {
         return of(null);
       })
     );
+  }
+
+  async getClub(): Promise<boolean>{
+    let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
+      this.afs.collection('clubes').doc(this.uid).get().subscribe( data =>{ resolve(data.exists)});
+    });
+    
+    return dataPromise;
+  }
+
+  async getEntrenador(): Promise<boolean>{
+    let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
+      this.afs.collection('entrenadores').doc(this.uid).get().subscribe( data =>{ resolve(data.exists)});
+    });
+    
+    return dataPromise;
   }
 
   async resetPassword(email: string): Promise<void> {
