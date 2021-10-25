@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -8,12 +8,15 @@ import { ModalController } from '@ionic/angular';
 })
 export class ModalAgregarGolComponent implements OnInit {
   public Jugadores:any[]=[];
-  constructor(public modalController:ModalController) { }
+  constructor(public modalController:ModalController, private zone:NgZone) { }
 
   ngOnInit() {
     
   }
+  onAgregar(){
 
+    this.dismiss();
+  }
 
   dismiss() {
    

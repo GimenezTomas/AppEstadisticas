@@ -17,7 +17,9 @@ export class ModalAgregarFaltaComponent implements OnInit {
     this.Jugadores.push("a");
     
   }
-    
+  onAgregar(){
+    this.dismiss();
+  }
 
   dismiss() {
    
