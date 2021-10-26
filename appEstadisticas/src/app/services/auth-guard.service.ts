@@ -9,9 +9,7 @@ import { AuthService } from './auth.service';
 })
 export class AuthGuardService implements CanActivate{
 
-  constructor(private router: Router, private authSvc: AuthService) { 
-    console.log("constructor de auth guard service")
-  } 
+  constructor(private router: Router, private authSvc: AuthService) { } 
 
   canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
     return new Promise((resolve, rejects) => {

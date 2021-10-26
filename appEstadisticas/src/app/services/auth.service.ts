@@ -17,7 +17,6 @@ export class AuthService {
   public esEntrenador;
 
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router ) {
-    console.log("constructor de auth service");
     this.esClub = false;
     this.esEntrenador = false;
     this.user$ = this.afAuth.authState.pipe(
