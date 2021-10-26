@@ -28,7 +28,7 @@ jobs:
 
       - name: Add Android platform
         run: ionic cordova platform add android@latest
-        working-directory: .\appEstadisticas\
+        working-directory: ./appEstadisticas/
 
       - name: Build Android Dev APK
         run: ionic cordova build android
