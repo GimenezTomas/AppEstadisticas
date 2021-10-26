@@ -22,15 +22,13 @@ jobs:
 
       - name: Install Ionic
         run: npm install -g @ionic/cli
-
-      - name: Cambiar directorio
-        run: cd .\appEstadisticas\
         
       - name: Install app dependencies
         run: npm install
 
       - name: Add Android platform
         run: ionic cordova platform add android@latest
+        working-directory: .\appEstadisticas\
 
       - name: Build Android Dev APK
         run: ionic cordova build android
