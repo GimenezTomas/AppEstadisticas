@@ -23,6 +23,9 @@ jobs:
       - name: Install Ionic
         run: npm install -g @ionic/cli
 
+      - name: Cambiar directorio
+        run: cd .\appEstadisticas\
+        
       - name: Install app dependencies
         run: npm install
 
