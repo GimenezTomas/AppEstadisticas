@@ -17,7 +17,15 @@ export class AuthGuardService implements CanActivate{
         if(club) { resolve(true); }
         else {
           this.authSvc.getEntrenador().then(entrenador => {
-            if(entrenador) { resolve(true); }
+            if(entrenador) { 
+              this.authSvc.entrenadorClub().then(entr => {
+                if(entr){ resolve (true); }
+                else{ 
+                  this.router.navigate(["loading"]);
+                  resolve(false);
+                }
+              });
+            }
             else {
               this.router.navigate(["eleccion-usuario"]);
               resolve(false);

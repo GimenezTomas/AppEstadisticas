@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { Entrenador } from '../shared/entrenador.interface';
 import { User } from '../shared/user.interface';
 
 @Injectable({
@@ -37,7 +38,7 @@ export class AuthService {
 
   async getClub(): Promise<boolean>{
     let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
-      this.afs.collection('clubes').doc(this.uid).get().subscribe( data =>{ resolve(data.exists)});
+      this.afs.collection('clubes').doc(this.uid).get().subscribe( data =>{ resolve(data.exists) });
     });
     
     return dataPromise;
@@ -45,11 +46,21 @@ export class AuthService {
 
   async getEntrenador(): Promise<boolean>{
     let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
-      this.afs.collection('entrenadores').doc(this.uid).get().subscribe( data =>{ resolve(data.exists)});
+      this.afs.collection('entrenadores').doc(this.uid).get().subscribe( data =>{ resolve(data.exists) });
     });
     
     return dataPromise;
   }
+
+  async entrenadorClub(): Promise<boolean>{
+
+    let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
+      this.afs.collection('entrenadores').doc<Entrenador>(this.uid).get().subscribe( data =>{ resolve(data.data().club != null ); });
+    });
+    
+    return dataPromise;
+  }
+    
 
   async resetPassword(email: string): Promise<void> {
     try {
