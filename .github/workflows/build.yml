@@ -47,9 +47,11 @@ jobs:
         
       - name: Build Android Dev APK
         run: ionic cordova build android
+        working-directory: ./appEstadisticas/
 
       - name: Build Android Release APK
         run: ionic cordova build android --release --prod
+        working-directory: ./appEstadisticas/
 
       - name: Generate the Android App Bundle
         working-directory: ./platforms/android/
