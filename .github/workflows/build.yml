@@ -29,11 +29,8 @@ jobs:
       - name: Install app dependencies
         run: npm install
 
-      - name: ls
-        run: ls 
-        
       - name: Add Android platform
-        run: ionic cordova platform add android@latest
+        run: ionic cordova platform add android@9
         working-directory: ./appEstadisticas/
           
       - name: Renombrar dx.jar
