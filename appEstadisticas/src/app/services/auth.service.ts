@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { Entrenador } from '../shared/entrenador.interface';
 import { User } from '../shared/user.interface';
 
 @Injectable({
@@ -26,9 +27,6 @@ export class AuthService {
             this.afs.collection('entrenadores').doc(user.uid).get().subscribe(data1=>{
               this.esClub=data.exists;
               this.esEntrenador=data1.exists;
-              if(this.esClub == false && this.esEntrenador == false && user.emailVerified == true){
-                this.router.navigate(['/eleccion-usuario'])
-            }
             });
           });
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
@@ -37,6 +35,32 @@ export class AuthService {
       })
     );
   }
+
+  async getClub(): Promise<boolean>{
+    let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
+      this.afs.collection('clubes').doc(this.uid).get().subscribe( data =>{ resolve(data.exists) });
+    });
+    
+    return dataPromise;
+  }
+
+  async getEntrenador(): Promise<boolean>{
+    let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
+      this.afs.collection('entrenadores').doc(this.uid).get().subscribe( data =>{ resolve(data.exists) });
+    });
+    
+    return dataPromise;
+  }
+
+  async entrenadorClub(): Promise<boolean>{
+
+    let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
+      this.afs.collection('entrenadores').doc<Entrenador>(this.uid).get().subscribe( data =>{ resolve(data.data().club != null ); });
+    });
+    
+    return dataPromise;
+  }
+    
 
   async resetPassword(email: string): Promise<void> {
     try {
