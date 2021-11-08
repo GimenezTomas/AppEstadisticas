@@ -3,6 +3,7 @@ import { ModalController, Platform } from '@ionic/angular';
 import { ModalElegirPartidoPage } from 'src/app/modals/modal-elegir-partido/modal-elegir-partido.page';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 import { EquipoService } from '../../services/firebase/equipo.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-cancha',
@@ -18,13 +19,40 @@ export class CanchaPage implements OnInit {
   suplentes: any = []
   width = 0
   height = 0
-  algo=100;
+  time: BehaviorSubject<String> = new BehaviorSubject('00:00')
+  timer: number
+  
   constructor(private platform: Platform, private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { 
   }
 
   ngOnInit() {
     this.openModalPartidos()
   }
+
+  startTimer(duration: number){
+    this.timer = 0
+    setInterval(() => {
+      this.updateTimeValue(duration)
+    }, 1000)
+  }
+
+  updateTimeValue(duration:number){
+    let minutes:any = this.timer / 60
+    let seconds:any = this.timer % 60
+
+    minutes = String('0' + Math.floor(minutes)).slice(-2)
+    seconds = String('0' + Math.floor(seconds)).slice(-2)
+    
+    const text = minutes + ":" + seconds
+    this.time.next(text)
+
+    ++this.timer
+
+    if(this.timer > duration * 60){
+      this.startTimer(duration)
+    }
+  }
+
   refreshMap()
   {
     this.width = (<HTMLInputElement>document.getElementById('cancha')).clientWidth
