@@ -1,0 +1,24 @@
+<ion-header class="main-header">
+  <ion-toolbar>
+    <ion-title>Crear Club</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="end" routerLink="/">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main-content">
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre del Club</ion-label>
+      <ion-input type="text" #name required></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" (click)="registerClub(name)" routerLink="/home" expand="block">Crear</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

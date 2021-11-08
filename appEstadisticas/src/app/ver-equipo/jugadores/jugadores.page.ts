@@ -9,6 +9,7 @@ import { ModalEditarPage } from 'src/app/modals/modal-editar/modal-editar.page';
 import { AbmService } from 'src/app/services/abm.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
+import { EstadisticasService } from 'src/app/services/firebase/estadisticas.service';
 
 
 @Component({
@@ -20,14 +21,18 @@ export class JugadoresPage implements OnInit {
   private jugadorList:any[] = [];
   private idClub:string 
 
-  constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService) {}
-  ngOnInit() {
-    this.actualizarJugadores()  
+  constructor(private ABMsvc:AbmService,private modalController:ModalController, private jugadoresService: JugadoresService,private AUTHsvc:AuthService, private estadisticasService: EstadisticasService) {}
+  async ngOnInit() {
+    this.actualizarJugadores()
+    let jugadores = await this.ABMsvc.afs.collectionGroup('equipos').get();
+    jugadores.forEach(element => {
+      console.log(element,'=> ', element.data());
+    });
   }
   actualizarJugadores(){
     this.jugadorList = [];
     this.AUTHsvc.user$.forEach(i=>{
-      this.ABMsvc.afs.collection("clubes").where("mail", "==", i.email).get().then((data)=>{
+      this.ABMsvc.afs.collection("clubes").where("email", "==", i.email).get().then((data)=>{
         data.forEach(element => {
           this.idClub = element.id
         });

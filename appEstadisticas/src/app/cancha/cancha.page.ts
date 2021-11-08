@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { ModalController } from '@ionic/angular';
+import { ModalAgregarFaltaComponent } from '../modal-agregar-falta/modal-agregar-falta.component';
+import { ModalAgregarGolComponent } from '../modal-agregar-gol/modal-agregar-gol.component';
+import { ModalDeporteCreadoComponent } from '../modal-deporte-creado/modal-deporte-creado.component';
 
 @Component({
   selector: 'app-cancha',
@@ -9,13 +12,11 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 export class CanchaPage implements OnInit {
   public futbol=true;
   public basket=false;
-  constructor(/*private screenOrientation: ScreenOrientation*/) { }
+  constructor(private modalController:ModalController) { }
 
   ngOnInit() {
-    //console.log(this.screenOrientation.type);
-    var pic = document.getElementById('aaa');
-    console.log("CW ", pic.clientWidth);
-    console.log("CH ", pic.clientHeight);
+    console.log(screen.orientation.type);
+    screen.orientation.lock("portrait-secondary");
   }
 
   onBasquet(){
@@ -26,5 +27,28 @@ export class CanchaPage implements OnInit {
   onFutbol(){
     this.basket=false;
     this.futbol=true;
+  }
+
+  async presentModalAgregarFalta() {
+    const modal = await this.modalController.create({
+      component: ModalAgregarFaltaComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
+  async presentModalAgregarGol(){
+    const modal = await this.modalController.create({
+      component: ModalAgregarGolComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
+
+  onClickGol(equipo){
+    console.log(equipo);
+    
+    equipo.value=equipo.value+1;
   }
 }

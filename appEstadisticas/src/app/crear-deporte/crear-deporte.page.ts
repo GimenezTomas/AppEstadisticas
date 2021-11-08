@@ -11,7 +11,6 @@ import { ModalModificarDeporteComponent } from '../modal-modificar-deporte/modal
 import { AbmService } from '../services/abm.service';
 import { AuthService } from '../services/auth.service';
 import { ToastController } from '@ionic/angular';
-import { element } from 'protractor';
 
 
 
@@ -75,6 +74,8 @@ public deporteExistente(nombreDeporte):boolean{
     if(this.deporteExistente(nombreDeporte.value)){
       console.log("existeeee");
       this.presentModalExistente();
+    }else if(cantEquipos.value=="" || cantParticipantes.value==""){
+      this.presentToastCamposVacios();
     }else{
       let estadisticasRegistrar:Array<boolean>=[];
       this.formEstadisticas.forEach(element => {
@@ -122,6 +123,7 @@ public deporteExistente(nombreDeporte):boolean{
 
   async presentToast() {
     const toast = await this.toastController.create({
+      color:"danger",
       message: 'Ya existe esa Posición',
       duration: 3000
     });
@@ -130,7 +132,17 @@ public deporteExistente(nombreDeporte):boolean{
 
   async presentToastVacio() {
     const toast = await this.toastController.create({
+      color:"danger",
       message: 'El nombre no puede estar vacío',
+      duration: 3000
+    });
+    toast.present();
+  }
+
+  async presentToastCamposVacios(){
+    const toast = await this.toastController.create({
+      color:"danger",
+      message: 'Cantidad de Equipos o Particiapntes no puede estar vacío o incluir letras',
       duration: 3000
     });
     toast.present();

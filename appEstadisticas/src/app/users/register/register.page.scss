@@ -15,41 +15,67 @@
     color: black;
 }
 
-.main-content ion-list{
-    padding: 5%;
-    width: 92%;
+.main-content div{
+    padding: 3%;
+    width: 100%;
     display: block;
     margin: auto;
-    margin-top: 5%;
 }
 
-.main-content ion-list ion-button{
+.main-content div{
     width: 100%;
+}
+
+.main-content div div ion-text{
+    text-align: center;
+    display: block;
+}
+
+.main-content div div div ion-text{
+    margin-top: 5%;
+    text-align: start;
+}
+
+.main-content div div ion-segment{
+    margin-top: 10px;
+}
+
+.main-content div div ion-button{
+  display: block;
+  margin: auto;
+  --background: grey;
+  width: 70%;
+  margin-top: 5%;
+}
+
+.main-content2{
+    padding: 5%;
+    width: 100%;
+    display: block;
+    margin: auto;
+}
+
+.main-content2 ion-button{
+    width: 100% !important;
     margin-top: 8%;
-    --background: white;
+    --background: white !important;
     --border-radius: 20px;
 }
 
-.main-content ion-list ion-button ion-item{
+.main-content2 ion-button ion-item{
     width: 100%;
     color: #757575;
 }
 
-.main-content ion-list ion-button ion-item ion-icon{
+.main-content2 ion-button ion-item ion-icon{
     width: 20px;
 }
 
-.main-content ion-list ion-button ion-item ion-label{
+.main-content2 ion-button ion-item ion-label{
     font-weight: 600;
     letter-spacing: 1px;
 }
 
-.cambiar{
-    text-align: center;
-    font-size: 15px;
-    display: grid;
-    margin-top: 8%;
-}
 
 ion-menu {
     --min-width: 100%;
@@ -82,7 +108,6 @@ ion-menu ion-content div{
 ion-menu ion-content ion-list{
     width: 100%;
     margin-top: 5%;
-    //border: solid 3px rgba(160, 160, 160, 0.822);
     border-radius: 12px;
 }
 
@@ -105,8 +130,9 @@ ion-menu ion-content ion-list ion-text{
     text-align: left;
 }
 
-#signin{
-    margin-top: 20%;
+.cambiar{
+    text-align: center;
+    display: grid;
+    font-size: 15px;
+    margin-top: 8%;
 }
-
-
