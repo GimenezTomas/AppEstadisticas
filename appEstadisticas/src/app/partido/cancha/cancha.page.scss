@@ -71,4 +71,21 @@
 #marcador{
     width: 100%;
 }
-  
+.cont{
+  position: relative;
+}
+.cont .cancha{
+  width: 100%;
+  height: auto;
+}
+.cont .cancha .secciones{
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, auto 1fr);
+  height: 100%;
+}
+
+.cont div{
+  width: 75%;
+  height: 100%;
+}

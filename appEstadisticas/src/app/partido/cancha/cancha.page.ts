@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { ModalElegirPartidoPage } from 'src/app/modals/modal-elegir-partido/modal-elegir-partido.page';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 import { EquipoService } from '../../services/firebase/equipo.service';
-import { PartidosService } from '../../services/firebase/partidos.service';
 
 @Component({
   selector: 'app-cancha',
@@ -11,18 +10,32 @@ import { PartidosService } from '../../services/firebase/partidos.service';
   styleUrls: ['./cancha.page.scss'],
 })
 export class CanchaPage implements OnInit {
-  futbol=true;
-  basket=false;
+  refresh = false
   backdropVisible = false 
   mimodal:any;
   partido: any;
   titulares: any = []
   suplentes: any = []
-
-  constructor(private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { }
+  width = 0
+  height = 0
+  algo=100;
+  constructor(private platform: Platform, private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { 
+  }
 
   ngOnInit() {
     this.openModalPartidos()
+  }
+  refreshMap()
+  {
+    this.width = (<HTMLInputElement>document.getElementById('cancha')).clientWidth
+    this.height = (<HTMLInputElement>document.getElementById('cancha')).clientHeight;
+    this.refresh = false
+    this.refresh = true
+  }
+  onResize(event){
+    this.width = (<HTMLInputElement>document.getElementById('cancha')).clientWidth
+    this.height = (<HTMLInputElement>document.getElementById('cancha')).clientHeight
+    this.refreshMap()
   }
 
   toggleBackdrop(isVisible){
@@ -31,13 +44,11 @@ export class CanchaPage implements OnInit {
 
   async getPlantilla(){    
     this.partido.jugadores.forEach(async element => {
-      console.log(element)
       let jugador = await this.jugadoresService.jugadorPorId('RIGtETEOcR9WyBN9MLL1', element.id)
       if(element.titular){
         this.titulares.push(jugador)
       }else{
         this.suplentes.push(jugador)
-        console.log(jugador)
       }
     });
   }
@@ -55,19 +66,10 @@ export class CanchaPage implements OnInit {
     })
 
     this.mimodal = modal;
+    this.refreshMap()
   }
 
   dismiss(){
     this.mimodal.dismiss()
-  }
-
-  onBasquet(){
-    this.basket=true;
-    this.futbol=false;
-  }
-
-  onFutbol(){
-    this.basket=false;
-    this.futbol=true;
   }
 }
