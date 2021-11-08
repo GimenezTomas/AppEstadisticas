@@ -34,7 +34,7 @@ export class JugadoresService {
       console.error("Error adding document: ", error);
   }); 
   }
-  editar(idClub: string, idJugador:string, jugadorN: any){
+  editar(idClub:string, idJugador:string, jugadorN:any){
     console.log(jugadorN)
     console.log(idJugador)
     this.ABMsvc.afs.collection("clubes").doc(idClub).collection('jugadores').doc(idJugador).update({
