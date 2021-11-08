@@ -13,6 +13,17 @@
 
     <ion-button (click)="startTimer(90)"> comenzar </ion-button>
     <h1>{{time | async}}</h1>  
+    <ion-item>
+      <ion-button id = "BotonGol" color= "success" (click)="onClickGolHome()">
+        + Gol
+      </ion-button>
+      <ion-button id = "BotonFalta" color= "danger" (click)="presentModalAgregarFalta()">
+      + Falta
+    </ion-button>
+    <ion-button id = "BotonGol" color= "success" (click)="onClickGolAway()">
+      + Gol
+    </ion-button>
+    </ion-item>
       <div class="container">
         <center>
           <div class="cont" id="cont">

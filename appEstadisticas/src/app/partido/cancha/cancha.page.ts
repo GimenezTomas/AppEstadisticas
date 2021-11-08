@@ -4,6 +4,8 @@ import { ModalElegirPartidoPage } from 'src/app/modals/modal-elegir-partido/moda
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 import { EquipoService } from '../../services/firebase/equipo.service';
 import { BehaviorSubject } from 'rxjs';
+import { ModalAgregarFaltaComponent } from 'src/app/modals/modal-agregar-falta/modal-agregar-falta.component';
+import { ModalAgregarGolComponent } from 'src/app/modals/modal-agregar-gol/modal-agregar-gol.component';
 
 @Component({
   selector: 'app-cancha',
@@ -21,7 +23,9 @@ export class CanchaPage implements OnInit {
   height = 0
   time: BehaviorSubject<String> = new BehaviorSubject('00:00')
   timer: number
-  
+  homeScore = 0
+  awayScore = 0
+
   constructor(private platform: Platform, private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { 
   }
 
@@ -99,5 +103,37 @@ export class CanchaPage implements OnInit {
 
   dismiss(){
     this.mimodal.dismiss()
+  }
+
+  async presentModalAgregarFalta() {
+    const modal = await this.modalController.create({
+      component: ModalAgregarFaltaComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
+  async presentModalAgregarGol(){
+    const modal = await this.modalController.create({
+      component: ModalAgregarGolComponent,
+      cssClass: 'my-custom-class',
+      componentProps:{
+        tiempo : this.timer
+      }
+    });
+    return await modal.present();
+  }
+
+  onClickGolHome(){
+    this.presentModalAgregarGol();
+    this.homeScore=this.homeScore+1;
+    console.log("HomeScore:",this.homeScore);
+  }
+
+  onClickGolAway(){
+    this.presentModalAgregarGol();
+    this.awayScore=this.awayScore+1;
+    console.log("AwayScore: ",this.awayScore);
+    
   }
 }
