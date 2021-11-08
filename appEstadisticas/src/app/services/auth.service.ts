@@ -20,6 +20,7 @@ export class AuthService {
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router ) {
     this.esClub = false;
     this.esEntrenador = false;
+    this.uid = sessionStorage.getItem("uid");
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -38,6 +39,7 @@ export class AuthService {
 
   async getClub(): Promise<boolean>{
     let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
+      console.log(this.uid);
       this.afs.collection('clubes').doc(this.uid).get().subscribe( data =>{ resolve(data.exists) });
     });
     
@@ -74,7 +76,7 @@ export class AuthService {
     try {
       const { user } = await this.afAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
       this.updateUserData(user);
-      this.uid = user.uid;
+      sessionStorage.setItem("uid", user.uid);
       return user;
     } catch (error) {
       console.log('Error->', error);
@@ -95,7 +97,7 @@ export class AuthService {
     try {
       const { user } = await this.afAuth.signInWithEmailAndPassword(email, password);
       this.updateUserData(user);
-      this.uid = user.uid;
+      sessionStorage.setItem("uid", user.uid);
       return user;
     } catch (error) {
       console.log('Error->', error);
