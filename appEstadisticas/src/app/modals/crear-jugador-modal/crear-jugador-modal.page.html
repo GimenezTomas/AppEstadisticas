@@ -41,6 +41,12 @@
       <ion-label class="tit">Posicion</ion-label>
       <ion-input type="text"#posicion placeholder="Base, Alero, Arquero, Defensa"></ion-input>
     </ion-item>
+    <ion-item class="form">
+      <ion-label class="tit">Equipos</ion-label>
+      <ion-select multiple="true" [compareWith]="compareWith">
+        <ion-select-option *ngFor="let equipo of equipos" [value]="equipo">{{equipo.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-button (click)="agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion)" class="button button-block button-possitive">Agregar</ion-button>
   </div>
 </ion-content>
