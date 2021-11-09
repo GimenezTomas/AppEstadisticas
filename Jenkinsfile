@@ -15,7 +15,7 @@ pipeline {
      stage('Android Remove'){
         steps {
           dir('./appEstadisticas/') {
-          sh 'ionic cordova platform rm'
+          sh 'ionic cordova platform rm android'
           }  
         }
       }
