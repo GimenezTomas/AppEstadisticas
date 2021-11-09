@@ -14,7 +14,9 @@ pipeline {
       
      stage('Android add') {
      steps {
+        dir('./appEstadisticas/') {
         sh 'ionic cordova platform add android@9 --verbose'
+        }
      }
    }
       
