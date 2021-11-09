@@ -16,6 +16,7 @@ export class AuthService {
   public uid: string;
   public esClub;
   public esEntrenador;
+  public entrenadorxClub;
 
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router ) {
     this.esClub = false;
@@ -26,8 +27,11 @@ export class AuthService {
         if (user) {
           this.afs.collection('clubes').doc(user.uid).get().subscribe(data=>{
             this.afs.collection('entrenadores').doc(user.uid).get().subscribe(data1=>{
-              this.esClub=data.exists;
-              this.esEntrenador=data1.exists;
+              this.afs.collection('entrenadores').doc<Entrenador>(this.uid).get().subscribe( data2 =>{
+                this.esClub=data.exists;
+                this.esEntrenador=data1.exists;
+                this.entrenadorxClub = data2.data().club;
+              });
             });
           });
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
