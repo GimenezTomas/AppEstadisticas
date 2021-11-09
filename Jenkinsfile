@@ -12,7 +12,14 @@ pipeline {
       }
    }
       
-     stage('Android add') {
+     stage('Android Remove'){
+        steps {
+          dir('./appEstadisticas/') {
+          sh 'ionic cordova platform rm'
+          }  
+        }
+      }
+     stage('Android Add') {
      steps {
         dir('./appEstadisticas/') {
         sh 'ionic cordova platform add android@9 --verbose'
