@@ -22,13 +22,17 @@ pipeline {
       
      stage('remove whitelist') {
      steps {
+        dir('./appEstadisticas/') {
         sh 'ionic cordova plugin rm cordova-plugin-whitelist'
+        }
      }
    }
       
      stage('Android Build') {
      steps {
+        dir('./appEstadisticas/') {
         sh 'ionic cordova build android'
+        }
      }
    }
        
