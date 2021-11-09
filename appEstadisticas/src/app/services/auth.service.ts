@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore,AngularFirestoreDocument } from "@angular/fire/firestore";
 import { Router } from '@angular/router';
+import { Console } from 'console';
 import * as firebase from 'firebase';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -27,10 +28,10 @@ export class AuthService {
         if (user) {
           this.afs.collection('clubes').doc(user.uid).get().subscribe(data=>{
             this.afs.collection('entrenadores').doc(user.uid).get().subscribe(data1=>{
-              this.afs.collection('entrenadores').doc<Entrenador>(this.uid).get().subscribe( data2 =>{
+              this.afs.collection('entrenadores').doc<Entrenador>(user.uid).get().subscribe( data2 =>{              
                 this.esClub=data.exists;
                 this.esEntrenador=data1.exists;
-                this.entrenadorxClub = data2.data().club;
+                if(data2.exists){ this.entrenadorxClub = data2.data().club; }
               });
             });
           });
