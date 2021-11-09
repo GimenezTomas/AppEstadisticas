@@ -28,7 +28,6 @@ export class AuthGuardService implements CanActivate{
             }
             else {
               this.router.navigate(["eleccion-usuario"]);
-              console.log(club)
               resolve(false);
             }
           });
