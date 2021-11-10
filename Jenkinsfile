@@ -6,20 +6,13 @@ pipeline {
  
    stages {
       
-      stage('Install app dependencies') {
+      stage('Install App Dependencies') {
       steps {
          sh 'npm install'
       }
    }
       
-     stage('Android Remove'){
-        steps {
-          dir('./appEstadisticas/') {
-          sh 'ionic cordova platform rm android'
-          }  
-        }
-      }
-     stage('Android Add') {
+     stage('Add Android Platform') {
      steps {
         dir('./appEstadisticas/') {
         sh 'ionic cordova platform add android@9 --verbose'
@@ -27,7 +20,7 @@ pipeline {
      }
    }
       
-     stage('remove whitelist') {
+     stage('Remove whitelist') {
      steps {
         dir('./appEstadisticas/') {
         sh 'ionic cordova plugin rm cordova-plugin-whitelist'
@@ -35,13 +28,21 @@ pipeline {
      }
    }
       
-     stage('Android Build') {
+     stage('Build Android APK') {
      steps {
         dir('./appEstadisticas/') {
         sh 'ionic cordova build android'
         }
      }
    }
+      
+      stage('Remove Android Platform'){
+      steps {
+         dir('./appEstadisticas/') {
+         sh 'ionic cordova platform rm android'
+         }  
+       }
+     }
        
   }
 }
