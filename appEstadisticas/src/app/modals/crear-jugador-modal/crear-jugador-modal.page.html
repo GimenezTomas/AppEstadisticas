@@ -43,7 +43,7 @@
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Equipos</ion-label>
-      <ion-select multiple="true" [compareWith]="compareWith">
+      <ion-select #equipo multiple="true" [compareWith]="compareWith" placeholder="Opcional">
         <ion-select-option *ngFor="let equipo of equipos" [value]="equipo">{{equipo.nombre}}</ion-select-option>
       </ion-select>
     </ion-item>

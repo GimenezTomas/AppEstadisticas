@@ -3,6 +3,7 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { AbmService } from 'src/app/services/abm.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
+import { clubService } from 'src/app/services/firebase/club.service'
 
 @Component({
   selector: 'app-crear-jugador-modal',
@@ -13,7 +14,7 @@ export class CrearJugadorModalPage implements OnInit {
   @Input() idClub:string;
   private equipos: any[] = [];
   
-  constructor(private toastcontroller:ToastController,private ABMsvc:AbmService,private AUTHsvc: AuthService,private modalController:ModalController, private jugadoresService: JugadoresService) { }
+  constructor(private toastcontroller:ToastController,private club:clubService, private ABMsvc:AbmService,private AUTHsvc: AuthService,private modalController:ModalController, private jugadoresService: JugadoresService) { }
 
   ngOnInit() {
     this.AUTHsvc.user$.subscribe(user =>{
@@ -28,7 +29,8 @@ export class CrearJugadorModalPage implements OnInit {
     })
   }
 
-  agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion):void{
+  agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion, equipo):void{
+    console.log(equipo);
     if(nombre.value =="" || apellido.value==""){
       this.presentToast('Nombre y Apellido no pueden estar vacío');
     }else{ 
@@ -41,6 +43,9 @@ export class CrearJugadorModalPage implements OnInit {
       altura : altura.value,
       posicion : posicion.value
     })
+    if(equipo == true){
+
+    }
     this.dismiss()
     }
   }
