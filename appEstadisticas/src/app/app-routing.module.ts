@@ -20,6 +20,10 @@ const routes: Routes = [
     ...canActivate(loggedIntoHome),
   },
   {
+    path: 'more',
+    loadChildren: () => import('./tab2/tab2.module').then(m => m.Tab2PageModule)
+  },
+  {
     path: 'loading',
     loadChildren: () => import('./loading/loading.module').then( m => m.LoadingPageModule)
   },
