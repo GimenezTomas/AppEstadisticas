@@ -136,6 +136,10 @@ const routes: Routes = [
   {
     path: 'entrenador',
     loadChildren: () => import('./users/entrenador/entrenador.module').then( m => m.EntrenadorPageModule)
+  },
+  {
+    path: 'modal-accion',
+    loadChildren: () => import('./modals/modal-accion/modal-accion.module').then( m => m.ModalAccionPageModule)
   }
 
 ];

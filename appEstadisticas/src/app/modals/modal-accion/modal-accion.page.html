@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Acciones</ion-title>
+    <ion-button slot="end" size="small"(click)="dismiss()" color="danger">
+      X
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-button id = "BotonGol" (click)="onClickGolHome()" color= "success">
+      + Gol
+    </ion-button>
+    <ion-button id = "BotonFalta" color= "danger" (click)="presentModalAgregarFalta()">
+    + Falta
+  </ion-button>
+  <ion-button id = "BotonGol" color= "success" (click)="onClickGolAway()">
+    + Gol
+  </ion-button>
+  </ion-item>
+</ion-content>
