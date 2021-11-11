@@ -11,6 +11,8 @@
     <ion-button (click)="startTimer(90)"> comenzar </ion-button>
     <ion-button (click)="stopTimer(90)"> detener </ion-button>
     <h1>{{time | async}}</h1>  
+    <ion-button (click)="posesionAFavor = !posesionAFavor"> cambiar posesion</ion-button>
+    <h1>POSESION LOCAL: %{{(posesionHome * 100/timer)}}    POSESION VISITANTE: %{{(posesionAway * 100 / timer)}}</h1>
     <div class="container">
       <center>
         <div class="cont" id="cont">

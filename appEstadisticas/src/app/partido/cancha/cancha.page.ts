@@ -27,6 +27,9 @@ export class CanchaPage implements OnInit {
   timer = 0
   homeScore = 0
   awayScore = 0
+  posesionHome = 0
+  posesionAway = 0
+  posesionAFavor: boolean = true
 
   constructor(private platform: Platform, private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { 
   }
@@ -53,6 +56,18 @@ export class CanchaPage implements OnInit {
     this.time.next(text)
 
     ++this.timer
+
+    if(this.posesionAFavor){
+      this.posesionHome++
+      /*let numero = (this.posesionHome * this.timer / 100)   
+      let posesionHome = Math.round(numero * 100 / this.timer)
+      console.log(numero)
+      console.log(posesionHome)*/
+    }else{
+      this.posesionAway++
+      /*let numero = (this.posesionAway * this.timer / 100) + 1
+      let posesionAway = Math.round(numero * 100 / this.timer)*/
+    }
 
     if(this.timer > duration * 60){
       this.startTimer(duration)

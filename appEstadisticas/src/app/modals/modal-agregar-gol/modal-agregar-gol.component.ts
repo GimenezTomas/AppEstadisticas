@@ -24,7 +24,7 @@ export class ModalAgregarGolComponent implements OnInit {
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true, 
-      componentProps: {data: this.jugadores/*.push(null)*/}
+      componentProps: {data: this.jugadores}
     });
     await popover.present();
 
