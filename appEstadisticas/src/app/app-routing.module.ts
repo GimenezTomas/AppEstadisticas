@@ -140,6 +140,10 @@ const routes: Routes = [
   {
     path: 'entrenador',
     loadChildren: () => import('./users/entrenador/entrenador.module').then( m => m.EntrenadorPageModule)
+  },
+  {
+    path: 'add-entrenador',
+    loadChildren: () => import('./users/add-entrenador/add-entrenador.module').then( m => m.AddEntrenadorPageModule)
   }
 
 ];
