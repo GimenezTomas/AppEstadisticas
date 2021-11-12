@@ -65,6 +65,16 @@ export class AuthService {
     
     return dataPromise;
   }
+
+  async getEntrenadores(){
+    let entrenadores = Array<Entrenador>();
+    let ent=await this.afs.collection<Entrenador>('entrenadores').get().toPromise()
+
+      ent.docs.forEach(item => {
+       entrenadores.push(item.data());
+      });
+    return entrenadores;
+  }
     
 
   async resetPassword(email: string): Promise<void> {

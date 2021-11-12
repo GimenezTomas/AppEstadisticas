@@ -19,7 +19,7 @@
       <ion-button (click)="logout()" expand="block">Log Out</ion-button>
     </ion-col>
   </ion-row>
-  <ion-row>
+  <ion-row *ngIf="this.authSvc.esClub">
     <ion-col>
       <ion-button routerLink="/add-entrenador" expand="block">Agregar Entrenador</ion-button>
     </ion-col>

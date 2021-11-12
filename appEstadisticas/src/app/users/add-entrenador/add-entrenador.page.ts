@@ -12,15 +12,18 @@ export class AddEntrenadorPage implements OnInit {
 
   constructor(public popoverController: PopoverController, private authSvc: AuthService) { }
 
-  ngOnInit() {
-  }
+  entrenadores:any
+
+  ngOnInit() {  }
 
   async presentPopover(ev: any) {
+    this.entrenadores = await this.authSvc.getEntrenadores()
     const popover = await this.popoverController.create({
       component: PopComponent,
       cssClass: 'my-custom-class',
       event: ev,
-      translucent: true
+      translucent: true, 
+      componentProps: {entrenadores: this.entrenadores}
     });
     await popover.present();
 

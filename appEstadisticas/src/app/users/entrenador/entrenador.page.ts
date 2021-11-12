@@ -14,12 +14,11 @@ export class EntrenadorPage implements OnInit {
   ngOnInit() {
   }
 
-  async registerEntrenador(name,apellido,fecha) {
+  async registerEntrenador(name,fecha) {
     try {
       this.authSvc.user$.subscribe(data => {
         this.afs.afs.collection('entrenadores').doc(data.uid).set({
         nombre: name.value,
-        apellido: apellido.value,
         fecha: fecha.value,
         email: data.email,
         club: null,
