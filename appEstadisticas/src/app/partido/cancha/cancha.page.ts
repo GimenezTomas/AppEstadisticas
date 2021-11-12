@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ModalAgregarFaltaComponent } from 'src/app/modals/modal-agregar-falta/modal-agregar-falta.component';
 import { ModalAgregarGolComponent } from 'src/app/modals/modal-agregar-gol/modal-agregar-gol.component';
 import { ModalAccionPage } from 'src/app/modals/modal-accion/modal-accion.page';
+import { TimerService } from 'src/app/services/timer.service';
 
 @Component({
   selector: 'app-cancha',
@@ -27,20 +28,21 @@ export class CanchaPage implements OnInit {
   timer = 0
   homeScore = 0
   awayScore = 0
+  interval: any
   posesionHome = 0
   posesionAway = 0
   posesionAFavor: boolean = true
 
-  constructor(private platform: Platform, private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { 
+  constructor(private timerService: TimerService, private platform: Platform, private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { 
   }
 
   ngOnInit() {
     this.openModalPartidos()
   }
 
-  startTimer(duration: number){
-    this.timer = 0
-    setInterval(() => {
+  /*startTimer(duration: number, start:number){
+    this.timer = start
+    this.interval = setInterval(() => {
       this.updateTimeValue(duration)
     }, 1000)
   }
@@ -59,20 +61,14 @@ export class CanchaPage implements OnInit {
 
     if(this.posesionAFavor){
       this.posesionHome++
-      /*let numero = (this.posesionHome * this.timer / 100)   
-      let posesionHome = Math.round(numero * 100 / this.timer)
-      console.log(numero)
-      console.log(posesionHome)*/
     }else{
       this.posesionAway++
-      /*let numero = (this.posesionAway * this.timer / 100) + 1
-      let posesionAway = Math.round(numero * 100 / this.timer)*/
     }
 
     if(this.timer > duration * 60){
-      this.startTimer(duration)
+      this.startTimer(duration, 0)
     }
-  }
+  }*/
 
   refreshMap()
   {
@@ -142,5 +138,23 @@ export class CanchaPage implements OnInit {
     })
 
     return await modal.present();
+  }
+
+  handlerTimer(){
+    this.interval.setInterval(() => {
+      if(this.posesionAFavor){
+        this.posesionHome++
+      }else{
+        this.posesionAway++
+      }
+    }, 1000)
+  }
+
+  posesionH(){
+    return Math.round(this.posesionHome * 100 / this.timerService.timer)
+  }
+
+  posesionA(){
+    return Math.round(this.posesionAway * 100 / this.timerService.timer)
   }
 }

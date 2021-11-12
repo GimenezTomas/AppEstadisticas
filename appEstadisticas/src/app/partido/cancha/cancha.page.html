@@ -8,11 +8,11 @@
         <ion-input type="number" value="0" min="0"></ion-input>
       </ion-item>
     </center>
-    <ion-button (click)="startTimer(90)"> comenzar </ion-button>
-    <ion-button (click)="stopTimer(90)"> detener </ion-button>
+    <ion-button (click)="timerService.startTimer(90, timerService.timer), handlerTimer()"> comenzar </ion-button>
+    <ion-button (click)="clearInterval(timerService.this.interval), clearInterval(interval)"> detener </ion-button>
     <h1>{{time | async}}</h1>  
     <ion-button (click)="posesionAFavor = !posesionAFavor"> cambiar posesion</ion-button>
-    <h1>POSESION LOCAL: %{{(posesionHome * 100/timer)}}    POSESION VISITANTE: %{{(posesionAway * 100 / timer)}}</h1>
+    <h1>POSESION LOCAL: %{{posesionH()}}    POSESION VISITANTE: %{{posesionA()}}</h1>
     <div class="container">
       <center>
         <div class="cont" id="cont">

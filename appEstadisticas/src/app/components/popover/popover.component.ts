@@ -16,7 +16,6 @@ export class PopoverComponent implements OnInit {
   }
 
   dismiss(jp: any){
-    console.log(jp)
     this.popoverController.dismiss({
       'dismissed': true, 'jugador': jp
     })

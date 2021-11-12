@@ -12,13 +12,17 @@ export class ModalAgregarGolComponent implements OnInit {
   @Input() coords: any
   @Input() tiempo: any
   jugador: any
+  jugadorA: any
   
   constructor(public popoverController: PopoverController, private modalController:ModalController) { }
 
   ngOnInit() {
+    console.log(this.jugadores[0])
+    this.jugador = this.jugadores[0]
+    this.jugadorA = this.jugador
   }
 
-  async presentPopover(ev: any) {
+  async presentPopover(ev: any, gol: boolean) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
       cssClass: 'my-custom-class',
@@ -28,12 +32,15 @@ export class ModalAgregarGolComponent implements OnInit {
     });
     await popover.present();
 
-    const { role } = await popover.onDidDismiss();
-    
-    popover.onDidDismiss().then((data)=>{
-      this.jugador = data.data.jugador
+    popover.onDidDismiss().then( data =>{
+      if(gol){
+        this.jugador = data.data.jugador
+      }else{
+        this.jugadorA = data.data.jugador
+      }
     })
     
+    const { role } = await popover.onDidDismiss();
   }
 
   onAgregar(){

@@ -28,6 +28,7 @@ export class ModalAccionPage implements OnInit {
   }
 
   async presentModalAgregarFalta() {
+    
     const modal = await this.modalController.create({
       component: ModalAgregarFaltaComponent,
       cssClass: 'my-custom-class'
@@ -45,7 +46,13 @@ export class ModalAccionPage implements OnInit {
         coords: this.coords
       }
     });
-    return await modal.present();
+ modal.onDidDismiss().then(data => {
+      console.log('adentro')
+      this.dismiss()
+    })
+    await modal.present();
+    
+   
   }
 
   onClickGolHome(){
