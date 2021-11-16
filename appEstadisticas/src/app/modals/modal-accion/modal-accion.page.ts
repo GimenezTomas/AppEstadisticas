@@ -10,7 +10,6 @@ import { ModalAgregarGolComponent } from '../modal-agregar-gol/modal-agregar-gol
   styleUrls: ['./modal-accion.page.scss'],
 })
 export class ModalAccionPage implements OnInit {
-  @Input() tiempo
   @Input() jugadores
   @Input() coords
   @Input() away
@@ -21,9 +20,9 @@ export class ModalAccionPage implements OnInit {
   ngOnInit() {
   }
 
-  dismiss(){
+  dismiss(gol: boolean){
     this.modalController.dismiss({
-      'dismissed': true
+      'dismissed': true, 'gol': gol
     });
   }
 
@@ -41,14 +40,12 @@ export class ModalAccionPage implements OnInit {
       component: ModalAgregarGolComponent,
       cssClass: 'my-custom-class',
       componentProps:{
-        tiempo : this.tiempo,
         jugadores: this.jugadores,
         coords: this.coords
       }
     });
- modal.onDidDismiss().then(data => {
-      console.log('adentro')
-      this.dismiss()
+    modal.onDidDismiss().then(data => {
+      this.dismiss(true)
     })
     await modal.present();
     

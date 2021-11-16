@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
+import { clear } from 'console';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimerService {
-  timer: number
+  timer: number = 0
   interval: any
-  time: any
+  posHome: number = 0
+  posAway: number = 0
+  paused: boolean = true
+  posesion: boolean = true
+  time: BehaviorSubject<String> = new BehaviorSubject('00:00')
 
   constructor() { }
 
   startTimer(duration: number, start:number){
-    this.timer = start
-    this.interval = setInterval(() => {
-      this.updateTimeValue(duration)
-    }, 1000)
+    if(this.paused){
+      this.paused = false
+      this.timer = start
+      this.interval = setInterval(() => {
+        this.updateTimeValue(duration)
+      }, 1000)
+    }
   }
 
   updateTimeValue(duration:number){
@@ -27,10 +36,29 @@ export class TimerService {
     const text = minutes + ":" + seconds
     this.time.next(text)
 
-    ++this.timer
+    this.timer++
+    this.posesionF()
 
     if(this.timer > duration * 60){
       this.startTimer(duration, 0)
+    }
+  }
+
+  stop(){
+    this.paused = true
+    clearInterval(this.interval)
+  }
+
+  cambiarPos(){
+    this.posesion = !this.posesion
+  }
+
+  posesionF(){
+    if(this.posesion){
+      this.posHome++
+    }else{
+      this.posAway++
+      console.log(this.posAway)
     }
   }
 

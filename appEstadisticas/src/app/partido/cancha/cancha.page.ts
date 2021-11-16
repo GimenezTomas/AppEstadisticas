@@ -1,11 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { ModalElegirPartidoPage } from 'src/app/modals/modal-elegir-partido/modal-elegir-partido.page';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 import { EquipoService } from '../../services/firebase/equipo.service';
 import { BehaviorSubject } from 'rxjs';
-import { ModalAgregarFaltaComponent } from 'src/app/modals/modal-agregar-falta/modal-agregar-falta.component';
-import { ModalAgregarGolComponent } from 'src/app/modals/modal-agregar-gol/modal-agregar-gol.component';
 import { ModalAccionPage } from 'src/app/modals/modal-accion/modal-accion.page';
 import { TimerService } from 'src/app/services/timer.service';
 
@@ -24,14 +22,8 @@ export class CanchaPage implements OnInit {
   suplentes: any = []
   width = 0
   height = 0
-  time: BehaviorSubject<String> = new BehaviorSubject('00:00')
-  timer = 0
   homeScore = 0
   awayScore = 0
-  interval: any
-  posesionHome = 0
-  posesionAway = 0
-  posesionAFavor: boolean = true
 
   constructor(private timerService: TimerService, private platform: Platform, private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { 
   }
@@ -39,36 +31,6 @@ export class CanchaPage implements OnInit {
   ngOnInit() {
     this.openModalPartidos()
   }
-
-  /*startTimer(duration: number, start:number){
-    this.timer = start
-    this.interval = setInterval(() => {
-      this.updateTimeValue(duration)
-    }, 1000)
-  }
-
-  updateTimeValue(duration:number){
-    let minutes:any = this.timer / 60
-    let seconds:any = this.timer % 60
-
-    minutes = String('0' + Math.floor(minutes)).slice(-2)
-    seconds = String('0' + Math.floor(seconds)).slice(-2)
-    
-    const text = minutes + ":" + seconds
-    this.time.next(text)
-
-    ++this.timer
-
-    if(this.posesionAFavor){
-      this.posesionHome++
-    }else{
-      this.posesionAway++
-    }
-
-    if(this.timer > duration * 60){
-      this.startTimer(duration, 0)
-    }
-  }*/
 
   refreshMap()
   {
@@ -123,7 +85,6 @@ export class CanchaPage implements OnInit {
       component: ModalAccionPage,
       cssClass: 'my-custom-class',
       componentProps:{
-        tiempo : this.timer,
         jugadores: this.titulares,
         coords: [x1,y1,x2,y2],
         home: this.homeScore,
@@ -134,27 +95,18 @@ export class CanchaPage implements OnInit {
     modal.onDidDismiss().then(async (data) => {
       this.homeScore = data.data.homeScore 
       this.awayScore = data.data.awayScore
+      this.timerService.startTimer(90, this.timerService.timer)
       this.dismiss()
     })
 
     return await modal.present();
   }
 
-  handlerTimer(){
-    this.interval.setInterval(() => {
-      if(this.posesionAFavor){
-        this.posesionHome++
-      }else{
-        this.posesionAway++
-      }
-    }, 1000)
-  }
-
   posesionH(){
-    return Math.round(this.posesionHome * 100 / this.timerService.timer)
+    return Math.round(this.timerService.posHome * 100 / this.timerService.timer)
   }
 
   posesionA(){
-    return Math.round(this.posesionAway * 100 / this.timerService.timer)
+    return Math.round(this.timerService.posAway * 100 / this.timerService.timer)
   }
 }
