@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 
 export class AbmService {
   public afs;
-  constructor() { 
+  constructor(/*private afs: AngularFirestore*/) { 
     this.afs=firebase.default.firestore()
   }  
   

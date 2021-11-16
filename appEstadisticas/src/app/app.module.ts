@@ -20,11 +20,13 @@ import firebase from 'firebase/app';
 import { CommonModule } from '@angular/common';
 import { ModalModificarDeporteComponent } from './modal-modificar-deporte/modal-modificar-deporte.component';
 import { FormsModule } from '@angular/forms';
+import { PopComponent } from './components/pop/pop.component';
 import { PopoverComponent } from './components/popover/popover.component';
 
 @NgModule({
-  declarations: [AppComponent, ModalModificarDeporteComponent, PopoverComponent],
-  entryComponents: [PopoverComponent],
+  declarations: [AppComponent, ModalModificarDeporteComponent, PopoverComponent,PopComponent],
+  entryComponents: [PopoverComponent, PopComponent],
+
   imports: [BrowserModule, FormsModule, CommonModule, AngularFireModule.initializeApp(environment.firebaseConfig),IonicModule.forRoot(), AppRoutingModule, FontAwesomeModule,AngularFireAuthModule],
   providers: [
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
