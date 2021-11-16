@@ -43,8 +43,8 @@
     </ion-item>
     <ion-item class="form">
       <ion-label class="tit">Equipos</ion-label>
-      <ion-select #equipo multiple="true" [compareWith]="compareWith" placeholder="Opcional">
-        <ion-select-option *ngFor="let equipo of equipos" [value]="equipo">{{equipo.nombre}}</ion-select-option>
+      <ion-select #equipo multiple="true" [compareWith]="compareWith" placeholder="Opcional" ngDefaultControl [(ngModel)]="equiposSelec" (ionChange)="cambio();">
+        <ion-select-option *ngFor="let equipo of equipos" [value]=equipo>{{equipo.nombre}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-button (click)="agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion)" class="button button-block button-possitive">Agregar</ion-button>

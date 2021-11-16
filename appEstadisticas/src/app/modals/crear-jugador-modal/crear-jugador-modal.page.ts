@@ -13,6 +13,7 @@ import { clubService } from 'src/app/services/firebase/club.service'
 export class CrearJugadorModalPage implements OnInit {
   @Input() idClub:string;
   private equipos: any[] = [];
+  equiposSelec:String[];
   
   constructor(private toastcontroller:ToastController,private club:clubService, private ABMsvc:AbmService,private AUTHsvc: AuthService,private modalController:ModalController, private jugadoresService: JugadoresService) { }
 
@@ -29,8 +30,7 @@ export class CrearJugadorModalPage implements OnInit {
     })
   }
 
-  agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion, equipo):void{
-    console.log(equipo);
+  agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion):void{
     if(nombre.value =="" || apellido.value==""){
       this.presentToast('Nombre y Apellido no pueden estar vacío');
     }else{ 
@@ -43,9 +43,6 @@ export class CrearJugadorModalPage implements OnInit {
       altura : altura.value,
       posicion : posicion.value
     })
-    if(equipo == true){
-
-    }
     this.dismiss()
     }
   }
@@ -62,5 +59,8 @@ export class CrearJugadorModalPage implements OnInit {
       duration: 3000
     });
     toast.present();
+  }
+  cambio(){
+    console.log(this.equiposSelec)
   }
 }
