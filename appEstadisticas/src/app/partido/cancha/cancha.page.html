@@ -1,62 +1,37 @@
 <ion-content scrollY=false>
   <ion-content>
     <center>
-  
-    <ion-item id="marcador">
-    <ion-label>HOME</ion-label>
-    <ion-input type="number" value="0" min="0"></ion-input>
-    <ion-label>AWAY</ion-label>
-    <ion-input type="number" value="0" min="0"></ion-input>
-  </ion-item>
-  </center>
-  
-
+      <ion-item id="marcador">
+        <ion-label>HOME</ion-label>
+        <ion-input type="number" value="0" min="0"></ion-input>
+        <ion-label>AWAY</ion-label>
+        <ion-input type="number" value="0" min="0"></ion-input>
+      </ion-item>
+    </center>
     <ion-button (click)="startTimer(90)"> comenzar </ion-button>
+    <ion-button (click)="stopTimer(90)"> detener </ion-button>
     <h1>{{time | async}}</h1>  
-    <ion-item>
-      <ion-button id = "BotonGol" color= "success" (click)="onClickGolHome()">
-        + Gol
-      </ion-button>
-      <ion-button id = "BotonFalta" color= "danger" (click)="presentModalAgregarFalta()">
-      + Falta
-    </ion-button>
-    <ion-button id = "BotonGol" color= "success" (click)="onClickGolAway()">
-      + Gol
-    </ion-button>
-    </ion-item>
-      <div class="container">
-        <center>
-          <div class="cont" id="cont">
-            <img id="cancha" usemap="#workmap" class="imagen" src="assets/img/footballcourt.jpg">
-            <map *ngIf="refresh" name="workmap">
-              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((1-1)/10)}},{{width*(i/10)}},{{height*(1/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((2-1)/10)}},{{width*(i/10)}},{{height*(2/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((3-1)/10)}},{{width*(i/10)}},{{height*(3/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((4-1)/10)}},{{width*(i/10)}},{{height*(4/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((5-1)/10)}},{{width*(i/10)}},{{height*(5/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((6-1)/10)}},{{width*(i/10)}},{{height*(6/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((7-1)/10)}},{{width*(i/10)}},{{height*(7/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((8-1)/10)}},{{width*(i/10)}},{{height*(8/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((9-1)/10)}},{{width*(i/10)}},{{height*(9/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-              <area href="www.goo" shape="rect" coords="{{width*((i-1)/10)}},{{height*((10-1)/10)}},{{width*(i/10)}},{{height*(10/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-            </map>
-          </div>
-        </center>
-  
-  
+    <ion-button (click)="posesionAFavor = !posesionAFavor"> cambiar posesion</ion-button>
+    <h1>POSESION LOCAL: %{{(posesionHome * 100/timer)}}    POSESION VISITANTE: %{{(posesionAway * 100 / timer)}}</h1>
+    <div class="container">
+      <center>
+        <div class="cont" id="cont">
+          <img id="cancha" usemap="#workmap" class="imagen" src="assets/img/footballcourt.jpg">
+          <map *ngIf="refresh" name="workmap">
+            <area (click)="presentModalAcciones(width*((i-1)/10), height*((1-1)/10), width*(i/10), height*(1/10))" shape="rect" coords="{{width*((i-1)/10)}},{{height*((1-1)/10)}},{{width*(i/10)}},{{height*(1/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+            <area (click)="presentModalAcciones(width*((i-2)/10), height*((2-1)/10), width*(i/10), height*(2/10))" shape="rect" coords="{{width*((i-1)/10)}},{{height*((2-1)/10)}},{{width*(i/10)}},{{height*(2/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+            <area (click)="presentModalAcciones(width*((i-3)/10), height*((3-1)/10), width*(i/10), height*(3/10))" shape="rect" coords="{{width*((i-1)/10)}},{{height*((3-1)/10)}},{{width*(i/10)}},{{height*(3/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+            <area (click)="presentModalAcciones(width*((i-4)/10), height*((4-1)/10), width*(i/10), height*(4/10))" shape="rect" coords="{{width*((i-1)/10)}},{{height*((4-1)/10)}},{{width*(i/10)}},{{height*(4/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+            <area (click)="presentModalAcciones(width*((i-5)/10), height*((5-1)/10), width*(i/10), height*(5/10))" shape="rect" coords="{{width*((i-1)/10)}},{{height*((5-1)/10)}},{{width*(i/10)}},{{height*(5/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+            <area (click)="presentModalAcciones(width*((i-6)/10), height*((6-1)/10), width*(i/10), height*(6/10))" shape="rect" coords="{{width*((i-1)/10)}},{{height*((6-1)/10)}},{{width*(i/10)}},{{height*(6/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+            <area (click)="presentModalAcciones(width*((i-7)/10), height*((7-1)/10), width*(i/10), height*(7/10))" shape="rect" coords="{{width*((i-1)/10)}},{{height*((7-1)/10)}},{{width*(i/10)}},{{height*(7/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+            <area (click)="presentModalAcciones(width*((i-8)/10), height*((8-1)/10), width*(i/10), height*(8/10))" shape="rect" coords="{{width*((i-1)/10)}},{{height*((8-1)/10)}},{{width*(i/10)}},{{height*(8/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+            <area (click)="presentModalAcciones(width*((i-9)/10), height*((9-1)/10), width*(i/10), height*(9/10))" shape="rect" coords="{{width*((i-1)/10)}},{{height*((9-1)/10)}},{{width*(i/10)}},{{height*(9/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+            <area (click)="presentModalAcciones(width*((i-10)/10), height*((10-1)/10), width*(i/10), height*(10/10))" shape="rect" coords="{{width*((i-1)/10)}},{{height*((10-1)/10)}},{{width*(i/10)}},{{height*(10/10)}}" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+          </map>
         </div>
-        <div>
-          <ion-button color= "danger">
-            + Falta
-          </ion-button>
-        </div>
-        <div>
-        </div>
-        <div>
-        </div>
-  </ion-content>  
-  <div>ss</div>
-  <ion-button (click)="startTimer(90)"></ion-button>
-  <div>{{time | async}}</div>  
+      </center>
+    </div>
+  </ion-content>    
   <app-drawer (openStateChanged)="toggleBackdrop($event)" [titulares]="titulares" [suplentes]="suplentes" #drawer></app-drawer>
 </ion-content>

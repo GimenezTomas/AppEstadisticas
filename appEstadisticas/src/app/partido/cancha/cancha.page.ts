@@ -6,12 +6,14 @@ import { EquipoService } from '../../services/firebase/equipo.service';
 import { BehaviorSubject } from 'rxjs';
 import { ModalAgregarFaltaComponent } from 'src/app/modals/modal-agregar-falta/modal-agregar-falta.component';
 import { ModalAgregarGolComponent } from 'src/app/modals/modal-agregar-gol/modal-agregar-gol.component';
+import { ModalAccionPage } from 'src/app/modals/modal-accion/modal-accion.page';
 
 @Component({
   selector: 'app-cancha',
   templateUrl: './cancha.page.html',
   styleUrls: ['./cancha.page.scss'],
 })
+
 export class CanchaPage implements OnInit {
   refresh = false
   backdropVisible = false 
@@ -22,9 +24,12 @@ export class CanchaPage implements OnInit {
   width = 0
   height = 0
   time: BehaviorSubject<String> = new BehaviorSubject('00:00')
-  timer: number
+  timer = 0
   homeScore = 0
   awayScore = 0
+  posesionHome = 0
+  posesionAway = 0
+  posesionAFavor: boolean = true
 
   constructor(private platform: Platform, private jugadoresService: JugadoresService, private equipo:EquipoService, private modalController: ModalController) { 
   }
@@ -51,6 +56,18 @@ export class CanchaPage implements OnInit {
     this.time.next(text)
 
     ++this.timer
+
+    if(this.posesionAFavor){
+      this.posesionHome++
+      /*let numero = (this.posesionHome * this.timer / 100)   
+      let posesionHome = Math.round(numero * 100 / this.timer)
+      console.log(numero)
+      console.log(posesionHome)*/
+    }else{
+      this.posesionAway++
+      /*let numero = (this.posesionAway * this.timer / 100) + 1
+      let posesionAway = Math.round(numero * 100 / this.timer)*/
+    }
 
     if(this.timer > duration * 60){
       this.startTimer(duration)
@@ -104,36 +121,26 @@ export class CanchaPage implements OnInit {
   dismiss(){
     this.mimodal.dismiss()
   }
-
-  async presentModalAgregarFalta() {
+  
+  async presentModalAcciones(x1:number, y1:number, x2:number, y2:number){
     const modal = await this.modalController.create({
-      component: ModalAgregarFaltaComponent,
-      cssClass: 'my-custom-class'
-    });
-    return await modal.present();
-  }
-
-  async presentModalAgregarGol(){
-    const modal = await this.modalController.create({
-      component: ModalAgregarGolComponent,
+      component: ModalAccionPage,
       cssClass: 'my-custom-class',
       componentProps:{
-        tiempo : this.timer
+        tiempo : this.timer,
+        jugadores: this.titulares,
+        coords: [x1,y1,x2,y2],
+        home: this.homeScore,
+        away: this.awayScore
       }
     });
+
+    modal.onDidDismiss().then(async (data) => {
+      this.homeScore = data.data.homeScore 
+      this.awayScore = data.data.awayScore
+      this.dismiss()
+    })
+
     return await modal.present();
-  }
-
-  onClickGolHome(){
-    this.presentModalAgregarGol();
-    this.homeScore=this.homeScore+1;
-    console.log("HomeScore:",this.homeScore);
-  }
-
-  onClickGolAway(){
-    this.presentModalAgregarGol();
-    this.awayScore=this.awayScore+1;
-    console.log("AwayScore: ",this.awayScore);
-    
   }
 }
