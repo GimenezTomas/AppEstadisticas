@@ -22,7 +22,7 @@ export class ModalAccionPage implements OnInit {
 
   dismiss(gol: boolean){
     this.modalController.dismiss({
-      'dismissed': true, 'gol': gol
+      'dismissed': true, 'gol': gol, home: this.home, away: this.away
     });
   }
 

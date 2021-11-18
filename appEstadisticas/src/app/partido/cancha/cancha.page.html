@@ -2,10 +2,8 @@
   <ion-content>
     <center>
       <ion-item id="marcador">
-        <ion-label>HOME</ion-label>
-        <ion-input type="number" value="0" min="0"></ion-input>
-        <ion-label>AWAY</ion-label>
-        <ion-input type="number" value="0" min="0"></ion-input>
+        <ion-label>HOME: {{homeScore}}</ion-label>
+        <ion-label>AWAY: {{awayScore}}</ion-label>
       </ion-item>
     </center>
     <ion-button (click)="timerService.startTimer(90, this.timerService.timer)"> comenzar </ion-button>

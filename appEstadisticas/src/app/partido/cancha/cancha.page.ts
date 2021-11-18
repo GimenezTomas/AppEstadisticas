@@ -93,8 +93,9 @@ export class CanchaPage implements OnInit {
     });
 
     modal.onDidDismiss().then(async (data) => {
-      this.homeScore = data.data.homeScore 
-      this.awayScore = data.data.awayScore
+      console.log(data.data.home)
+      this.homeScore = data.data.home 
+      this.awayScore = data.data.away
       this.timerService.startTimer(90, this.timerService.timer)
       this.dismiss()
     })
