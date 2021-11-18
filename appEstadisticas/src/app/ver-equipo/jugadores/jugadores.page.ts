@@ -4,13 +4,12 @@ import { modalController } from '@ionic/core';
 import 'firebase/firestore'
 import { type } from 'os';
 import { ModalBorrarJugadorPage } from 'src/app/modals/modal-borrar-jugador/modal-borrar-jugador.page';
-import { ModalCrearJugadorComponent } from 'src/app/modals/modal-crear-jugador/modal-crear-jugador.component';
 import { ModalEditarPage } from 'src/app/modals/modal-editar/modal-editar.page';
 import { AbmService } from 'src/app/services/abm.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 import { EstadisticasService } from 'src/app/services/firebase/estadisticas.service';
-
+import { CrearJugadorModalPage } from 'src/app/modals/crear-jugador-modal/crear-jugador-modal.page';
 
 @Component({
   selector: 'app-jugadores',
@@ -38,7 +37,8 @@ export class JugadoresPage implements OnInit {
       })
     })
   }
-
+  // vistas entrenador, por equipo y de todo el club
+  // añadir a un equipo automaticamente(multiples equipos) añadir y sacar de los equipos existentes 
   borrar(idJugador:string) {
     this.jugadoresService.borrar(this.idClub, idJugador);
     this.actualizarJugadores();
@@ -60,7 +60,7 @@ export class JugadoresPage implements OnInit {
   }
   async openModalAgregarJugador(){
     const modal = await this.modalController.create({
-      component: ModalCrearJugadorComponent,
+      component: CrearJugadorModalPage,
       componentProps: {
         'idClub' : this.idClub
       }

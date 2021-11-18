@@ -51,4 +51,12 @@ export class EstadisticasService {
       });  
     });
   }
+  
+  agregarEquipo(idClub:string, idEquipo:string, idPartido:string, estadisticas:object){
+    for(let estadistica in estadisticas){
+      this.ABMsvc.afs.collection("clubes").doc(idClub).collection("equipos").doc(idEquipo).collection("partidos").doc(idPartido).update({
+        ['estadisticas.'+ estadistica] : estadisticas[estadistica] 
+      });
+    }
+  }
 }

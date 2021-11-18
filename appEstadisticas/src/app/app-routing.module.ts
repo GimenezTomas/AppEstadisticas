@@ -97,7 +97,12 @@ const routes: Routes = [
   {
     path: 'modal-borrar-jugador',
     loadChildren: () => import('./modals/modal-borrar-jugador/modal-borrar-jugador.module').then( m => m.ModalBorrarJugadorPageModule)
+  },
+  {
+    path: 'crear-jugador-modal',
+    loadChildren: () => import('./modals/crear-jugador-modal/crear-jugador-modal.module').then( m => m.CrearJugadorModalPageModule)
   }
+
 
 ];
 @NgModule({
