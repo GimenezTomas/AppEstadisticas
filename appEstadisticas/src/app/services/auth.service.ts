@@ -69,14 +69,20 @@ export class AuthService {
 
   async getEntrenadores(){
     let entrenadores = Array<Entrenador>();
-    let ent=await this.afs.collection<Entrenador>('entrenadores').get().toPromise()
+    let ent = await this.afs.collection<Entrenador>('entrenadores').get().toPromise()
 
       ent.docs.forEach(item => {
-        let e:Entrenador=item.data();
+        let e:Entrenador = item.data();
         e.uid = item.id;
-       entrenadores.push(e);
+        entrenadores.push(e);
       });
     return entrenadores;
+  }
+
+  async getEquipos(){
+    let equipos = Array();
+    this.afs.collection('clubes').doc(this.uid).collection<Equipo>('equipos').get().toPromise();
+    
   }
     
 
@@ -91,8 +97,8 @@ export class AuthService {
   async loginGoogle(): Promise<User> {
     try {
       const { user } = await this.afAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
-      this.updateUserData(user);
       this.uid = user.uid;
+      this.updateUserData(user);
       sessionStorage.setItem("uid", user.uid);
       return user;
     } catch (error) {
@@ -113,8 +119,8 @@ export class AuthService {
   async login(email: string, password: string): Promise<User> {
     try {
       const { user } = await this.afAuth.signInWithEmailAndPassword(email, password);
-      this.updateUserData(user);
       this.uid = user.uid;
+      this.updateUserData(user);
       sessionStorage.setItem("uid", user.uid);
       return user;
     } catch (error) {
@@ -149,7 +155,6 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       emailVerified: user.emailVerified,
-      displayName: user.displayName,
     };
 
     return userRef.set(data, { merge: true });

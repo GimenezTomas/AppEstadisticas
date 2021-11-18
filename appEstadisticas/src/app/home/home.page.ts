@@ -3,8 +3,8 @@ import { MenuController } from '@ionic/angular'
 import { IonInfiniteScroll } from '@ionic/angular'; 
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
-import { PopoverComponent } from '../components/popover/popover.component';
 import { AuthService } from '../services/auth.service';
+import { EquiposComponent } from "src/app/components/equipos/equipos.component";
 
 
 
@@ -16,21 +16,26 @@ import { AuthService } from '../services/auth.service';
 export class HomePage implements OnInit {
 
   noticias: any[] = Array(20)
+  equipos: any;
+  equipo: any;
 
   constructor(private menu: MenuController, private router: Router, public popoverController: PopoverController, private authSvc: AuthService) { }
 
   async presentPopover(ev: any) {
-    console.log("entro")
+    this.equipos = await this.authSvc.getEquipos()
     const popover = await this.popoverController.create({
-      component: PopoverComponent,
+      component: EquiposComponent,
       cssClass: 'my-custom-class',
       event: ev,
-      translucent: true
+      translucent: true,
+      componentProps: {equipos: this.equipos}
     });
     await popover.present();
 
-    const { role } = await popover.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
+    popover.onDidDismiss().then((data)=>{
+      this.equipo = data.data.equipo
+    })
+
   }
 
   openFirst() {
