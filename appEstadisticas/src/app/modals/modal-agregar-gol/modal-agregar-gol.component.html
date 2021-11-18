@@ -13,8 +13,8 @@
     <ion-label>
       Jugador que hizo el Gol
     </ion-label>
-    <ion-button (click)="presentPopover($event)" class="equipo" fill="clear">
-      <ion-label>{{jugadores[0].nombre}} {{jugadores[0].apellido}} | {{jugadores[0].nCamiseta}}</ion-label>
+    <ion-button (click)="presentPopover($event, true)" class="equipo" fill="clear">
+      <ion-label>{{jugador.nombre}} {{jugador.apellido}} | {{jugador.nCamiseta}}</ion-label>
       <ion-icon name="chevron-down-outline"></ion-icon>
     </ion-button>
   </ion-item>
@@ -30,14 +30,18 @@
     <div>
       <slot>
         <ion-label>MINUTO</ion-label>
-        <ion-input>{{tiempo}}</ion-input>
+        <ion-input>{{timerService.timer}}</ion-input>
       </slot>
     </div>  
   </ion-item>
   <ion-item>
-    <ion-input>
+    <ion-label>
         Jugador Asistidor
-    </ion-input>
+    </ion-label>
+    <ion-button (click)="presentPopover($event, false)" class="equipo" fill="clear">
+      <ion-label>{{jugadorA.nombre}} {{jugadorA.apellido}} | {{jugadorA.nCamiseta}}</ion-label>
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </ion-button>
   </ion-item>
   <ion-item>
     <ion-button fill="clear">

@@ -106,12 +106,6 @@ const routes: Routes = [
     data: {authGuardPipe: redirectNoVerified}
   },
   {
-    path: 'cancha',
-    loadChildren: () => import('./cancha/cancha.module').then( m => m.CanchaPageModule),
-    canActivate: [AngularFireAuthGuard],
-    data: {authGuardPipe: redirectNoVerified}
-  },
-  {
     path: 'modal-elegir-partido',
     loadChildren: () => import('./modals/modal-elegir-partido/modal-elegir-partido.module').then( m => m.ModalElegirPartidoPageModule),
     canActivate: [AngularFireAuthGuard],
