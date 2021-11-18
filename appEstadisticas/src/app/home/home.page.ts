@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { EquiposComponent } from "src/app/components/equipos/equipos.component";
+import { EquipoService } from '../services/firebase/equipo.service';
 
 
 
@@ -19,10 +20,10 @@ export class HomePage implements OnInit {
   equipos: any;
   equipo: any;
 
-  constructor(private menu: MenuController, private router: Router, public popoverController: PopoverController, private authSvc: AuthService) { }
+  constructor(private menu: MenuController, private router: Router, public popoverController: PopoverController, public equipoService: EquipoService, public authSvc: AuthService) { }
 
   async presentPopover(ev: any) {
-    this.equipos = await this.authSvc.getEquipos()
+    this.equipos = await this.equipoService.getNombresEquipos(this.authSvc.uid);
     const popover = await this.popoverController.create({
       component: EquiposComponent,
       cssClass: 'my-custom-class',
@@ -33,7 +34,7 @@ export class HomePage implements OnInit {
     await popover.present();
 
     popover.onDidDismiss().then((data)=>{
-      this.equipo = data.data.equipo
+      this.equipo = data.data.team
     })
 
   }

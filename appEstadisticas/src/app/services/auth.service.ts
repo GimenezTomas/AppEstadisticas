@@ -79,13 +79,6 @@ export class AuthService {
     return entrenadores;
   }
 
-  async getEquipos(){
-    let equipos = Array();
-    this.afs.collection('clubes').doc(this.uid).collection<Equipo>('equipos').get().toPromise();
-    
-  }
-    
-
   async resetPassword(email: string): Promise<void> {
     try {
       return this.afAuth.sendPasswordResetEmail(email);

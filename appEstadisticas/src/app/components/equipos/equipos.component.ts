@@ -14,7 +14,7 @@ export class EquiposComponent implements OnInit {
 
   dismiss(eqp: any){
     this.popoverController.dismiss({
-      'dismissed': true, 'equipo': eqp
+      'dismissed': true, 'team': eqp
     })
   }
 

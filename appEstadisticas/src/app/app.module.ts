@@ -22,10 +22,11 @@ import { ModalModificarDeporteComponent } from './modal-modificar-deporte/modal-
 import { FormsModule } from '@angular/forms';
 import { PopComponent } from './components/pop/pop.component';
 import { PopoverComponent } from './components/popover/popover.component';
+import { EquiposComponent } from './components/equipos/equipos.component';
 
 @NgModule({
-  declarations: [AppComponent, ModalModificarDeporteComponent, PopoverComponent,PopComponent],
-  entryComponents: [PopoverComponent, PopComponent],
+  declarations: [AppComponent, ModalModificarDeporteComponent, PopoverComponent,PopComponent,EquiposComponent],
+  entryComponents: [PopoverComponent, PopComponent,EquiposComponent],
 
   imports: [BrowserModule, FormsModule, CommonModule, AngularFireModule.initializeApp(environment.firebaseConfig),IonicModule.forRoot(), AppRoutingModule, FontAwesomeModule,AngularFireAuthModule],
   providers: [
