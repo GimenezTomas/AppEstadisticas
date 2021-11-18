@@ -24,6 +24,9 @@ export class EntrenadorPage implements OnInit {
         club: null,
       }).then((docref)=> console.log('guardado'))
       .catch((error)=>console.error(error))
+        this.afs.afs.collection('users').doc(data.uid).update({
+          displayName: name.value
+        }).catch((error)=>console.error(error))
       })
     } 
     catch (error) {
