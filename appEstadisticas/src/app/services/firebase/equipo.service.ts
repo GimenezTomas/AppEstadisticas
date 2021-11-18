@@ -49,7 +49,7 @@ export class EquipoService {
 
   getNombresEquipos(idClub: string){ //se puede obtener solo los nombres??
     let nombres = []
-    this.ABMsvc.afs.collection("clubes").doc('RIGtETEOcR9WyBN9MLL1').collection('equipos')
+    this.ABMsvc.afs.collection("clubes").doc(idClub).collection('equipos')
     .get()
     .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {

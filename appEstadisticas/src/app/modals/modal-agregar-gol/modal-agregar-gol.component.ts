@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { ArcoComponent } from 'src/app/components/arco/arco.component';
 import { PopoverComponent } from 'src/app/components/popover/popover.component';
 import { TimerService } from 'src/app/services/timer.service';
 
@@ -41,6 +42,21 @@ export class ModalAgregarGolComponent implements OnInit {
     })
     
     const { role } = await popover.onDidDismiss();
+  }
+
+  async presentArco(ev: any) {
+    const modal = await this.modalController.create({
+      component: ArcoComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {data: this.jugadores}
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then( data =>{
+      
+    })
+    
+    const { role } = await modal.onDidDismiss();
   }
 
   onAgregar(){
