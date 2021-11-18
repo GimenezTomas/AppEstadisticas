@@ -11,6 +11,7 @@ export class EquipoService {
 
   constructor( private ABMsvc:AbmService, private jugadoresService: JugadoresService) {}
 
+  
   crearEquipo(nombre: string, deporte: string, id: string){
     this.ABMsvc.afs.collection('clubes').doc(id).collection('equipos').doc(nombre).set({
       nombre: nombre,
@@ -76,5 +77,17 @@ export class EquipoService {
     });  
     console.log(jugadores)
     return jugadores 
+  }
+
+  agregarJugadorEquipo(idClub: any, idEquipo: any, body: any){
+    console.log(body)
+    this.ABMsvc.afs.collection("clubes").doc(idClub).collection('equipos').doc(idEquipo).update({
+      jugadores: firebase.firestore.FieldValue.arrayUnion(body)
+    }).then(() => {
+        console.log("Document written");
+    })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+    });
   }
 }

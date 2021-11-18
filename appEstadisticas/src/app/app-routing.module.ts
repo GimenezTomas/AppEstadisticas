@@ -86,6 +86,19 @@ const routes: Routes = [
     loadChildren: () => import('./modals/modal-elegir-partido/modal-elegir-partido.module').then( m => m.ModalElegirPartidoPageModule)
   },
   {
+    path: 'modal-editar',
+    loadChildren: () => import('./modals/modal-editar/modal-editar.module').then( m => m.ModalEditarPageModule)
+  },
+  {
+    path: 'modal-jugadores',
+    loadChildren: () => import('./modals/modal-jugadores/modal-jugadores.module').then( m => m.ModalJugadoresPageModule)
+
+  },
+  {
+    path: 'modal-borrar-jugador',
+    loadChildren: () => import('./modals/modal-borrar-jugador/modal-borrar-jugador.module').then( m => m.ModalBorrarJugadorPageModule)
+  },
+  {
     path: 'crear-jugador-modal',
     loadChildren: () => import('./modals/crear-jugador-modal/crear-jugador-modal.module').then( m => m.CrearJugadorModalPageModule)
   }
