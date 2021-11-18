@@ -7,6 +7,7 @@
     </ion-button>
   </ion-toolbar>
 </ion-header>
+
 <ion-content class="pageBody">
   <ion-card class="card2" routerLink="/partidos/patido-home">
     <ion-item>
@@ -41,7 +42,7 @@
   </ion-card>
 
  
-  <ion-card id="crearDeporte" routerLink="/crear-deporte" class="cards">
+  <ion-card id="crearDeporte" *ngIf="this.authSvc.esClub" routerLink="/crear-deporte" class="cards">
     <ion-img src="./assets/depor.png"></ion-img>
     <ion-card-header style="display: flex;">
       <ion-item>
@@ -57,7 +58,7 @@
   </ion-card>
   
 
-  <ion-card id="crearEquipo" routerLink="/crear-equipo" class="cards">
+  <ion-card id="crearEquipo" *ngIf="this.authSvc.esClub" routerLink="/crear-equipo" class="cards">
     <ion-img src="./assets/equipo3.jpg"></ion-img>
     <ion-card-header style="display: flex;">
       <ion-item>
@@ -70,7 +71,7 @@
     </ion-card-content>
   </ion-card>
   
-  <ion-item *ngFor="let noticia of noticias; let i = index;">
+  <!--<ion-item *ngFor="let noticia of noticias; let i = index;">
     <h3>Noticias {{ i }} </h3>
   </ion-item>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
@@ -79,4 +80,4 @@
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-</ion-content>
+</ion-content>-->

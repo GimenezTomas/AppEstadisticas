@@ -14,5 +14,14 @@
     <ion-label>Entrenadores</ion-label>
     <ion-icon name="chevron-down-outline"></ion-icon>
   </ion-button>
+  <div class="linea"></div>
+    <ion-label id="names" *ngIf="entrenador != null">{{entrenador.nombre}}</ion-label>
+  <div class="linea1"></div>
+  <ion-row>
+    <ion-col>
+      <ion-button (click)="agregarEntrendorClub()" routerLink="/more" expand="block">Agregar Entrenador</ion-button>
+    </ion-col>
+  </ion-row>
+  
 
 </ion-content>

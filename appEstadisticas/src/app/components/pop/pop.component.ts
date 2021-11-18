@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-pop',
@@ -8,8 +10,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PopComponent implements OnInit {
   @Input()entrenadores;
 
-  constructor() { }
+  constructor(public popoverController: PopoverController) { }
 
   ngOnInit() { }
+
+  dismiss(entr: any){
+    this.popoverController.dismiss({
+      'dismissed': true, 'trainer': entr
+    })
+  }
 
 }

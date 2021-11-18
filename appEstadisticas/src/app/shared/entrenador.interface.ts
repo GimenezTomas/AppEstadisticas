@@ -4,4 +4,5 @@ export interface Entrenador {
     apellido: string;
     email: string;
     fecha: string;
+    uid: string;
 }

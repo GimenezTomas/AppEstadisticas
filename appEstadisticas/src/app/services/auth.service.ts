@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore,AngularFirestoreDocument } from "@angular/fire/firestore";
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
+import { database } from 'firebase-admin';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Entrenador } from '../shared/entrenador.interface';
@@ -71,7 +72,9 @@ export class AuthService {
     let ent=await this.afs.collection<Entrenador>('entrenadores').get().toPromise()
 
       ent.docs.forEach(item => {
-       entrenadores.push(item.data());
+        let e:Entrenador=item.data();
+        e.uid = item.id;
+       entrenadores.push(e);
       });
     return entrenadores;
   }

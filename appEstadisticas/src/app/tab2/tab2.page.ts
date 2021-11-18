@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AbmService } from '../services/abm.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -8,7 +9,14 @@ import { AuthService } from '../services/auth.service';
 })
 export class Tab2Page {
 
-  constructor( private authSvc: AuthService) {}
+  nombre: any;
+  
+  constructor( private authSvc: AuthService, private afs: AbmService) { 
+    this.authSvc.user$.subscribe( async data => {
+      let usuarios = await this.afs.afs.collection('users').doc(data.uid).get();
+      this.nombre = usuarios.data().displayName;
+    });
+  }
 
   async logout(){
     this.authSvc.logout();
