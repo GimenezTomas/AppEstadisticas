@@ -1,5 +1,7 @@
 import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
+import { AbmService } from 'src/app/services/abm.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 
 @Component({
@@ -9,18 +11,28 @@ import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 })
 export class ModalEditarPage implements OnInit {
   @Input() idClub:string;
-  @Input() jugador:object;
+  @Input() jugador:any;
   @Input() idJugador:string;
   @Input() jugadorN:object;
+  private equiposSelec:Array<string>;
+  private equipos = [];
+  private equiposAux;
   
   
-  constructor(private toastcontroller:ToastController,private modalController: ModalController, private jugadoresService: JugadoresService, private zone:NgZone) { }
+  constructor(private toastcontroller:ToastController, private ABMsvc:AbmService,private modalController: ModalController, private authSVC:AuthService,private jugadoresService: JugadoresService, private zone:NgZone) { }
   ngOnInit() {
-    // console.log(this.idClub)
-    // console.log(this.idJugador)
-    // console.log(this.jugador)
-    // console.log("Nombre Jugador! ",this.jugador) 
+    this.authSVC.user$.subscribe(user => {
+      this.ABMsvc.afs.collection("clubes").doc(user.uid).collection("equipos").get().then(data => {
+        data.forEach(element => {
+          this.equipos.push(element.id);
+        });
+      })
+    })
+    this.equiposSelec = this.jugador.equipos;
+    this.equiposAux = this.jugador.equipos;
+    console.log('selec: ',this.equiposSelec,'aux: ',this.equiposAux);
   }
+
   async editar(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion){
     if(nombre.value=="" || apellido.value==""){
       this.presentToast();
@@ -55,5 +67,7 @@ export class ModalEditarPage implements OnInit {
       duration: 3000
     });
     toast.present();
+  }
+  cambio(){
   }
 }

@@ -52,11 +52,18 @@ export class EstadisticasService {
     });
   }
   
-  agregarEquipo(idClub:string, idEquipo:string, idPartido:string, estadisticas:object){
+  agregarPartido(idClub:string, idEquipo:string, idPartido:string, estadisticas:object){
     for(let estadistica in estadisticas){
       this.ABMsvc.afs.collection("clubes").doc(idClub).collection("equipos").doc(idEquipo).collection("partidos").doc(idPartido).update({
         ['estadisticas.'+ estadistica] : estadisticas[estadistica] 
       });
     }
+  }
+  borrarPartido(idClub:string, idEquipo:string, idPartido:string, estadisticasABorrar:Array<string>){
+    estadisticasABorrar.forEach(estadistica => {
+      this.ABMsvc.afs.collection("clubes").doc(idClub).collection("equipos").doc(idEquipo).collection("partidos").doc(idPartido).update({
+        ['estadisticas.'+ estadistica] : firebase.firestore.FieldValue.delete()
+      });  
+    });
   }
 }

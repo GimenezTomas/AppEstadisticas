@@ -39,6 +39,12 @@
       <ion-label class="tit">Posicion</ion-label>
       <ion-input value = {{jugador.posicion}} type="text" #posicion></ion-input>
     </ion-item>
+    <ion-item class="form">
+      <ion-label class="tit">Equipos</ion-label>
+      <ion-select #equipo multiple="true" [compareWith]="compareWith" placeholder="Opcional" ngDefaultControl [(ngModel)]="equiposSelec" (ionChange)="cambio();">
+        <ion-select-option *ngFor="let equipo of equipos" [value]=equipo>{{equipo}}</ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-button (click)="editar(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion)" class="button button-block button-possitive">Confirmar</ion-button>
   </div>
 </ion-content>

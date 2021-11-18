@@ -4,7 +4,7 @@ import { AbmService } from 'src/app/services/abm.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 import { clubService } from 'src/app/services/firebase/club.service'
-
+import { EquipoService } from 'src/app/services/firebase/equipo.service';
 @Component({
   selector: 'app-crear-jugador-modal',
   templateUrl: './crear-jugador-modal.page.html',
@@ -13,9 +13,9 @@ import { clubService } from 'src/app/services/firebase/club.service'
 export class CrearJugadorModalPage implements OnInit {
   @Input() idClub:string;
   private equipos: any[] = [];
-  equiposSelec:String[];
+  equiposSelec = [];
   
-  constructor(private toastcontroller:ToastController,private club:clubService, private ABMsvc:AbmService,private AUTHsvc: AuthService,private modalController:ModalController, private jugadoresService: JugadoresService) { }
+  constructor(private toastcontroller:ToastController,private club:clubService,private equipoService:EquipoService, private ABMsvc:AbmService,private AUTHsvc: AuthService,private modalController:ModalController, private jugadoresService: JugadoresService) { }
 
   ngOnInit() {
     this.AUTHsvc.user$.subscribe(user =>{
@@ -30,19 +30,28 @@ export class CrearJugadorModalPage implements OnInit {
     })
   }
 
-  agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion):void{
+  async agregarJugador(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion):Promise<void>{
     if(nombre.value =="" || apellido.value==""){
       this.presentToast('Nombre y Apellido no pueden estar vacío');
     }else{ 
-    this.jugadoresService.agregar(this.idClub, {
+      let res = await this.jugadoresService.agregar(this.idClub, {
       nombre : nombre.value,
       apellido : apellido.value,
       nCamiseta : nCamiseta.value,
       nacimiento : nacimiento.value,
       peso : peso.value,
       altura : altura.value,
-      posicion : posicion.value
+      posicion : posicion.value,
+      equipos : this.equiposSelec
     })
+    console.log(this.equiposSelec);
+    if(this.equiposSelec != null){
+      this.equiposSelec.forEach(equipo => {
+        console.log(`el equipo es: ${equipo}`)
+        this.equipoService.agregarJugadorEquipo(this.idClub,equipo,{'id':res.id,'nCamiseta':res.nCamiseta})
+      });
+    }
+  
     this.dismiss()
     }
   }
