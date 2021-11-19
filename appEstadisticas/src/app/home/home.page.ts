@@ -58,12 +58,7 @@ export class HomePage implements OnInit {
 
 
   async ngOnInit() {
-    if(this.authSvc.esEntrenador){
-      this.equipos = await this.equipoService.getNombresEquipos(await this.authSvc.getEntrenador());
-    }
-    else{
-      this.equipos = await this.equipoService.getNombresEquipos(this.authSvc.uid);
-    }
+      this.equipos = await this.equipoService.getNombresEquipos(await this.authSvc.getIDclub());
   }
 
   loadData(event) {

@@ -42,6 +42,15 @@ export class AuthService {
     );
   }
 
+  async getIDclub() :Promise<string>{
+    if(this.esEntrenador){
+      return await this.getEntrenador();
+    }
+    else{
+      return this.uid;
+    }
+  }
+
   async clubExists(): Promise<boolean>{
     let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
       this.afs.collection('clubes').doc(this.uid).get().subscribe( data =>{ resolve(data.exists) });
