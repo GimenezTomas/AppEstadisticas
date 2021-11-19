@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-jugadores-inicio',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JugadoresInicioPage implements OnInit {
 
-  constructor() { }
+  constructor(public authSvc: AuthService) { }
 
   ngOnInit() {
   }
