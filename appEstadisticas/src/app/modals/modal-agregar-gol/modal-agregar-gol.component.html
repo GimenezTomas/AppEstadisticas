@@ -1,0 +1,63 @@
+<ion-header class="main-header">
+  <ion-toolbar>
+    <ion-item>
+    <ion-label>Agregar Gol</ion-label>
+    </ion-item>
+    <ion-button slot="end" size="small" (click)="dismiss()" color="danger">
+      X
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-label>
+      Jugador que hizo el Gol
+    </ion-label>
+    <ion-button (click)="presentPopover($event, true)" class="equipo" fill="clear">
+      <ion-label>{{jugador.nombre}} {{jugador.apellido}} | {{jugador.nCamiseta}}</ion-label>
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let jugador of Jugadores">
+      <ion-label>
+        <h2>AAAAAAAAAAAA</h2>
+        
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-item>
+    <div>
+      <slot>
+        <ion-label>MINUTO</ion-label>
+        <ion-input>{{timerService.timer}}</ion-input>
+      </slot>
+    </div>  
+  </ion-item>
+  <ion-item>
+    <ion-label>
+        Jugador Asistidor
+    </ion-label>
+    <ion-button (click)="presentPopover($event, false)" class="equipo" fill="clear">
+      <ion-label>{{jugadorA.nombre}} {{jugadorA.apellido}} | {{jugadorA.nCamiseta}}</ion-label>
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-item>
+    <ion-button fill="clear">
+      <ion-label>UBICACION: ({{coords[0]}}) - ({{coords[1]}}) - ({{coords[2]}}) - ({{coords[3]}})</ion-label>
+      <ion-icon name="chevron-right-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-item>
+    <ion-button fill="clear" (click)="presentArco($event)">
+      ARCO
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-item>
+    <ion-button color="success" (click)="onAgregar()"> 
+      Agregar
+    </ion-button>
+  </ion-item>
+</ion-content>

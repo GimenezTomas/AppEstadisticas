@@ -1,0 +1,41 @@
+.main-header ion-title{
+    text-align: center;
+}
+
+.main-header ion-button{
+    position: absolute;
+    right: 2%;
+    --background: transparent;
+    --box-shadow: 0;
+}
+
+.entr{
+    margin: auto;
+    width: fit-content;
+    display: block;
+    font-size: 20px;
+    margin-top: 2%;
+}
+
+#names{
+    margin-left: 22%;
+    font-size: 18px;
+    margin-top: 50%;
+    padding-top: 10px;
+}
+
+.linea {
+    border-top: 2px solid hsl(224, 90%, 55%);
+    height: 20px;
+    max-width: 100%px;
+    padding: 0;
+    margin: 40px auto 0 auto;
+}
+
+.linea1 {
+    border-top: 2px solid hsl(224, 90%, 55%);
+    height: 20px;
+    max-width: 100%px;
+    padding: 0;
+    margin: 20px auto 0 auto;
+}

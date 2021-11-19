@@ -1,17 +1,27 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Perfil
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+<ion-content>
+  <div class="div">
+    <ion-avatar id="pic">
+      <img src="https://st.depositphotos.com/1614195/1512/i/600/depositphotos_15126123-stock-photo-basketball-background.jpg">
+    </ion-avatar>
+    <h4 id="nombre">{{ nombre }}</h4>
+  </div>
+  <div class="linea"></div>
+  <ion-row id="btn">
+    <ion-col>
+      <ion-button (click)="logout()" expand="block">Log Out</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="this.authSvc.esClub">
+    <ion-col>
+      <ion-button routerLink="/add-entrenador" expand="block">Agregar Entrenador</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

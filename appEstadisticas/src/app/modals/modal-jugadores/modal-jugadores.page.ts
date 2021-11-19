@@ -18,30 +18,10 @@ export class ModalJugadoresPage implements OnInit {
   jugadoresSuplentes: any = []
   cantJugadoresTitulares: number = 5
   cantJugadoresSuplentes: number = 5
-  jugadores: any = [
-    /*{
-      id: 'dsdsds',
-      nombre: 'Kevin Durant',
-      nCamiseta: 7,
-      posicion: 'Alero',
-      img: 'https://teamsport.pe/wp-content/uploads/2020/06/Durant.jpg'
-    },{
-      id: 'dsdsds2',
-      nombre: 'Stephen Curry',
-      nCamiseta: 30,
-      posicion: 'Base',
-      img: 'https://imagenes.milenio.com/exTGQWQpuj4omAbbtEhEDv6vvaY=/958x596/smart/https://www.milenio.com/uploads/media/2021/05/16/stephen-curry-reuters-2_0_23_1024_637.JPG'
-    },{
-      id: 'dsdsds3',
-      nombre: 'Lebron James',
-      nCamiseta: 23,
-      posicion: 'Alero',
-      img: 'https://www.mundodeportivo.com/r/GODO/MD/p8/Baloncesto/Imagenes/2021/05/13/Recortada/img_cvila_20201106-185537_imagenes_md_otras_fuentes_no_archivables_lebron-kRKH-U493740258841Q4-980x554@MundoDeportivo-Web.jpg'
-    },*/
-  ]
+  jugadores: any = []
 
   ngOnInit() {
-    this.equipoService.getJugadoresEquipo('RIGtETEOcR9WyBN9MLL1' , 'Equipo1').then(doc => { this.jugadores = doc })
+    this.equipoService.getJugadoresEquipo('RIGtETEOcR9WyBN9MLL1' , 'Equipo1').then(doc => { console.log(doc);this.jugadores = doc })
   }
 
   dismiss(){
