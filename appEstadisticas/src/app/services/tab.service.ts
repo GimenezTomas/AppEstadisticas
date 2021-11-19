@@ -29,6 +29,7 @@ export class TabService {
   
   public showTabs() {
     const tabBar = document.getElementById('myTabBar');
+    if(!tabBar){return} 
     if (tabBar.style.display !== 'flex') tabBar.style.display = 'flex';
   }
   

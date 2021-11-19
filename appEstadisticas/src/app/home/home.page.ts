@@ -23,7 +23,6 @@ export class HomePage implements OnInit {
   constructor(private menu: MenuController, private router: Router, public popoverController: PopoverController, public equipoService: EquipoService, public authSvc: AuthService) { }
 
   async presentPopover(ev: any) {
-    this.equipos = await this.equipoService.getNombresEquipos(this.authSvc.uid);
     const popover = await this.popoverController.create({
       component: EquiposComponent,
       cssClass: 'my-custom-class',
@@ -58,7 +57,13 @@ export class HomePage implements OnInit {
   }
 
 
-  ngOnInit() {
+  async ngOnInit() {
+    if(this.authSvc.esEntrenador){
+      this.equipos = await this.equipoService.getNombresEquipos(await this.authSvc.getEntrenador());
+    }
+    else{
+      this.equipos = await this.equipoService.getNombresEquipos(this.authSvc.uid);
+    }
   }
 
   loadData(event) {

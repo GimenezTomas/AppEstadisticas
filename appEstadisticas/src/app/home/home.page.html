@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start"></ion-buttons>
     <ion-button (click)="presentPopover($event)" class="equipos" fill="clear">
-      <ion-label>equipos</ion-label>
+      <ion-label *ngIf="equipos">{{ equipo || equipos[0] }}</ion-label>
       <ion-icon name="chevron-down-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>

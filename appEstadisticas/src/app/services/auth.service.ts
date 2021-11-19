@@ -42,7 +42,7 @@ export class AuthService {
     );
   }
 
-  async getClub(): Promise<boolean>{
+  async clubExists(): Promise<boolean>{
     let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
       this.afs.collection('clubes').doc(this.uid).get().subscribe( data =>{ resolve(data.exists) });
     });
@@ -50,7 +50,7 @@ export class AuthService {
     return dataPromise;
   }
 
-  async getEntrenador(): Promise<boolean>{
+  async entrenadorExists(): Promise<boolean>{
     let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
       this.afs.collection('entrenadores').doc(this.uid).get().subscribe( data =>{ resolve(data.exists) });
     });
@@ -59,9 +59,16 @@ export class AuthService {
   }
 
   async entrenadorClub(): Promise<boolean>{
-
     let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
       this.afs.collection('entrenadores').doc<Entrenador>(this.uid).get().subscribe( data =>{ resolve(data.data().club != null ); });
+    });
+    
+    return dataPromise;
+  }
+
+  async getEntrenador(): Promise<string>{
+    let dataPromise : Promise<string> = new Promise((resolve, reject) => {
+      this.afs.collection('entrenadores').doc<Entrenador>(this.uid).get().subscribe( data =>{ resolve(data.data().club ); });
     });
     
     return dataPromise;
