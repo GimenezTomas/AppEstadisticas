@@ -20,8 +20,7 @@ export class ClubPage implements OnInit {
         this.afs.afs.collection('clubes').doc(data.uid).set({
         nombre: name.value,
         email: data.email,
-      }).then((docref)=> console.log('guardado'))
-      .catch((error)=>console.error(error))
+      }).catch((error)=>console.error(error))
         this.afs.afs.collection('users').doc(data.uid).update({
           displayName: name.value
         }).catch((error)=>console.error(error))

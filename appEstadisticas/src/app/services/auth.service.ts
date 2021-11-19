@@ -42,7 +42,16 @@ export class AuthService {
     );
   }
 
-  async getClub(): Promise<boolean>{
+  async getIDclub() :Promise<string>{
+    if(this.esEntrenador){
+      return await this.getEntrenador();
+    }
+    else{
+      return this.uid;
+    }
+  }
+
+  async clubExists(): Promise<boolean>{
     let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
       this.afs.collection('clubes').doc(this.uid).get().subscribe( data =>{ resolve(data.exists) });
     });
@@ -50,7 +59,7 @@ export class AuthService {
     return dataPromise;
   }
 
-  async getEntrenador(): Promise<boolean>{
+  async entrenadorExists(): Promise<boolean>{
     let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
       this.afs.collection('entrenadores').doc(this.uid).get().subscribe( data =>{ resolve(data.exists) });
     });
@@ -59,7 +68,6 @@ export class AuthService {
   }
 
   async entrenadorClub(): Promise<boolean>{
-
     let dataPromise : Promise<boolean> = new Promise((resolve, reject) => {
       this.afs.collection('entrenadores').doc<Entrenador>(this.uid).get().subscribe( data =>{ resolve(data.data().club != null ); });
     });
@@ -67,18 +75,25 @@ export class AuthService {
     return dataPromise;
   }
 
+  async getEntrenador(): Promise<string>{
+    let dataPromise : Promise<string> = new Promise((resolve, reject) => {
+      this.afs.collection('entrenadores').doc<Entrenador>(this.uid).get().subscribe( data =>{ resolve(data.data().club ); });
+    });
+    
+    return dataPromise;
+  }
+
   async getEntrenadores(){
     let entrenadores = Array<Entrenador>();
-    let ent=await this.afs.collection<Entrenador>('entrenadores').get().toPromise()
+    let ent = await this.afs.collection<Entrenador>('entrenadores').get().toPromise()
 
       ent.docs.forEach(item => {
-        let e:Entrenador=item.data();
+        let e:Entrenador = item.data();
         e.uid = item.id;
-       entrenadores.push(e);
+        entrenadores.push(e);
       });
     return entrenadores;
   }
-    
 
   async resetPassword(email: string): Promise<void> {
     try {
@@ -91,8 +106,8 @@ export class AuthService {
   async loginGoogle(): Promise<User> {
     try {
       const { user } = await this.afAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
-      this.updateUserData(user);
       this.uid = user.uid;
+      this.updateUserData(user);
       sessionStorage.setItem("uid", user.uid);
       return user;
     } catch (error) {
@@ -113,8 +128,8 @@ export class AuthService {
   async login(email: string, password: string): Promise<User> {
     try {
       const { user } = await this.afAuth.signInWithEmailAndPassword(email, password);
-      this.updateUserData(user);
       this.uid = user.uid;
+      this.updateUserData(user);
       sessionStorage.setItem("uid", user.uid);
       return user;
     } catch (error) {
@@ -149,7 +164,6 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       emailVerified: user.emailVerified,
-      displayName: user.displayName,
     };
 
     return userRef.set(data, { merge: true });

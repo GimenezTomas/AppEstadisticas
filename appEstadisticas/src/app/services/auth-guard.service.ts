@@ -13,10 +13,10 @@ export class AuthGuardService implements CanActivate{
 
   canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
     return new Promise((resolve, rejects) => {
-      this.authSvc.getClub().then(club => {
+      this.authSvc.clubExists().then(club => {
         if(club) { resolve(true); }
         else {
-          this.authSvc.getEntrenador().then(entrenador => {
+          this.authSvc.entrenadorExists().then(entrenador => {
             if(entrenador) { 
               this.authSvc.entrenadorClub().then(entr => {
                 if(entr){ resolve (true); }
