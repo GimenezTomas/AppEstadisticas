@@ -46,7 +46,8 @@ export class JugadoresService {
       nacimiento : jugadorN.nacimiento,
       peso : jugadorN.peso,
       altura : jugadorN.altura,
-      posicion : jugadorN.posicion
+      posicion : jugadorN.posicion,
+      equipos : jugadorN.equipos
   })
     .catch((error) => {
       console.error("Error adding document: ", error);

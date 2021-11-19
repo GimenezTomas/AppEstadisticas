@@ -2,6 +2,7 @@ import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { AbmService } from 'src/app/services/abm.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { EquipoService } from 'src/app/services/firebase/equipo.service';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 
 @Component({
@@ -19,18 +20,21 @@ export class ModalEditarPage implements OnInit {
   private equiposAux;
   
   
-  constructor(private toastcontroller:ToastController, private ABMsvc:AbmService,private modalController: ModalController, private authSVC:AuthService,private jugadoresService: JugadoresService, private zone:NgZone) { }
-  ngOnInit() {
+  constructor(private toastcontroller:ToastController, private ABMsvc:AbmService, private modalController: ModalController, private equipoSVC:EquipoService, private authSVC:AuthService,private jugadoresService: JugadoresService, private zone:NgZone) { }
+  async ngOnInit() {
     this.authSVC.user$.subscribe(user => {
       this.ABMsvc.afs.collection("clubes").doc(user.uid).collection("equipos").get().then(data => {
         data.forEach(element => {
           this.equipos.push(element.id);
         });
+        console.log('selec: ',this.equiposSelec,'aux: ',this.equiposAux,'equipo: ', this.equipos);
+        console.log(this.equipos.filter(x => !this.equiposSelec.includes(x)));
       })
     })
     this.equiposSelec = this.jugador.equipos;
     this.equiposAux = this.jugador.equipos;
-    console.log('selec: ',this.equiposSelec,'aux: ',this.equiposAux);
+    console.log('selec: ',this.equiposSelec,'aux: ',this.equiposAux,'equipo: ', this.equipos);
+    console.log(this.equipos.filter(x => !this.equiposSelec.includes(x)));
   }
 
   async editar(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion){
@@ -44,9 +48,20 @@ export class ModalEditarPage implements OnInit {
       nacimiento : nacimiento.value,
       peso : peso.value,
       altura : altura.value,
-      posicion : posicion.value
+      posicion : posicion.value,
+      equipos : this.equiposSelec
     })
-    console.log("edita")
+    let equiposViejos = this.equiposAux.filter(x => !this.equiposSelec.includes(x));
+    let equiposNuevos = this.equiposSelec.filter(x => !this.equiposAux.includes(x));
+    console.log('nuevos: ', equiposNuevos,'viejos: ', equiposViejos);
+    equiposNuevos.forEach(equipo => {
+      console.log("añadiendo: ", equipo)
+      this.equipoSVC.agregarJugadorEquipo(this.idClub,equipo,{'id':this.idJugador, 'nCamiseta':nCamiseta.value})
+    })
+    equiposViejos.forEach(equipo => {
+      console.log("eliminando: ", equipo)
+      this.equipoSVC.eliminarJugadorEquipo(this.idClub,equipo,{'id':this.idJugador, 'nCamiseta':nCamiseta.value})
+    });
     this.dismiss();
   }
   }
