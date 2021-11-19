@@ -8,7 +8,3 @@ npm i @fortawesome/free-brands-svg-icons
 
 ng add @angular/fire
 npm install firebase @angular/fire --save
-
---------
-Mantenimiento:
-  - Register / Login
