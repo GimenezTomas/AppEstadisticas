@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { ArcoComponent } from 'src/app/components/arco/arco.component';
 import { PopoverComponent } from 'src/app/components/popover/popover.component';
+import { EstadisticasService } from 'src/app/services/firebase/estadisticas.service';
 import { TimerService } from 'src/app/services/timer.service';
 
 @Component({
@@ -14,11 +15,11 @@ export class ModalAgregarGolComponent implements OnInit {
   @Input() coords: any
   jugador: any
   jugadorA: any
+  sector: any
   
-  constructor(public timerService: TimerService,public popoverController: PopoverController, private modalController:ModalController) { }
+  constructor( private estadisticasService: EstadisticasService, private timerService: TimerService, private popoverController: PopoverController, private modalController:ModalController) { }
 
   ngOnInit() {
-    console.log(this.jugadores[0])
     this.jugador = this.jugadores[0]
     this.jugadorA = this.jugador
   }
@@ -53,13 +54,14 @@ export class ModalAgregarGolComponent implements OnInit {
     await modal.present();
 
     modal.onDidDismiss().then( data =>{
-      
+      this.sector = data.data.sector
     })
     
     const { role } = await modal.onDidDismiss();
   }
 
   onAgregar(){
+    this.estadisticasService.agregarAJugador('RIGtETEOcR9WyBN9MLL1', this.jugador.id, {})
     this.dismiss(true)
   }
 

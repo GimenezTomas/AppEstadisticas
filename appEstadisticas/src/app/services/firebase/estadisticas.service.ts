@@ -19,11 +19,13 @@ export class EstadisticasService {
   }
 
   agregarAJugador(idClub:string, idJugador:string, estadisticas:object){
-    for(let estadistica in estadisticas){
-      this.ABMsvc.afs.collection("clubes").doc(idClub).collection("jugadores").doc(idJugador).update({
-        ['estadisticas.'+ estadistica] : estadisticas[estadistica] 
-      });
-    }
+    this.ABMsvc.afs.collection("clubes").doc(idClub).collection('jugadores').doc(idJugador).update({
+      estadisticas: firebase.firestore.FieldValue.arrayUnion(estadisticas)
+    }).then(() => {
+        console.log("Document written");
+    }).catch((error) => {
+        console.error("Error adding document: ", error);
+    });
   }
 
   async getStatsGenerales(idClub:string, idEquipo:string){
