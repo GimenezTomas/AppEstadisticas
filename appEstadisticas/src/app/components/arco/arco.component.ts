@@ -14,18 +14,15 @@ export class ArcoComponent implements OnInit {
   x2: number = 0
   y1: number = 0
   y2: number = 0 
-  refresh: boolean = true
 
   constructor(public modalController: ModalController) { }
 
-  ngOnInit() {
-    /*setTimeout(function(){ 
-      this.refreshMap()
-    }, 1000)*/
-    (<HTMLInputElement>document.getElementById('arco')).onload = function(){
-      
-    }
+  ngOnInit() {}
+
+  ngAfterViewInit(){
+    this.refreshMap()
   }
+
   dismiss(sector: number){
     console.log(sector)
     this.modalController.dismiss({
@@ -39,8 +36,6 @@ export class ArcoComponent implements OnInit {
     this.x2 = (<HTMLInputElement>document.getElementById('arco')).clientWidth - this.x1
     this.y1 = (20.5 * (<HTMLInputElement>document.getElementById('arco')).clientHeight)/100;
     this.y2 = (69.23 * (<HTMLInputElement>document.getElementById('arco')).clientHeight)/100;
-    this.refresh = false
-    this.refresh = true
   }
 
   onResize(event){
