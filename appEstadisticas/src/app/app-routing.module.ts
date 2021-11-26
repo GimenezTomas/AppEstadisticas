@@ -142,6 +142,10 @@ const routes: Routes = [
   {
     path: 'modal-accion',
     loadChildren: () => import('./modals/modal-accion/modal-accion.module').then( m => m.ModalAccionPageModule)
+  },
+  {
+    path: 'crear-jugador-modal',
+    loadChildren: () => import('./modals/crear-jugador-modal/crear-jugador-modal.module').then( m => m.CrearJugadorModalPageModule)
   }
 
 ];

@@ -90,4 +90,10 @@ export class EquipoService {
         console.error("Error adding document: ", error);
     });
   }
+  eliminarJugadorEquipo(idClub: string, idEquipo: any, body:any) {
+    this.ABMsvc.afs.collection("clubes").doc(idClub).collection('equipos').doc(idEquipo).update({
+      jugadores: firebase.firestore.FieldValue.arrayRemove(body)
+    }).then(() => console.log("Document removed"))
+      .catch((error) => console.error("Error deleting: ", error))
+  }
 }

@@ -13,16 +13,18 @@ import { resolve } from 'dns';
 export class JugadoresService {
 
   constructor(private ABMsvc:AbmService) { }
-  agregar(idClub: string, jugador: any) {
-    return this.ABMsvc.afs.collection("clubes").doc(idClub).collection('jugadores').add({
+  async agregar(idClub: string, jugador: any){
+    let doc = await this.ABMsvc.afs.collection("clubes").doc(idClub).collection('jugadores').add({
       nombre : jugador.nombre,
       apellido : jugador.apellido,
       nCamiseta : jugador.nCamiseta,
       nacimiento : jugador.nacimiento,
       peso : jugador.peso,
       altura : jugador.altura,
-      posicion : jugador.posicion
+      posicion : jugador.posicion,  
+      equipos : jugador.equipos
     })
+    return {'id': doc.id,'nCamiseta':jugador.nCamiseta};
   }
 
   borrar(idClub: string, idJugador:string){
@@ -44,7 +46,8 @@ export class JugadoresService {
       nacimiento : jugadorN.nacimiento,
       peso : jugadorN.peso,
       altura : jugadorN.altura,
-      posicion : jugadorN.posicion
+      posicion : jugadorN.posicion,
+      equipos : jugadorN.equipos
   })
     .catch((error) => {
       console.error("Error adding document: ", error);

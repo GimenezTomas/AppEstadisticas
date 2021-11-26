@@ -1,5 +1,8 @@
 import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
+import { AbmService } from 'src/app/services/abm.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { EquipoService } from 'src/app/services/firebase/equipo.service';
 import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 
 @Component({
@@ -9,18 +12,31 @@ import { JugadoresService } from 'src/app/services/firebase/jugadores.service';
 })
 export class ModalEditarPage implements OnInit {
   @Input() idClub:string;
-  @Input() jugador:object;
+  @Input() jugador:any;
   @Input() idJugador:string;
   @Input() jugadorN:object;
+  private equiposSelec:Array<string>;
+  private equipos = [];
+  private equiposAux;
   
   
-  constructor(private toastcontroller:ToastController,private modalController: ModalController, private jugadoresService: JugadoresService, private zone:NgZone) { }
-  ngOnInit() {
-    // console.log(this.idClub)
-    // console.log(this.idJugador)
-    // console.log(this.jugador)
-    // console.log("Nombre Jugador! ",this.jugador) 
+  constructor(private toastcontroller:ToastController, private ABMsvc:AbmService, private modalController: ModalController, private equipoSVC:EquipoService, private authSVC:AuthService,private jugadoresService: JugadoresService, private zone:NgZone) { }
+  async ngOnInit() {
+    this.authSVC.user$.subscribe(user => {
+      this.ABMsvc.afs.collection("clubes").doc(user.uid).collection("equipos").get().then(data => {
+        data.forEach(element => {
+          this.equipos.push(element.id);
+        });
+        console.log('selec: ',this.equiposSelec,'aux: ',this.equiposAux,'equipo: ', this.equipos);
+        console.log(this.equipos.filter(x => !this.equiposSelec.includes(x)));
+      })
+    })
+    this.equiposSelec = this.jugador.equipos;
+    this.equiposAux = this.jugador.equipos;
+    console.log('selec: ',this.equiposSelec,'aux: ',this.equiposAux,'equipo: ', this.equipos);
+    console.log(this.equipos.filter(x => !this.equiposSelec.includes(x)));
   }
+
   async editar(nombre, apellido, nCamiseta, nacimiento , peso, altura, posicion){
     if(nombre.value=="" || apellido.value==""){
       this.presentToast();
@@ -32,9 +48,20 @@ export class ModalEditarPage implements OnInit {
       nacimiento : nacimiento.value,
       peso : peso.value,
       altura : altura.value,
-      posicion : posicion.value
+      posicion : posicion.value,
+      equipos : this.equiposSelec
     })
-    console.log("edita")
+    let equiposViejos = this.equiposAux.filter(x => !this.equiposSelec.includes(x));
+    let equiposNuevos = this.equiposSelec.filter(x => !this.equiposAux.includes(x));
+    console.log('nuevos: ', equiposNuevos,'viejos: ', equiposViejos);
+    equiposNuevos.forEach(equipo => {
+      console.log("añadiendo: ", equipo)
+      this.equipoSVC.agregarJugadorEquipo(this.idClub,equipo,{'id':this.idJugador, 'nCamiseta':nCamiseta.value})
+    })
+    equiposViejos.forEach(equipo => {
+      console.log("eliminando: ", equipo)
+      this.equipoSVC.eliminarJugadorEquipo(this.idClub,equipo,{'id':this.idJugador, 'nCamiseta':nCamiseta.value})
+    });
     this.dismiss();
   }
   }
@@ -55,5 +82,7 @@ export class ModalEditarPage implements OnInit {
       duration: 3000
     });
     toast.present();
+  }
+  cambio(){
   }
 }

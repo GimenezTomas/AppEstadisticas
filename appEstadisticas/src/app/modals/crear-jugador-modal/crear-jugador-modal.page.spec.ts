@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ModalCrearJugadorComponent } from './modal-crear-jugador.component';
+import { CrearJugadorModalPage } from './crear-jugador-modal.page';
 
-describe('ModalCrearJugadorComponent', () => {
-  let component: ModalCrearJugadorComponent;
-  let fixture: ComponentFixture<ModalCrearJugadorComponent>;
+describe('CrearJugadorModalPage', () => {
+  let component: CrearJugadorModalPage;
+  let fixture: ComponentFixture<CrearJugadorModalPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalCrearJugadorComponent ],
+      declarations: [ CrearJugadorModalPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ModalCrearJugadorComponent);
+    fixture = TestBed.createComponent(CrearJugadorModalPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
