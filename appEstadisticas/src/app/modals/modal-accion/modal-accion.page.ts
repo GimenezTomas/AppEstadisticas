@@ -14,6 +14,9 @@ export class ModalAccionPage implements OnInit {
   @Input() coords
   @Input() away
   @Input() home
+  @Input() ubiX
+  @Input() ubiY
+  @Input() partido
 
   constructor(private modalController: ModalController) { }
 
@@ -41,7 +44,10 @@ export class ModalAccionPage implements OnInit {
       cssClass: 'my-custom-class',
       componentProps:{
         jugadores: this.jugadores,
-        coords: this.coords
+        coords: this.coords,
+        ubiX: this.ubiX,
+        ubiY: this.ubiY,
+        partido: this.partido
       }
     });
     modal.onDidDismiss().then(data => {

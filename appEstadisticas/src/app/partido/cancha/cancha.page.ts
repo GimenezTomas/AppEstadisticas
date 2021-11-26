@@ -81,7 +81,7 @@ export class CanchaPage implements OnInit {
     this.mimodal.dismiss()
   }
   
-  async presentModalAcciones(x1:number, y1:number, x2:number, y2:number){
+  async presentModalAcciones(x1:number, y1:number, x2:number, y2:number, i: number, j: number){
     const modal = await this.modalController.create({
       component: ModalAccionPage,
       cssClass: 'my-custom-class',
@@ -89,7 +89,10 @@ export class CanchaPage implements OnInit {
         jugadores: this.titulares,
         coords: [x1,y1,x2,y2],
         home: this.homeScore,
-        away: this.awayScore
+        away: this.awayScore,
+        ubiX: i,
+        ubiY: j,
+        partido: this.partido
       }
     });
 

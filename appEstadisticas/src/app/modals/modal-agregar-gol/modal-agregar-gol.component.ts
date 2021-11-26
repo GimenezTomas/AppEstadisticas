@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
-import { ArcoComponent } from 'src/app/components/arco/arco.component';
+import { AuthService } from '../../services/auth.service';
+import { ArcoComponent, sector } from 'src/app/components/arco/arco.component';
 import { PopoverComponent } from 'src/app/components/popover/popover.component';
 import { EstadisticasService } from 'src/app/services/firebase/estadisticas.service';
 import { TimerService } from 'src/app/services/timer.service';
@@ -13,11 +14,14 @@ import { TimerService } from 'src/app/services/timer.service';
 export class ModalAgregarGolComponent implements OnInit {
   @Input() jugadores: any
   @Input() coords: any
+  @Input() ubiX: number
+  @Input() partido
+  @Input() ubiY: number
   jugador: any
   jugadorA: any
   sector: any
   
-  constructor( private estadisticasService: EstadisticasService, private timerService: TimerService, private popoverController: PopoverController, private modalController:ModalController) { }
+  constructor(private auth: AuthService,private estadisticasService: EstadisticasService, private timerService: TimerService, private popoverController: PopoverController, private modalController:ModalController) { }
 
   ngOnInit() {
     this.jugador = this.jugadores[0]
@@ -59,9 +63,18 @@ export class ModalAgregarGolComponent implements OnInit {
     
     const { role } = await modal.onDidDismiss();
   }
-
+//deportes deberia de decir que estadisticas anotar
   onAgregar(){
-    this.estadisticasService.agregarAJugador('RIGtETEOcR9WyBN9MLL1', this.jugador.id, {})
+    console.log(this.partido)
+    this.estadisticasService.agregarAJugador('RIGtETEOcR9WyBN9MLL1', this.jugador.id, {
+      tipo: 'gol',
+      ubicacionX: this.ubiX,
+      ubicacionY: this.ubiY,
+      ubicacionGol: this.sector,
+      segundo: this.timerService.timer,
+      partido: this.partido.id,
+      
+    }, {goles: this.jugador.estadisticasGenerales.goles+1})
     this.dismiss(true)
   }
 
